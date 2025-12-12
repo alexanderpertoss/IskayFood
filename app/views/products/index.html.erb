@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Products" %>
+
+<h1>Products</h1>
+
+<p>
+  Cart´s id is: <%= @cart.id %>, the quantity is: <%= @cart.cart_products.count %>. 
+</p>
+
+<p>
+  <%= link_to "Go to cart", "/shopping_cart" %>
+</p>
+
+<div id="products">
+  <% @products.each do |product| %>
+    <%= render product %>
+    <p>
+      <%= link_to "Show this product", product %>
+    </p>
+    <p>
+      <%= link_to "Add to cart", "/add_to_cart/#{product.id}" %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New product", new_product_path %>
