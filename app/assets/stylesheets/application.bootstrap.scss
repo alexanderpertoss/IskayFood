@@ -1,0 +1,8 @@
+$primary: #ff4500;  // El naranja de tu botón "Comprar"
+$secondary: #333333; // Color de textos oscuros
+$body-bg: #f8f9fa;   // Un gris muy suave de fondo, no blanco puro
+$font-family-sans-serif: 'Poppins', sans-serif; // La fuente que usaste en Figma
+$border-radius: 0.5rem; // Bordes un poco más redondeados en tarjetas
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
