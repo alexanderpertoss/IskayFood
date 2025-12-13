@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Staatliches&display=swap);
 
 $headings-font-family: 'Jaro', sans-serif;
 
@@ -15,4 +16,14 @@ $headings-color: $primary;
 
 .font-jaro {
   font-family: 'Jaro', sans-serif;
+}
+.font-staatliches {
+    font-family: "Staatliches", sans-serif;
+}
+#shop-header {
+    background: $secondary;
+}
+.section-title {
+    color: white;
+    font-size: 600%;
 }
