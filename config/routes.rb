@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "shop/index"
   resources :orders
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "products#index"
+  root "shop#index"
   get "/add_to_cart/:id" => "products#add_to_cart"
   get "/shopping_cart" => "orders#shopping_cart"
   get "/confirm_order" => "orders#confirm_order"

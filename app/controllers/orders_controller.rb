@@ -61,11 +61,17 @@ class OrdersController < ApplicationController
   end
 
   def confirm_order
-    if @cart.cart_products.count > 0
-      @order = Order.create(total: @cart.cart_total, customer_name: "Alexander", customer_shipping_address: "ABCD", customer_phone: "1234567", customer_email: "aptpta@yahoo.es", status: "Recently created", cart: @cart)
-      session[:cart_id] = Cart.create
-    else
+    @order = @cart.finalize_order
+
+    if @order.nil?
       redirect_to products_path
+    else
+      if @order.persisted?
+        # Because the cart order was finalized, we reset the cart
+        session[:cart_id] = nil
+      else
+        redirect_to products_path
+      end
     end
   end
 

@@ -3,14 +3,27 @@ class Cart < ApplicationRecord
   has_one :order
 
   def add_product(product_for_cart)
-    CartProduct.create(quantity: 1, product_price: product_for_cart.price, product: product_for_cart, cart: self)
+    CartProduct.create!(
+      quantity: 1,
+      product_price: product_for_cart.price,
+      product: product_for_cart,
+      cart: self
+      )
   end
 
   def cart_total
-    total = 0
-    cart_products.each do |cart_product|
-      total += cart_product.product_price
-    end
-    total
+    cart_products.sum(:product_price)
+  end
+
+  def finalize_order
+    Order.create!(
+      total: cart_total,
+      customer_name: "Alexander",
+      customer_shipping_address: "ABCD",
+      customer_phone: "1234567",
+      customer_email: "aptpta@yahoo.es",
+      status: "Recently created",
+      cart: self
+      ) unless cart_products.empty?
   end
 end
