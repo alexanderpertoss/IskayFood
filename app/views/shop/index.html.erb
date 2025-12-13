@@ -6,7 +6,7 @@
     <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
 </div>
 
-<section id="main-products" class="pt-5">
+<section id="main-products" class="pt-5 pb-5">
     <div id="main-products-container" class="container pt-2 pb-2">
         <div class="row p-1">
             <div class="col-12 col-md-6 col-lg-6 co d-flex flex-column gap-3">
@@ -14,7 +14,7 @@
                     <div class="position-relative overflow-hidden shadow-sm main-product"
                         style="background-image: url('<%= image_path("products/img11.jpeg") %>');">
                         <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
-                            <h3 class="text-white text-uppercase">Título del Plato</h3>
+                            <h3 class="text-white text-uppercase">Product name </h3>
                             <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro" %>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="position-relative overflow-hidden shadow-sm main-product"
                         style="background-image: url('<%= image_path("products/img7.png") %>');">
                         <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
-                            <h3 class="text-white text-uppercase">Título del Plato</h3>
+                            <h3 class="text-white text-uppercase">Product name </h3>
                             <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro" %>
                         </div>
                     </div>
@@ -34,12 +34,97 @@
                     <div class="position-relative overflow-hidden shadow-sm main-product-large"
                         style="background-image: url('<%= image_path("products/img10.png") %>');">
                         <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
-                            <h3 class="text-white text-uppercase">Título del Plato</h3>
+                            <h3 class="text-white text-uppercase">Product name </h3>
                             <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro" %>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="shop-header" class="col d-flex flex-column align-items-left text-uppercase p-3">
+    <div class="section-title2 font-staatliches px-5">Other products we offer</div>
+</div>
+
+<section id="other-products" class="pt-3 pb-5">
+    <div class="container py-5">  
+        <div class="masonry-grid">
+            
+            <div class="masonry-item">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="background-image: url('<%= image_path("products/img10.png") %>'); 
+                            min-height: 450px; /* Simulación de alturas diferentes */
+                            background-size: cover; background-position: center;">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
+                        <h3 class="text-white text-uppercase">Product name </h3>
+                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="masonry-item">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="background-image: url('<%= image_path("products/img9.png") %>'); 
+                            min-height: 350px; /* Simulación de alturas diferentes */
+                            background-size: cover; background-position: center;">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
+                        <h3 class="text-white text-uppercase">Product name </h3>
+                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="masonry-item">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="background-image: url('<%= image_path("products/img3.png") %>'); 
+                            min-height: 450px; /* Simulación de alturas diferentes */
+                            background-size: cover; background-position: center;">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
+                        <h3 class="text-white text-uppercase">Product name </h3>
+                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="masonry-item">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="background-image: url('<%= image_path("products/img13.jpg") %>'); 
+                            min-height: 450px; /* Simulación de alturas diferentes */
+                            background-size: cover; background-position: center;">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
+                        <h3 class="text-white text-uppercase">Product name </h3>
+                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="masonry-item">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="background-image: url('<%= image_path("products/img6.png") %>'); 
+                            min-height: 250px; /* Simulación de alturas diferentes */
+                            background-size: cover; background-position: center;">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
+                        <h3 class="text-white text-uppercase">Product name </h3>
+                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="masonry-item">
+                <div class="position-relative overflow-hidden shadow-sm"
+                    style="background-image: url('<%= image_path("products/img22.jpg") %>'); 
+                            min-height: 450px; /* Simulación de alturas diferentes */
+                            background-size: cover; background-position: center;">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
+                        <h3 class="text-white text-uppercase">Product name </h3>
+                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro" %>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

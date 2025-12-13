@@ -3,11 +3,11 @@
 
 $headings-font-family: 'Jaro', sans-serif;
 
-$primary: #391042;  // El naranja de tu botón "Comprar"
-$secondary: #FF1E51; // Color de textos oscuros
-$body-bg: #f8f9fa;   // Un gris muy suave de fondo, no blanco puro
-$font-family-sans-serif: 'Poppins', sans-serif; // La fuente que usaste en Figma
-$border-radius: 0.5rem; // Bordes un poco más redondeados en tarjetas
+$primary: #391042; 
+$secondary: #FF1E51;
+$body-bg: #f8f9fa;  
+$font-family-sans-serif: 'Poppins', sans-serif;
+$border-radius: 0.5rem;
 
 $headings-color: $primary;
 
@@ -27,6 +27,10 @@ $headings-color: $primary;
     color: white;
     font-size: 600%;
 }
+.section-title2 {
+    font-size: 400%;
+    color: white;
+}
 .main-product {
     height: 400px;
     background-size: cover;
@@ -39,4 +43,23 @@ $headings-color: $primary;
 }
 .main-product-background {
     background: rgba($primary, 0.65);
+}
+.other-product-background {
+    background: rgba($secondary, 0.65);
+}
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.5rem;
+  
+  @include media-breakpoint-up(md) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-count: 3;
+  }
+}
+.masonry-item {
+  break-inside: avoid; 
+  margin-bottom: 1.5rem; 
 }
