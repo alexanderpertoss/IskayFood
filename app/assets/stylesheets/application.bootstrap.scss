@@ -1,18 +1,18 @@
-$primary: #ff4500;  // El naranja de tu botón "Comprar"
-$secondary: #333333; // Color de textos oscuros
+@import url(https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap);
+
+$headings-font-family: 'Jaro', sans-serif;
+
+$primary: #391042;  // El naranja de tu botón "Comprar"
+$secondary: #FF1E51; // Color de textos oscuros
 $body-bg: #f8f9fa;   // Un gris muy suave de fondo, no blanco puro
 $font-family-sans-serif: 'Poppins', sans-serif; // La fuente que usaste en Figma
 $border-radius: 0.5rem; // Bordes un poco más redondeados en tarjetas
 
+$headings-color: $primary;
+
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
-#navigation-bar {
-   background: red; 
-}
-#navigation-logo {
-    background: greenyellow;
-}
-#navigation-links {   
-    background: green;
+.font-jaro {
+  font-family: 'Jaro', sans-serif;
 }

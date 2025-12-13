@@ -23,22 +23,7 @@
   </head>
 
   <body>
-    
-    <nav id="navigation-bar" class="navbar container-fluid">
-        <div class="row p-4">
-          <div id="navigation-logo" class="col-2">
-            <%= image_tag "logo_purple.png", class: "img-fluid" %>
-          </div>
-          <div id="navigation-links" class="col d-flex align-items-center justify-content-end gap-4">
-            <%= link_to "About", products_path, class: "text-decoration-none text-dark" %>
-            <%= link_to "Shop", products_path, class: "text-decoration-none text-dark" %>
-            <%= link_to "Singani", products_path, class: "text-decoration-none text-dark" %>
-            <%= link_to "Amazónica", products_path, class: "text-decoration-none text-dark" %>
-            <%= link_to "Contact", products_path, class: "text-decoration-none text-dark" %>
-          </div>
-        </div>
-    </nav>
-
+    <%= render "shared/navbar" %>
     <%= yield %>
   </body>
 </html>
