@@ -72,11 +72,36 @@ $headings-color: $primary;
   right: 2rem; 
   z-index: 1050; 
 }
-
 .fab-container .btn {
   width: 65px;
   height: 65px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+// 1. Estado Base (Fija la barra arriba, siempre visible)
+#navigation-bar {
+  position: fixed; // CRÍTICO: Fija la barra al tope de la ventana
+  top: 0;
+  width: 100%;
+  // Asegura que esté sobre el contenido y el FAB
+  z-index: 1030; 
+  transition: top 0.5s ease-in-out; // Suaviza la animación de entrada/salida
+}
+// 2. Estado Escondido (Se activa con JavaScript)
+.navbar-hidden {
+  top: -1000px !important; // Empuja la barra fuera de la vista (debe ser más que la altura de la barra)
+}
+// Clase de utilidad para el padding del cuerpo
+.body-padding-compensation {
+    // Valor grande para Mobile/MD (por defecto)
+    padding-top: 330px !important; 
+}
+
+// Sobrescribe el valor a partir de la resolución LG (PC)
+@include media-breakpoint-up(lg) {
+    .body-padding-compensation {
+        // Valor más pequeño para Desktop
+        padding-top: 120px !important; 
+    }
 }
