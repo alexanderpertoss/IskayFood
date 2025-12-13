@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Iskay Food" %></title>
+    <title><%= content_for(:title) || "Iskay Food - Andean Food" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -26,5 +26,10 @@
     <%= render "shared/navbar" %>
     <%= yield %>
     <%= render "shared/footer" %>
+    <div class="fab-container">
+      <%= link_to "#", class: "btn btn-primary btn-lg rounded-circle shadow-lg" do %>
+        <i class="bi bi-cart4 fs-3"></i>
+      <% end %>
+    </div>
   </body>
 </html>

@@ -66,3 +66,17 @@ $headings-color: $primary;
 #main-footer {
     background: $secondary;
 }
+.fab-container {
+  position: fixed; 
+  bottom: 2rem; 
+  right: 2rem; 
+  z-index: 1050; 
+}
+
+.fab-container .btn {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
