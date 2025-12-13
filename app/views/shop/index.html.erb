@@ -5,3 +5,41 @@
 <div id="decorative-divider" class="col d-flex flex-column align-items-center">
     <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
 </div>
+
+<section id="main-products" class="pt-5">
+    <div id="main-products-container" class="container pt-2 pb-2">
+        <div class="row p-1">
+            <div class="col-12 col-md-6 col-lg-6 co d-flex flex-column gap-3">
+                <div>
+                    <div class="position-relative overflow-hidden shadow-sm main-product"
+                        style="background-image: url('<%= image_path("products/img11.jpeg") %>');">
+                        <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
+                            <h3 class="text-white text-uppercase">Título del Plato</h3>
+                            <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro" %>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="position-relative overflow-hidden shadow-sm main-product"
+                        style="background-image: url('<%= image_path("products/img7.png") %>');">
+                        <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
+                            <h3 class="text-white text-uppercase">Título del Plato</h3>
+                            <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex flex-column gap-3">
+                <div>
+                    <div class="position-relative overflow-hidden shadow-sm main-product-large"
+                        style="background-image: url('<%= image_path("products/img10.png") %>');">
+                        <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
+                            <h3 class="text-white text-uppercase">Título del Plato</h3>
+                            <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

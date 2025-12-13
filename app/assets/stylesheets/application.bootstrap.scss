@@ -27,3 +27,16 @@ $headings-color: $primary;
     color: white;
     font-size: 600%;
 }
+.main-product {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+}
+.main-product-large {
+    height: 815px;
+    background-size: cover;
+    background-position: center;
+}
+.main-product-background {
+    background: rgba($primary, 0.65);
+}
