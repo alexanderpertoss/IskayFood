@@ -1,0 +1,12 @@
+<%= turbo_stream.replace "product_controls_" + @product.id.to_s do %>
+  <%= render 'shop/quantity_controls', product: @product %>
+<% end %>
+
+<%= turbo_stream.append "notifications" do %>
+  <%= render 'shared/notification_toast', product_name: @product.name %>
+<% end %>
+
+
+<%= turbo_stream.replace "cart_count" do %>
+  <%= render 'shared/cart_count_badge' %>
+<% end %>

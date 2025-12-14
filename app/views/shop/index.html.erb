@@ -13,9 +13,16 @@
                 <div>
                     <div class="position-relative overflow-hidden shadow-sm main-product"
                         style="background-image: url('<%= image_path("products/img11.jpeg") %>');">
-                        <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
+                        <div id="product_controls_<%= @first_product.id %>" 
+                            class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
+                        
                             <h3 class="text-white text-uppercase"><%= @first_product.name %></h3>
-                            <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro text-uppercase" %>
+                            
+                            <%= button_to "Buy", 
+                                            add_to_cart_path(id: @first_product.id),
+                                            form_class: "d-inline", # Evita que button_to rompa el d-flex
+                                            class: "btn btn-secondary text-white font-jaro text-uppercase",
+                                            data: { turbo_stream: true } %>
                         </div>
                     </div>
                 </div>

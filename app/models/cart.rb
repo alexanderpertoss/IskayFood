@@ -15,6 +15,15 @@ class Cart < ApplicationRecord
     cart_products.sum(:product_price)
   end
 
+  def total_items
+    cart_products.count
+  end
+
+  def quantity_of(product)
+    item = cart_products.find_by(product: product)
+    item.present? ? item.quantity : 0
+  end
+
   def finalize_order
     Order.create!(
       total: cart_total,

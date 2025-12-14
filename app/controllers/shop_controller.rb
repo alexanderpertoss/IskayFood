@@ -19,7 +19,14 @@ class ShopController < ApplicationController
   def add_to_cart
     @product = Product.find(params[:id])
     @cart.add_product(@product)
-    redirect_to products_path
+
+    respond_to do |format|
+      format.html { redirect_to products_path } # Fallback if Turbo is not active
+      format.turbo_stream # Calls add_to_cart.turbo_stream.erb
+    end
+  end
+
+  def remove_from_cart
   end
 
   def confirm_order
