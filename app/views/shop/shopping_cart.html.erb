@@ -1,17 +1,119 @@
-<div class="container">
-    <p style="color: green"><%= notice %></p>
+<div id="shop-header" class="col d-flex flex-column align-items-center text-uppercase p-3">
+    <div class="section-title font-staatliches">Cart</div>
+</div>
 
-    <h1>Cart</h1>
+<div id="decorative-divider" class="col d-flex flex-column align-items-center">
+    <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
+</div>
 
-    <% @cart.cart_products.each do |cart_product| %>
-        Name: <%= cart_product.product.name %> - Quantity: <%= cart_product.quantity %> - Price: <%= cart_product.product_price * cart_product.quantity %><br>
-    <% end %>
 
-    <p>
-        Total: <%= @cart.cart_total %>
-    </p>
+<div class="container my-5">
+  <% if @cart.cart_products.any? %>
+    <div id="cart_content" class="row g-5">
+      
+      <div class="col-lg-7">
+        <h2 class="mb-4 fs-3 text-uppercase">Summary</h2>
 
-    <p>
-        <%= link_to "Confirm order", "/confirm_order" %>
-    </p>
+        <div class="table-responsive">
+          <table class="table align-middle font-staatliches">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col" class="text-center">Quantity</th>
+                <th scope="col" class="text-end">Price (per unit</th>
+                <th scope="col" class="text-end">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @cart.cart_products.each do |item| %>
+                <tr id="cart_item_<%= item.id %>">
+                  <td>
+                    <h5 class="my-0"><%= item.product.name %></h5>
+                    <small class="text-muted"><%= truncate(item.product.description, length: 40) %></small>
+                  </td>
+                  
+                  <td class="text-center">
+                    <div class="btn-group btn-group-sm" role="group">
+                      <%= button_to "-", 
+                                    remove_from_cart_path(id: item.product.id), 
+                                    method: :post, 
+                                    class: "btn btn-outline-secondary", 
+                                    data: { turbo_stream: true } %>
+                                    
+                      <span class="btn"><%= item.quantity %></span>
+                      
+                      <%= button_to "+", 
+                                    add_to_cart_path(id: item.product.id), 
+                                    method: :post, 
+                                    class: "btn btn-outline-secondary", 
+                                    data: { turbo_stream: true } %>
+                    </div>
+                  </td>
+                  
+                  <td class="text-end"><%= number_to_currency(item.product_price) %></td>
+                  
+                  <td class="text-end fw-bold"><%= number_to_currency(item.product_price * item.quantity) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            
+            <tfoot>
+              <tr id="cart_total_row">
+                <th colspan="3" class="text-end fs-5 pt-3">Cart total:</th>
+                <td class="text-end fs-5 pt-3 fw-bold text-success font-staatliches"><%= number_to_currency(@cart.cart_total) %></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <hr class="my-4">
+        
+        
+      </div>
+      
+      <div class="col-lg-5">
+        <div class="card shadow-sm border-light">
+          <div class="card-body p-4">
+            <h2 class="mb-4 fs-3 text-uppercase">Order details</h2>
+            
+            <%# Utilizamos un formulario genérico. Asumimos una ruta POST a confirm_order_path %>
+            <%= form_with url: confirm_order_path, method: :post, local: true do |f| %>
+
+              <h4 class="mb-3 text-primary text-uppercase">Contact Information</h4>
+              <div class="row g-3 mb-4 text-uppercase font-staatliches">
+                <div class="col-sm-6">
+                  
+                  <%= f.text_field :customer_name, class: "form-control", required: true, placeholder: "Name" %>
+                </div>
+                <div class="col-sm-6">
+                  
+                  <%= f.text_field :customer_phone, class: "form-control", required: true, placeholder: "Phone number" %>
+                </div>
+                <div class="col-12">
+                  
+                  <%= f.email_field :customer_email, class: "form-control", placeholder: "Email address" %>
+                </div>
+              </div>
+
+              <h4 class="mb-3 text-primary text-uppercase">Shipping Address</h4>
+              <div class="row g-3 mb-4">
+                <div class="col-12">
+                  <%= f.text_area :customer_shipping_address, class: "form-control", rows: 3, required: true %>
+                </div>
+              </div>
+              
+              <hr class="my-4">
+              
+              <%= f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  <% else %>
+    <div class="alert text-center py-4">
+      <p class="mb-0 fs-5 text-uppercase font-jaro">Your cart is empty. ¡Add some products!</p>
+      <%= link_to "Go to the shop", "/shop/index", class: "btn btn-primary mt-3 font-jaro text-uppercase p-3" %>
+    </div>
+  <% end %>
 </div>

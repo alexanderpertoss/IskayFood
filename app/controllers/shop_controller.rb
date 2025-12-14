@@ -41,7 +41,7 @@ class ShopController < ApplicationController
   end
 
   def confirm_order
-    @order = @cart.finalize_order
+    @order = @cart.finalize_order(params[:customer_name], params[:customer_shipping_address], params[:customer_phone], params[:customer_email])
 
     if @order.nil?
       redirect_to products_path
@@ -49,6 +49,7 @@ class ShopController < ApplicationController
       if @order.persisted?
         # Because the cart order was finalized, we reset the cart
         session[:cart_id] = nil
+        redirect_to @order
       else
         redirect_to products_path
       end
