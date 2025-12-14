@@ -1,27 +1,44 @@
-<p style="color: green"><%= notice %></p>
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Products</h2>
 
-<% content_for :title, "Products" %>
+  Cart´s id is: <%= @cart.id %>, the quantity is: <%= @cart.cart_products.count %>. <%= link_to "View cart", "/shopping_cart" %>
 
-<h1>Products</h1>
-
-<p>
-  Cart´s id is: <%= @cart.id %>, the quantity is: <%= @cart.cart_products.count %>. 
-</p>
-
-<p>
-  <%= link_to "Go to cart", "/shopping_cart" %>
-</p>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-    <p>
-      <%= link_to "Add to cart", "/add_to_cart/#{product.id}" %>
-    </p>
+  <% if @products.any? %>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col" class="text-end">^Price</th>
+            <th scope="col" class="text-center">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each_with_index do |product, index| %>
+            <tr>
+              <th scope="row" class="text-center"><%= index + 1 %></th>
+              <td><%= product.name %></td>
+              <td><%= truncate(product.description, length: 70, separator: ' ') %></td>
+              <td class="text-end">Bs. <%= number_to_currency(product.price, precision: 2, unit: '') %></td>
+              <td class="text-center">
+                <%= link_to "See details", product_path(product), class: "btn btn-info btn-sm text-white me-2" %>
+                <%= link_to "Edit", edit_product_path(product), class: "btn btn-warning btn-sm" %>
+                <%= link_to "Add to cart", "/add_to_cart/#{product.id}", class: "btn btn-primary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="alert alert-info text-center" role="alert">
+      No available products
+    </div>
   <% end %>
-</div>
 
-<%= link_to "New product", new_product_path %>
+  <div class="text-center mt-4">
+    <%= link_to "Add new product", new_product_path, class: "btn btn-success btn-lg" %>
+  </div>
+</div>

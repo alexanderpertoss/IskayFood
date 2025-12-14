@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy add_to_cart]
+  include CurrentCart
+  before_action :set_cart
+  before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
   def index
@@ -55,11 +57,6 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_path, notice: "Product was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
-  end
-
-  def add_to_cart
-    @cart.add_product(@product)
-    redirect_to products_path
   end
 
   private

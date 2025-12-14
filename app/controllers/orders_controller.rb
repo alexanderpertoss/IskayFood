@@ -57,24 +57,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def shopping_cart
-  end
-
-  def confirm_order
-    @order = @cart.finalize_order
-
-    if @order.nil?
-      redirect_to products_path
-    else
-      if @order.persisted?
-        # Because the cart order was finalized, we reset the cart
-        session[:cart_id] = nil
-      else
-        redirect_to products_path
-      end
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

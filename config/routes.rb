@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "shop#index"
-  get "/add_to_cart/:id" => "products#add_to_cart"
-  get "/shopping_cart" => "orders#shopping_cart"
-  get "/confirm_order" => "orders#confirm_order"
+  get "/add_to_cart/:id" => "shop#add_to_cart"
+  get "/shopping_cart" => "shop#shopping_cart"
+  get "/confirm_order" => "shop#confirm_order"
 end
