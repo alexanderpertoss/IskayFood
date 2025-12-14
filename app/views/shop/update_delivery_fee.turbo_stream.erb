@@ -1,0 +1,6 @@
+<%# app/views/shop/update_delivery_fee.turbo_stream.erb %>
+
+<%= turbo_stream.replace "order_summary_totals" do %>
+  <%# Renderiza el partial de totales usando el valor guardado en la sesión %>
+  <%= render 'shop/order_summary_totals', cart: @cart, delivery_fee: session[:delivery_fee] %>
+<% end %>

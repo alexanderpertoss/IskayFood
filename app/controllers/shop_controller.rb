@@ -55,4 +55,14 @@ class ShopController < ApplicationController
       end
     end
   end
+
+  def update_delivery_fee
+    # El fee viene como string, lo convertimos a float y lo guardamos en la sesión
+    session[:delivery_fee] = params[:fee].to_f
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to cart_path }
+    end
+  end
 end

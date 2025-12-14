@@ -57,6 +57,27 @@ class OrdersController < ApplicationController
     end
   end
 
+  def prepare_order
+    @order = Order.find(params[:id])
+    @order.status = "Preparing order"
+    @order.save
+    redirect_to orders_path
+  end
+
+  def shipped
+    @order = Order.find(params[:id])
+    @order.status = "Shipped"
+    @order.save
+    redirect_to orders_path
+  end
+
+  def delivered
+    @order = Order.find(params[:id])
+    @order.status = "Delivered"
+    @order.save
+    redirect_to orders_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

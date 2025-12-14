@@ -1,16 +1,92 @@
-<p style="color: green"><%= notice %></p>
+<div class="container my-5">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 fw-bold text-primary">📦 Order Management Dashboard</h1>
+    <%# Opcional: Botón para crear nueva orden si es necesario %>
+    <%# <%= link_to 'New Order', new_order_path, class: 'btn btn-primary' %>
+  </div>
 
-<% content_for :title, "Orders" %>
-
-<h1>Orders</h1>
-
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
+  <div class="card shadow-lg">
+    <div class="card-body p-0">
+      
+      <% if @orders.any? %>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col" class="text-uppercase">Order ID</th>
+                <th scope="col" class="text-uppercase">Customer Name</th>
+                <th scope="col" class="text-uppercase">Total</th>
+                <th scope="col" class="text-uppercase">Status</th>
+                <th scope="col" class="text-uppercase">Date</th>
+                <th scope="col" class="text-uppercase">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr class="order-row-<%= order.status.downcase %>">
+                  
+                  <%# ID y Link a la vista de detalle %>
+                  <td>
+                    <%= link_to "##{order.id}", order_path(order), class: 'fw-bold text-decoration-none' %>
+                  </td>
+                  
+                  <%# Nombre del Cliente %>
+                  <td>
+                    <%= order.customer_name %>
+                    <small class="d-block text-muted"><%= order.customer_email %></small>
+                  </td>
+                  
+                  <%# Total de la Orden %>
+                  <td>
+                    <span class="fs-6 fw-bold text-success"><%= number_to_currency(order.total) %></span>
+                  </td>
+                  
+                  <%# Estado de la Orden (Con badge de color) %>
+                  <td>
+                    <% status_class = case order.status.downcase %>
+                                       <% when 'confirmed' then 'bg-success' %>
+                                       <% when 'pending' then 'bg-warning text-dark' %>
+                                       <% when 'shipped' then 'bg-info' %>
+                                       <% when 'canceled' then 'bg-danger' %>
+                                       <% else 'bg-secondary' %>
+                                     <% end %>
+                    <span class="badge <%= status_class %>"><%= order.status.capitalize %></span>
+                  </td>
+                  
+                  <%# Fecha de Creación %>
+                  <td>
+                    <small><%= order.created_at.strftime("%b %d, %Y") %></small>
+                  </td>
+                  
+                  <%# Acciones %>
+                  <td>
+                    <div class="btn-group btn-group-sm" role="group">
+                      <%= link_to 'View', order_path(order), class: 'btn btn-outline-primary' %>
+                      <%# Ejemplo de botón para cambiar estado (requeriría lógica AJAX/Turbo) %>
+                      <%# <%= button_to 'Ship', ship_order_path(order), method: :post, class: 'btn btn-outline-info' %>
+                      <% if order.status == "Recently created" %>
+                        <%= link_to "Change to: Preparing", "/prepare_order/#{order.id}", class: "btn btn-outline-secondary" %>
+                      <% end %>
+                      <% if order.status == "Preparing order" %>
+                        <%= link_to "Change to: Shipped", "/shipped/#{order.id}", class: "btn btn-outline-secondary" %>
+                      <% end %>
+                      <% if order.status == "Shipped" %>
+                        <%= link_to "Change to: Delivered", "/delivered/#{order.id}", class: "btn btn-outline-secondary" %>
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="alert alert-info mb-0 text-center py-4">
+          No orders found.
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
 </div>
-
-<%= link_to "New order", new_order_path %>

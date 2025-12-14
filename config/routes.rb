@@ -18,4 +18,9 @@ Rails.application.routes.draw do
   post "/remove_from_cart/:id" => "shop#remove_from_cart", as: :remove_from_cart
   get "/shopping_cart" => "shop#shopping_cart"
   post "/confirm_order" => "shop#confirm_order", as: :confirm_order
+  post "shop/update_delivery_fee", to: "shop#update_delivery_fee", as: :update_delivery_fee
+
+  get "/prepare_order/:id" => "orders#prepare_order"
+  get "/shipped/:id" => "orders#shipped"
+  get "/delivered/:id" => "orders#delivered"
 end

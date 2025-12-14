@@ -1,32 +1,43 @@
-<%= form_with(model: product) do |form| %>
-  <% if product.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      
+      <%= form_with(model: product, class: "p-4 border rounded-3 bg-light shadow-sm") do |form| %>
 
-      <ul>
-        <% product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% if product.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h4>
+            <ul class="mb-0">
+              <% product.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-floating mb-3">
+          <%= form.text_field :name, class: "form-control", placeholder: "Product Name", required: true %>
+          <%= form.label :name, "Product Name" %>
+        </div>
+
+        <div class="form-floating mb-3">
+          <%# Usamos inputmode: 'decimal' para teclado numérico en móviles %>
+          <%= form.text_field :price, class: "form-control", placeholder: "Price", required: true, inputmode: "decimal" %>
+          <%= form.label :price, "Price" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :description, "Description", class: "form-label" %>
+          <%= form.text_area :description, class: "form-control", rows: 4, placeholder: "A brief description of the product...", required: true %>
+        </div>
+
+        <div class="d-grid gap-2 mt-4 font-staatliches">
+          <%= form.submit "Save Product", class: "btn btn-primary btn-lg" %>
+          <%= link_to "Back", products_path, class: "btn btn-secondary btn-lg" %>
+        </div>
+        
+      <% end %>
+      
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
   </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.textarea :description %>
-  </div>
-
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

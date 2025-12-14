@@ -1,0 +1,29 @@
+<%# app/views/shop/_order_summary_totals.html.erb %>
+<%# Recibe: cart (objeto Cart) y delivery_fee (la tarifa de envío) %>
+
+<li class="list-group-item d-flex justify-content-between lh-sm">
+  <div>
+    <h6 class="my-0">Subtotal</h6>
+    <small class="text-muted">Cart items total</small>
+  </div>
+  <span class="text-muted"><%= number_to_currency(cart.cart_total) %></span>
+</li>
+
+<li class="list-group-item d-flex justify-content-between lh-sm" id="delivery_fee_row">
+  <div>
+    <h6 class="my-0">Delivery Fee</h6>
+    <small class="text-muted">Calculated upon address selection</small>
+  </div>
+  <% delivery_fee_value = delivery_fee.to_f %>
+  <span class="<%= 'text-muted' if delivery_fee_value == 0.0 %> fw-bold">
+    <%= number_to_currency(delivery_fee_value) %>
+  </span>
+</li>
+
+<li class="list-group-item d-flex justify-content-between">
+  <span class="fw-bold fs-5 font-staatliches">Grand Total (delivery included)</span>
+  <strong class="text-success fs-5 font-staatliches">
+    <% grand_total = cart.cart_total + delivery_fee_value %>
+    <%= number_to_currency(grand_total) %>
+  </strong>
+</li>
