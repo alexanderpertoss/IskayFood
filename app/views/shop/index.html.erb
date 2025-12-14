@@ -19,10 +19,7 @@
                 <div>
                     <div class="position-relative overflow-hidden shadow-sm main-product"
                         style="background-image: url('<%= image_path("products/img7.png") %>');">
-                        <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
-                            <h3 class="text-white text-uppercase"><%= @second_product.name %></h3>
-                            <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro text-uppercase" %>
-                        </div>
+                        <%= render 'shop/product_controls', product: @second_product %>
                     </div>
                 </div>
             </div>
@@ -30,10 +27,7 @@
                 <div>
                     <div class="position-relative overflow-hidden shadow-sm main-product-large"
                         style="background-image: url('<%= image_path("products/img10.png") %>');">
-                        <div class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
-                            <h3 class="text-white text-uppercase"><%= @third_product.name %></h3>
-                            <%= link_to "Buy", products_path, class: "btn btn-secondary text-white font-jaro text-uppercase" %>
-                        </div>
+                        <%= render 'shop/product_controls', product: @third_product %>
                     </div>
                 </div>
             </div>
@@ -55,10 +49,7 @@
                     style="background-image: url('<%= image_path("products/img10.png") %>'); 
                             min-height: 450px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
-                        <h3 class="text-white text-uppercase"><%= @fourth_product.name %></h3>
-                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro text-uppercase" %>
-                    </div>
+                    <%= render 'shop/product_controls', product: @fourth_product %>
                 </div>
             </div>
 
@@ -67,10 +58,7 @@
                     style="background-image: url('<%= image_path("products/img9.png") %>'); 
                             min-height: 350px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
-                        <h3 class="text-white text-uppercase"><%= @fifth_product.name %></h3>
-                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro text-uppercase" %>
-                    </div>
+                    <%= render 'shop/product_controls', product: @fifth_product %>
                 </div>
             </div>
 
@@ -79,10 +67,7 @@
                     style="background-image: url('<%= image_path("products/img3.png") %>'); 
                             min-height: 450px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
-                        <h3 class="text-white text-uppercase"><%= @sixth_product.name %></h3>
-                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro text-uppercase" %>
-                    </div>
+                    <%= render 'shop/product_controls', product: @sixth_product %>
                 </div>
             </div>
 
@@ -91,10 +76,7 @@
                     style="background-image: url('<%= image_path("products/img13.jpg") %>'); 
                             min-height: 450px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
-                        <h3 class="text-white text-uppercase"><%= @seventh_product.name %></h3>
-                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro text-uppercase" %>
-                    </div>
+                    <%= render 'shop/product_controls', product: @seventh_product %>
                 </div>
             </div>
 
@@ -103,10 +85,7 @@
                     style="background-image: url('<%= image_path("products/img6.png") %>'); 
                             min-height: 250px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
-                        <h3 class="text-white text-uppercase"><%= @eigth_product.name %></h3>
-                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro text-uppercase" %>
-                    </div>
+                    <%= render 'shop/product_controls', product: @eigth_product %>
                 </div>
             </div>
 
@@ -115,10 +94,7 @@
                     style="background-image: url('<%= image_path("products/img22.jpg") %>'); 
                             min-height: 450px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4 other-product-background text-white d-flex justify-content-between align-items-center">
-                        <h3 class="text-white text-uppercase"><%= @ninth_product.name %></h3>
-                        <%= link_to "Buy", products_path, class: "btn btn-primary text-white font-jaro text-uppercase" %>
-                    </div>
+                    <%= render 'shop/product_controls', product: @ninth_product %>
                 </div>
             </div>
 
