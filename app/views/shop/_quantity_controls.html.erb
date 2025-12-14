@@ -7,9 +7,10 @@
   <div class="btn-group" role="group">
     <%= button_to "-", remove_from_cart_path(id: product.id), # Asumiendo que tienes esta ruta
                   method: :post,
-                  class: "btn btn-secondary text-white font-jaro" %>
+                  class: "btn btn-secondary text-white font-jaro",
+                  data: { turbo_stream: true } %>
     
-    <span class="btn btn-dark text-white font-jaro">
+    <span class="btn btn-primary text-white font-jaro">
       <%= @cart.quantity_of(product) || 1 %>
     </span>
     

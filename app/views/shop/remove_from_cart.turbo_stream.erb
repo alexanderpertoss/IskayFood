@@ -1,0 +1,23 @@
+<% if @current_item.nil? %>
+  <%# La cantidad llegó a cero: Reemplaza con el botón "Buy" %>
+  <%= turbo_stream.replace "product_controls_" + @product.id.to_s do %>
+    <%= render 'shop/buy_button', product: @product %>
+  <% end %>
+  
+  <%# Inyecta la notificación de producto ELIMINADO %>
+  <%= turbo_stream.append "notifications" do %>
+    <%= render 'shared/notification_toast', 
+               product_name: @product.name, 
+               message_type: 'removed' %>
+  <% end %>
+<% else %>
+  <%# La cantidad es mayor a cero: Solo actualiza los controles de cantidad %>
+  <%= turbo_stream.replace "product_controls_" + @product.id.to_s do %>
+    <%= render 'shop/quantity_controls', product: @product %>
+  <% end %>
+<% end %>
+
+<%# 3. Actualiza el contador del carrito siempre %>
+<%= turbo_stream.replace "cart_count" do %>
+  <%= render 'shared/cart_count_badge' %>
+<% end %>

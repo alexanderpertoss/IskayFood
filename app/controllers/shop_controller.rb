@@ -1,6 +1,4 @@
 class ShopController < ApplicationController
-  include CurrentCart
-  before_action :set_cart
   def index
     @ninth_product = Product.order(created_at: :asc).offset(8).first
     @eigth_product = Product.order(created_at: :asc).offset(7).first
@@ -18,7 +16,9 @@ class ShopController < ApplicationController
 
   def add_to_cart
     @product = Product.find(params[:id])
-    @cart.add_product(@product)
+    @current_item, @was_newly_added = @cart.add_product(@product)
+
+    @cart.reload
 
     respond_to do |format|
       format.html { redirect_to products_path } # Fallback if Turbo is not active
@@ -27,6 +27,17 @@ class ShopController < ApplicationController
   end
 
   def remove_from_cart
+    @product = Product.find(params[:id])
+    @current_item = @cart.remove_product(@product)
+
+    @cart.reload
+
+    respond_to do |format|
+      format.html { redirect_to products_path } # Fallback
+      format.turbo_stream # Llama a remove_product.turbo_stream.erb
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to products_path, alert: "Producto no encontrado."
   end
 
   def confirm_order

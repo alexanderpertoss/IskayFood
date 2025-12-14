@@ -1,0 +1,7 @@
+<% if @cart && @cart.quantity_of(product) > 0 %>
+  <%# Si ya hay uno o más, muestra los controles de cantidad (+/-) %>
+  <%= render 'shop/quantity_controls', product: product %>
+<% else %>
+  <%# Si no hay, muestra el botón inicial de "Buy" %>
+  <%= render 'shop/buy_button', product: product %>
+<% end %>

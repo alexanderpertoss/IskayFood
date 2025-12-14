@@ -1,4 +1,16 @@
-<div class="toast align-items-center text-white bg-cart border-0 fade show p-3" 
+<% message_type ||= 'added' %> 
+
+<% if message_type == 'added' %>
+  <% toast_class = "bg-success" %>
+  <% message = "added to cart." %>
+<% else %>
+  <% toast_class = "bg-danger" %>
+  <% message = "removed from cart" %>
+<% end %>
+
+<% toast_id = "toast_#{SecureRandom.hex(6)}" %>
+
+<div id="<%= toast_id %>" class="toast align-items-center text-white bg-cart border-0 fade show p-3" 
      role="alert" 
      aria-live="assertive" 
      aria-atomic="true"
@@ -8,7 +20,7 @@
   <div class="d-flex align-items-center">
     
     <div class="toast-body font-jaro text-center flex-fill"> 
-      <strong><%= product_name %></strong> added to the cart.
+      <strong><%= product_name %></strong> <%= message %>
     </div>
     
     <button type="button" 
@@ -18,15 +30,29 @@
     </button>
   </div>
 </div>
-
 <script>
-  // Inicializa y muestra el Toast de Bootstrap (requiere que Bootstrap JS se cargue)
-  const toastEl = document.querySelector('.toast');
-  const toast = new bootstrap.Toast(toastEl);
-  toast.show();
+
+  (function() {
   
-  // Limpia el DOM después de que el toast se oculte
-  toastEl.addEventListener('hidden.bs.toast', (event) => {
-    event.target.remove();
-  })
+    const toastId = '<%= toast_id %>';
+    const toastEl = document.getElementById(toastId);
+    
+    if (!toastEl) return;
+    
+    const delayString = toastEl.getAttribute('data-bs-delay');
+    
+  
+    const toast = new bootstrap.Toast(toastEl, {
+        delay: parseInt(delayString) || 4000, 
+        autohide: toastEl.getAttribute('data-bs-autohide') === 'true'
+    });
+    
+  
+    toast.show();
+    
+  
+    toastEl.addEventListener('hidden.bs.toast', (event) => {
+      event.target.remove();
+    });
+  })();
 </script>

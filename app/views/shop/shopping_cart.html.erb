@@ -4,7 +4,7 @@
     <h1>Cart</h1>
 
     <% @cart.cart_products.each do |cart_product| %>
-        Name: <%= cart_product.product.name %> - Quantity: <%= cart_product.quantity %> - Price: <%= cart_product.product_price %><br>
+        Name: <%= cart_product.product.name %> - Quantity: <%= cart_product.quantity %> - Price: <%= cart_product.product_price * cart_product.quantity %><br>
     <% end %>
 
     <p>

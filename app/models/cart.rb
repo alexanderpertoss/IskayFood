@@ -3,12 +3,36 @@ class Cart < ApplicationRecord
   has_one :order
 
   def add_product(product_for_cart)
-    CartProduct.create!(
-      quantity: 1,
-      product_price: product_for_cart.price,
-      product: product_for_cart,
-      cart: self
+    current_item = cart_products.find_by(product_id: product_for_cart.id)
+    was_newly_added = false
+
+    if current_item
+      current_item.quantity += 1
+      current_item.save!
+    else
+      current_item = CartProduct.create!(
+        quantity: 1,
+        product_price: product_for_cart.price,
+        product: product_for_cart,
+        cart: self
       )
+      was_newly_added = true
+    end
+    return current_item, was_newly_added
+  end
+
+  def remove_product(product_to_remove)
+    current_item = cart_products.find_by(product_id: product_to_remove.id)
+    return unless current_item
+
+    if current_item.quantity > 1
+      current_item.quantity -= 1
+      current_item.save!
+      current_item
+    else
+      current_item.destroy
+      nil
+    end
   end
 
   def cart_total
@@ -16,7 +40,7 @@ class Cart < ApplicationRecord
   end
 
   def total_items
-    cart_products.count
+    cart_products.sum(:quantity)
   end
 
   def quantity_of(product)

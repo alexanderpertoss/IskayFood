@@ -2,10 +2,11 @@
   <%= render 'shop/quantity_controls', product: @product %>
 <% end %>
 
-<%= turbo_stream.append "notifications" do %>
-  <%= render 'shared/notification_toast', product_name: @product.name %>
+<% if @was_newly_added %>
+  <%= turbo_stream.append "notifications" do %>
+    <%= render 'shared/notification_toast', product_name: @product.name, message_type: 'added' %>
+  <% end %>
 <% end %>
-
 
 <%= turbo_stream.replace "cart_count" do %>
   <%= render 'shared/cart_count_badge' %>
