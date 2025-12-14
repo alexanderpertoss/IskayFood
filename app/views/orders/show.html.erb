@@ -1,10 +1,82 @@
-<p style="color: green"><%= notice %></p>
+<div id="shop-header" class="col d-flex flex-column align-items-center text-uppercase p-3">
+    <div class="section-title font-staatliches">Order #<%= @order.id %></div>
+</div>
 
-<%= render @order %>
+<div id="decorative-divider" class="col d-flex flex-column align-items-center">
+    <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
+</div>
 
-<div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
-  <%= link_to "Back to orders", orders_path %>
 
-  <%= button_to "Destroy this order", @order, method: :delete %>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      
+      <div class="text-center mb-5 p-4 bg-light rounded shadow-sm border border-success">
+        <h1 class="display-4 mb-3 text-uppercase">Order Confirmed!</h1>
+        <p class="lead font-staatliches">Thank you for your purchase. Your order details are below.</p>
+        <div class="badge bg-secondary fs-5 font-staatliches">Status: <%= @order.status.capitalize %></div>
+      </div>
+      
+      <div class="row g-5">
+        
+        <div class="col-md-7">
+          <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h2 class="h5 mb-0">Order Summary</h2>
+            </div>
+            <div class="card-body p-0">
+              
+              <ul class="list-group list-group-flush">
+                <% @order.cart.cart_products.each do |item| %>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <h6 class="my-0"><%= item.product.name %></h6>
+                      <small class="text-muted"><%= item.quantity %> x <%= number_to_currency(item.product_price) %></small>
+                    </div>
+                    <span class="text-success fw-bold">
+                      <%= number_to_currency(item.product_price * item.quantity) %>
+                    </span>
+                  </li>
+                <% end %>
+                
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                  <span class="fw-bold fs-5 font-staatliches">ORDER TOTAL</span>
+                  <strong class="fs-5 text-primary"><%= number_to_currency(@order.total) %></strong>
+                </li>
+              </ul>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-5">
+          <div class="card shadow-sm border-secondary">
+            <div class="card-header bg-secondary text-white">
+              <h2 class="h5 mb-0">Customer & Shipping Details</h2>
+            </div>
+            <div class="card-body">
+              
+              <h4 class="h6 text-primary mb-3">Billing Information</h4>
+              <p><strong>Name:</strong> <%= @order.customer_name %></p>
+              <p><strong>Email:</strong> <%= @order.customer_email %></p>
+              <p class="mb-4"><strong>Phone:</strong> <%= @order.customer_phone %></p>
+              
+              <h4 class="h6 text-primary mb-3 border-top pt-3">Shipping Address</h4>
+              <address>
+                <%= @order.customer_name %><br>
+                <%= simple_format(@order.customer_shipping_address) %>
+              </address>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="text-center mt-5">
+        <%= link_to "Continue Shopping", "/shop/index", class: "btn btn-outline-primary btn-lg font-staatliches text-uppercase" %>
+      </div>
+      
+    </div>
+  </div>
 </div>

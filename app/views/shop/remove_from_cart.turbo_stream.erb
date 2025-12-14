@@ -1,4 +1,4 @@
-<% if @current_item.nil? %>
+<% if @was_destroyed %>
   <%# La cantidad llegó a cero: Reemplaza con el botón "Buy" %>
   <%= turbo_stream.replace "product_controls_" + @product.id.to_s do %>
     <%= render 'shop/buy_button', product: @product %>
@@ -20,4 +20,37 @@
 <%# 3. Actualiza el contador del carrito siempre %>
 <%= turbo_stream.replace "cart_count" do %>
   <%= render 'shared/cart_count_badge' %>
+<% end %>
+
+<%# El objeto @cart_product (aunque destruido) contiene el ID de la fila a remover %>
+
+<% if @was_destroyed %>
+  <%# CASO 1: El CartProduct fue eliminado (la cantidad pasó de 1 a 0). %>
+  
+  <% if @cart.cart_products.empty? %>
+    <%# A) El carrito está completamente vacío: Reemplaza toda la sección con el mensaje de "vacío" %>
+    <%= turbo_stream.replace "cart_content" do %>
+      <%= render 'shop/empty_cart' %>
+    <% end %>
+  <% else %>
+    <%# B) El carrito aún tiene otros productos: Solo elimina esta fila %>
+    <%= turbo_stream.remove "cart_item_#{@cart_product.id}" %>
+  <% end %>
+
+<% else %>
+  <%# CASO 2: Cantidad > 1 (Decremento). El objeto @cart_product ya tiene la cantidad (n-1) actualizada. %>
+  <%= turbo_stream.replace "cart_item_#{@cart_product.id}" do %>
+    <%= render 'shop/cart_product_row', item: @cart_product %>
+  <% end %>
+<% end %>
+
+
+<%# 3. Actualiza el Total General (Siempre) %>
+<%= turbo_stream.replace "cart_total_row" do %>
+  <%= render 'shop/cart_total_row', cart: @cart %>
+<% end %>
+
+<%# 4. Actualiza el Contador Flotante (Siempre) %>
+<%= turbo_stream.replace "cart_count" do %>
+  <%= render 'shared/cart_count_badge', cart: @cart %>
 <% end %>

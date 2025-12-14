@@ -16,7 +16,7 @@ class ShopController < ApplicationController
 
   def add_to_cart
     @product = Product.find(params[:id])
-    @current_item, @was_newly_added = @cart.add_product(@product)
+    @cart_product, @was_newly_added = @cart.add_product(@product)
 
     @cart.reload
 
@@ -28,7 +28,7 @@ class ShopController < ApplicationController
 
   def remove_from_cart
     @product = Product.find(params[:id])
-    @current_item = @cart.remove_product(@product)
+    @cart_product, @was_destroyed = @cart.remove_product(@product)
 
     @cart.reload
 

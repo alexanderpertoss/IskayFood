@@ -26,42 +26,14 @@
             </thead>
             <tbody>
               <% @cart.cart_products.each do |item| %>
-                <tr id="cart_item_<%= item.id %>">
-                  <td>
-                    <h5 class="my-0"><%= item.product.name %></h5>
-                    <small class="text-muted"><%= truncate(item.product.description, length: 40) %></small>
-                  </td>
-                  
-                  <td class="text-center">
-                    <div class="btn-group btn-group-sm" role="group">
-                      <%= button_to "-", 
-                                    remove_from_cart_path(id: item.product.id), 
-                                    method: :post, 
-                                    class: "btn btn-outline-secondary", 
-                                    data: { turbo_stream: true } %>
-                                    
-                      <span class="btn"><%= item.quantity %></span>
-                      
-                      <%= button_to "+", 
-                                    add_to_cart_path(id: item.product.id), 
-                                    method: :post, 
-                                    class: "btn btn-outline-secondary", 
-                                    data: { turbo_stream: true } %>
-                    </div>
-                  </td>
-                  
-                  <td class="text-end"><%= number_to_currency(item.product_price) %></td>
-                  
-                  <td class="text-end fw-bold"><%= number_to_currency(item.product_price * item.quantity) %></td>
-                </tr>
+                <%# LLAMAMOS AL PARTIAL PARA CADA FILA (Paso 2) %>
+                <%= render 'shop/cart_product_row', item: item %>
               <% end %>
             </tbody>
             
             <tfoot>
-              <tr id="cart_total_row">
-                <th colspan="3" class="text-end fs-5 pt-3">Cart total:</th>
-                <td class="text-end fs-5 pt-3 fw-bold text-success font-staatliches"><%= number_to_currency(@cart.cart_total) %></td>
-              </tr>
+              <%# ID DEL TOTAL GENERAL (Paso 3) %>
+              <%= render 'shop/cart_total_row', cart: @cart %>
             </tfoot>
           </table>
         </div>

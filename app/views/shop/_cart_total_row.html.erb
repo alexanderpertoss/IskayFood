@@ -1,0 +1,8 @@
+<%# app/views/shop/_cart_total_row.html.erb %>
+<%# Recibe 'cart' como variable local %>
+
+<%# ID CRÍTICO: Para actualizar el total general %>
+<tr id="cart_total_row">
+  <th colspan="3" class="text-end fs-5 pt-3">Total del Carrito:</th>
+  <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(cart.cart_total) %></td>
+</tr>

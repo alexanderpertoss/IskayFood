@@ -11,3 +11,21 @@
 <%= turbo_stream.replace "cart_count" do %>
   <%= render 'shared/cart_count_badge' %>
 <% end %>
+
+<%# 1. ACTUALIZA LA FILA DEL PRODUCTO EN LA TABLA DEL CARRITO %>
+<%# El objeto @cart_product debe estar disponible para obtener su ID y la nueva cantidad %>
+<% if @cart_product && @cart_product.persisted? %>
+  <%= turbo_stream.replace "cart_item_#{@cart_product.id}" do %>
+    <%= render 'shop/cart_product_row', item: @cart_product %>
+  <% end %>
+<% end %>
+
+<%# 2. ACTUALIZA EL TOTAL GENERAL %>
+<%= turbo_stream.replace "cart_total_row" do %>
+  <%= render 'shop/cart_total_row', cart: @cart %>
+<% end %>
+
+<%# 4. Notificación (Si es la primera adición) %>
+<% if @was_newly_added %>
+  <%= render 'shared/notification_toast', product_name: @product.name, message_type: 'added' %>
+<% end %>

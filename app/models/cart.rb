@@ -23,16 +23,18 @@ class Cart < ApplicationRecord
 
   def remove_product(product_to_remove)
     current_item = cart_products.find_by(product_id: product_to_remove.id)
-    return unless current_item
+    return nil, false unless current_item
+
+    was_destroyed = false
 
     if current_item.quantity > 1
       current_item.quantity -= 1
       current_item.save!
-      current_item
     else
       current_item.destroy
-      nil
+      was_destroyed = true
     end
+    return current_item, was_destroyed
   end
 
   def cart_total
