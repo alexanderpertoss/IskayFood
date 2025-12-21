@@ -1,6 +1,19 @@
-<%# app/views/shop/update_delivery_fee.turbo_stream.erb %>
+<%# 1. Actualiza la tabla de totales (tfoot) %>
+<%= turbo_stream.update "order_summary_totals" do %>
+    <tr id="cart_total_row">
+      <th colspan="3" class="text-end fs-5 pt-3">TOTAL:</th>
+      <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(@cart.cart_total + @fee) %></td>
+    </tr>
+  
+<% end %>
+<%# 2. Actualiza el mensaje informativo debajo del título de Shipping %>
+<%= turbo_stream.update "fee_message" do %>
+  <div class="alert alert-info py-2 animate__animated animate__fadeIn">
+    <small class="text-uppercase fw-bold">Shipping Method:</small> <%= @method_name %><br>
+    <small class="text-uppercase fw-bold">Cost:</small> <%= number_to_currency(@fee) %>
+  </div>
+<% end %>
 
-<%= turbo_stream.replace "order_summary_totals" do %>
-  <%# Renderiza el partial de totales usando el valor guardado en la sesión %>
-  <%= render 'shop/order_summary_totals', cart: @cart, delivery_fee: session[:delivery_fee] %>
+<%= turbo_stream.update "delivery_cost" do %>
+  <%= hidden_field_tag :delivery_price, @fee %>
 <% end %>

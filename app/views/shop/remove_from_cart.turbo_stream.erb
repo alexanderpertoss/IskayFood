@@ -47,7 +47,7 @@
 
 <%# 3. Actualiza el Total General (Siempre) %>
 <%= turbo_stream.replace "cart_total_row" do %>
-  <%= render 'shop/cart_total_row', cart: @cart %>
+  <%= render 'shop/cart_total_row', cart: @cart, delivery_fee: @fee %>
 <% end %>
 
 <%# 4. Actualiza el Contador Flotante (Siempre) %>

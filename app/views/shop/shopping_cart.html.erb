@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
 <div id="shop-header" class="col d-flex flex-column align-items-center text-uppercase p-3">
     <div class="section-title font-staatliches">Cart</div>
 </div>
@@ -20,20 +24,22 @@
               <tr>
                 <th scope="col">Product</th>
                 <th scope="col" class="text-center">Quantity</th>
-                <th scope="col" class="text-end">Price (per unit</th>
+                <th scope="col" class="text-end">Price (per unit)</th>
                 <th scope="col" class="text-end">Subtotal</th>
               </tr>
             </thead>
             <tbody>
               <% @cart.cart_products.each do |item| %>
-                <%# LLAMAMOS AL PARTIAL PARA CADA FILA (Paso 2) %>
                 <%= render 'shop/cart_product_row', item: item %>
               <% end %>
             </tbody>
             
-            <tfoot>
-              <%# ID DEL TOTAL GENERAL (Paso 3) %>
-              <%= render 'shop/cart_total_row', cart: @cart %>
+            <%# CAMBIO AQUÍ: ID correcto para el Turbo Stream %>
+            <tfoot id="order_summary_totals">
+              <tr id="cart_total_row">
+                <th colspan="3" class="text-end fs-5 pt-3">TOTAL:</th>
+                <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(@cart.cart_total) %></td>
+              </tr>
             </tfoot>
           </table>
         </div>
@@ -57,6 +63,8 @@
                   <%= f.text_field :customer_name, class: "form-control", required: true, placeholder: "Name" %>
                 </div>
                 <div class="col-sm-6">
+
+                  <div id="delivery_cost"></div>
                   
                   <%= f.text_field :customer_phone, class: "form-control", required: true, placeholder: "Phone number" %>
                 </div>
@@ -68,38 +76,25 @@
 
               <h4 class="mb-3 text-primary text-uppercase">Shipping Address</h4>
 
-              <%# El controlador de Stimulus maneja la lógica del mapa y los costos %>
-              <div data-controller="map-selector">
-                  
-                  <div class="input-group mb-3">
-                      <%# Este campo NO es el que se envía, es solo para buscar %>
-                      <input type="text" class="form-control font-staatliches" placeholder="Search or click on map..." 
-                            data-map-selector-target="addressInput" 
-                            data-action="change->map-selector#geocode" 
-                            aria-label="Address search">
-                      <button type="button" class="btn btn-outline-secondary font-staatliches" data-action="map-selector#geocode">Search</button>
-                  </div>
+              <div class="container mt-4" data-controller="shipping-map">
+                
 
-                  <div id="delivery-map" style="height: 300px; background-color: #f8f9fa; border: 1px solid #dee2e6; margin-bottom: 15px;" 
-                      data-map-selector-target="mapContainer">
-                      <p class="text-center p-5 text-muted">
-                          🗺️ Interactive Map Here. Click to select point or search address.
-                      </p>
+                <div class="mb-3">
+                  <label class="form-label text-uppercase">Selected Address:</label>
+                  <div id="address-display" class="p-2 border bg-light rounded text-muted">
+                    Click on the map to select your location
                   </div>
-                  
-                  <%= f.hidden_field :customer_shipping_address, data: { map_selector_target: "finalAddress" } %>
+                </div>
 
-                  <%# Campo oculto: Guarda la tarifa de envío para el envío final de la orden %>
-                  <%= f.hidden_field :delivery_fee, value: 0.00, data: { map_selector_target: "deliveryFeeInput" } %>
+                <div id="map" style="height: 400px; width: 100%; border-radius: 8px; border: 1px solid #ddd; z-index: 1;"></div>
 
-                  <%# Mensaje de retroalimentación al usuario sobre la tarifa %>
-                  <div class="alert alert-primary font-staatliches" data-map-selector-target="feeMessage">
-                      Please select a delivery location on the map.
-                  </div>
+                <input type="hidden" id="postal_code" name="order[postal_code]">
+                <input type="hidden" id="country_code" name="order[country_code]">
               </div>
               
               <hr class="my-4">
-              
+              <%# CAMBIO AQUÍ: Contenedor para el mensaje del costo de envío %>
+                <div id="fee_message" class="mb-3"></div>
               <%= f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
             <% end %>
           </div>

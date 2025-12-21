@@ -40,8 +40,8 @@
                 <% end %>
                 
                 <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                  <span class="fw-bold fs-5 font-staatliches">ORDER TOTAL</span>
-                  <strong class="fs-5 text-primary"><%= number_to_currency(@order.total) %></strong>
+                  <span class="fw-bold fs-5 font-staatliches">ORDER TOTAL (INCLUDING DELIVERY)</span>
+                  <strong class="fs-5 text-primary"><%= number_to_currency(@order.total + @order.delivery_price) %></strong>
                 </li>
               </ul>
               

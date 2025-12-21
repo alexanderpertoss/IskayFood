@@ -50,7 +50,7 @@ class Cart < ApplicationRecord
     item.present? ? item.quantity : 0
   end
 
-  def finalize_order(cust_name, cust_address, cust_phone, cust_email)
+  def finalize_order(cust_name, cust_address, cust_phone, cust_email, del_price)
     Order.create!(
       total: cart_total,
       customer_name: cust_name,
@@ -58,6 +58,7 @@ class Cart < ApplicationRecord
       customer_phone: cust_phone,
       customer_email: cust_email,
       status: "Recently created",
+      delivery_price: del_price,
       cart: self
       ) unless cart_products.empty?
   end

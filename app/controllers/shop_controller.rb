@@ -1,3 +1,6 @@
+require "net/http"
+require "json"
+
 class ShopController < ApplicationController
   def index
     @ninth_product = Product.order(created_at: :asc).offset(8).first
@@ -41,7 +44,7 @@ class ShopController < ApplicationController
   end
 
   def confirm_order
-    @order = @cart.finalize_order(params[:customer_name], params[:customer_shipping_address], params[:customer_phone], params[:customer_email])
+    @order = @cart.finalize_order(params[:customer_name], params[:customer_shipping_address], params[:customer_phone], params[:customer_email], params[:delivery_price])
 
     if @order.nil?
       redirect_to products_path
@@ -57,12 +60,95 @@ class ShopController < ApplicationController
   end
 
   def update_delivery_fee
-    # El fee viene como string, lo convertimos a float y lo guardamos en la sesión
-    session[:delivery_fee] = params[:fee].to_f
+    postal_code = params[:postal_code]
+    country_code = params[:country_code]
+
+    # 1. Limpia cualquier espacio en blanco accidental
+    username = "86fc0a40-8974-4e4f-bd91-fa87f735835d"
+    password = "3fd0b0acd11944809ac0caab0a0539ed"
+
+    uri = URI("https://panel.sendcloud.sc/api/v3/shipping-options")
+    request = Net::HTTP::Post.new(uri)
+
+    # 2. Construir el Header de Autorización manualmente según la documentación
+    auth_string = Base64.strict_encode64("#{username}:#{password}")
+    request["Authorization"] = "Basic #{auth_string}"
+
+    # 3. Headers obligatorios adicionales
+    request["Content-Type"] = "application/json"
+    request["Accept"] = "application/json"
+
+    # 4. Cuerpo de la petición
+    request.body = {
+      from_country_code: "BE",
+      to_country_code: country_code,
+      to_postal_code: postal_code,
+      weight: {
+        value: "1",
+        unit: "kg"
+      },
+      calculate_quotes: true
+    }.to_json
+
+
+
+    # 5. Ejecución
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    puts "TEST--------------------------------------------------"
+    puts response.code
+
+    if response.code == "200"
+      data = JSON.parse(response.body)["data"]
+
+      puts "CANTIDAD DE OPCIONES: #{data.length}"
+      data.each do |opt|
+        puts "Carrier: #{opt['carrier']['name']} | Método: #{opt['name']} | Precio: #{opt['quotes']&.first&.dig('price', 'total', 'value')}"
+      end
+
+      # 1. Mapeamos los métodos disponibles
+      available_methods = data.map do |option|
+        quote = option["quotes"]&.first
+        next if quote.nil?
+
+        # Extraemos el precio total
+        total_price = quote.dig("price", "total", "value").to_f
+
+        # Ignoramos métodos con precio 0 (como Unstamped letter) o sin carrier real
+        next if total_price <= 0 || option["carrier"]["code"] == "sendcloud"
+
+        {
+          name: option["name"],
+          carrier: option["carrier"]["code"],
+          price: total_price,
+          currency: quote.dig("price", "total", "currency"),
+          lead_time: quote["lead_time"] # Por si quieres mostrar "Entrega en 24h"
+        }
+      end.compact
+
+      # 2. Selección de la mejor opción
+      # Priorizamos bpost si existe (muy común en BE), si no, el más barato de DPD
+      best_option = available_methods.min_by { |m| m[:price] }
+
+      if best_option
+        @fee = best_option[:price]
+        @method_name = best_option[:name]
+        puts "SUCCES: Seleccionado #{@method_name} con costo #{@fee}"
+      else
+        @fee = 7.50
+        @method_name = "Standard Shipping"
+        puts "WARN: No se encontraron métodos válidos, usando fallback."
+      end
+    else
+      puts "DEBUG: Error de Sendcloud #{response.code} - #{response.body}"
+      @fee = 7.50
+      @method_name = "Delivery Service"
+    end
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to cart_path }
     end
   end
 end
