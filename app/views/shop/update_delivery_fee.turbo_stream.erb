@@ -8,7 +8,7 @@
 <% end %>
 <%# 2. Actualiza el mensaje informativo debajo del título de Shipping %>
 <%= turbo_stream.update "fee_message" do %>
-  <div class="alert alert-info py-2 animate__animated animate__fadeIn">
+  <div class="alert py-2 animate__animated animate__fadeIn">
     <small class="text-uppercase fw-bold">Shipping Method:</small> <%= @method_name %><br>
     <small class="text-uppercase fw-bold">Cost:</small> <%= number_to_currency(@fee) %>
   </div>

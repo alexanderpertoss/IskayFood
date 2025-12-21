@@ -2,6 +2,7 @@ require "net/http"
 require "json"
 
 class ShopController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [ :confirm_order ]
   def index
     @ninth_product = Product.order(created_at: :asc).offset(8).first
     @eigth_product = Product.order(created_at: :asc).offset(7).first
@@ -44,18 +45,40 @@ class ShopController < ApplicationController
   end
 
   def confirm_order
-    @order = @cart.finalize_order(params[:customer_name], params[:customer_shipping_address], params[:customer_phone], params[:customer_email], params[:delivery_price])
+    @order = @cart.finalize_order(
+      params[:customer_name],
+      params[:order][:shipping_address],
+      params[:customer_phone],
+      params[:customer_email],
+      params[:delivery_price]
+    )
 
-    if @order.nil?
-      redirect_to products_path
+    if @order&.persisted?
+      # Configuramos Stripe
+      Stripe.api_key = "sk_test_51SgtKUINuHdo5ddVr8jz3OGxzPumj9sDQyeBK9qejvW4Xlwx2KSSc3bsh8stMiezl5Czpzs7WRxx4g60BY4bcTHU00gEMmAomD"
+
+      session = Stripe::Checkout::Session.create({
+        payment_method_types: [ "bancontact", "card" ],
+        line_items: [ {
+          price_data: {
+            currency: "eur",
+            product_data: { name: "IskayFood Order ##{@order.id}" },
+            # El cálculo de centavos está perfecto
+            unit_amount: (((@order.total + @order.delivery_price).to_f) * 100).round.to_i
+          },
+          quantity: 1
+        } ],
+        mode: "payment",
+        # Pasamos el ID de nuestra orden local para identificarla al volver
+        success_url: order_success_url + "?session_id={CHECKOUT_SESSION_ID}&order_id=#{@order.id}",
+        cancel_url: cancel_cart_url
+      })
+
+      # Redirigimos a Stripe y detenemos la ejecución con "return"
+      redirect_to session.url, allow_other_host: true and return
     else
-      if @order.persisted?
-        # Because the cart order was finalized, we reset the cart
-        session[:cart_id] = nil
-        redirect_to @order
-      else
-        redirect_to products_path
-      end
+      # Si la orden no se guardó bien, volvemos a la tienda
+      redirect_to products_path, alert: "Error creating order." and return
     end
   end
 

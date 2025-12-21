@@ -90,12 +90,14 @@
 
                 <input type="hidden" id="postal_code" name="order[postal_code]">
                 <input type="hidden" id="country_code" name="order[country_code]">
+                <input type="hidden" id="shipping_address" name="order[shipping_address]">
               </div>
               
               <hr class="my-4">
               <%# CAMBIO AQUÍ: Contenedor para el mensaje del costo de envío %>
                 <div id="fee_message" class="mb-3"></div>
-              <%= f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
+              <%# f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
+              <%= button_to "Pay", payments_path, method: :post, class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3", data: { turbo: false } %>
             <% end %>
           </div>
         </div>

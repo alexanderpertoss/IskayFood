@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get "shop/index"
   resources :orders
   resources :products
+  resources :payments, only: [ :create ]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -23,4 +25,8 @@ Rails.application.routes.draw do
   get "/prepare_order/:id" => "orders#prepare_order"
   get "/shipped/:id" => "orders#shipped"
   get "/delivered/:id" => "orders#delivered"
+
+  # También necesitaremos la ruta de éxito que definimos en el controlador
+  get "order_success", to: "orders#success", as: :order_success
+  get "cancel_cart", to: "orders#cancel", as: :cancel_cart
 end

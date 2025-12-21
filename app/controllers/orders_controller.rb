@@ -78,6 +78,18 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def success
+    # Ahora sí, el pedido es firme: vaciamos el carrito
+    session[:cart_id] = nil
+    @cart = nil
+    @order = Order.find(params[:order_id])
+    redirect_to @order
+  end
+
+  def cancel
+    redirect_to "/shopping_cart"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

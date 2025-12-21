@@ -37,6 +37,7 @@ export default class extends Controller {
         document.getElementById('address-display').innerText = fullAddress;
         document.getElementById('postal_code').value = postCode;
         document.getElementById('country_code').value = countryISO;
+        document.getElementById('shipping_address').value = fullAddress;
 
         // Si tenemos ambos datos, pedir el precio a Sendcloud
         if (postCode && countryISO) {
