@@ -108,3 +108,16 @@ $headings-color: $primary;
 .bg-cart {
   background: $secondary;
 }
+
+/* Asegura que el buscador no quede detrás de otros elementos */
+.leaflet-control-geocoder {
+  z-index: 1000;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+
+.leaflet-control-geocoder-icon {
+  width: 30px;
+  height: 30px;
+}

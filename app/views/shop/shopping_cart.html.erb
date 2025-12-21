@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
 
 <div id="shop-header" class="col d-flex flex-column align-items-center text-uppercase p-3">
     <div class="section-title font-staatliches">Cart</div>
@@ -90,12 +93,17 @@
 
                 <input type="hidden" id="postal_code" name="order[postal_code]">
                 <input type="hidden" id="country_code" name="order[country_code]">
-                <input type="hidden" id="shipping_address" name="order[shipping_address]">
+                <input type="hidden" id="shipping_address" name="order[shipping_address]" required="true">
               </div>
               
               <hr class="my-4">
               <%# CAMBIO AQUÍ: Contenedor para el mensaje del costo de envío %>
-                <div id="fee_message" class="mb-3"></div>
+                <div id="fee_message" class="mb-3">
+                  <%# Mensaje inicial para guiar al usuario %>
+                  <div class="alert alert-warning py-2 small">
+                    Please select a shipping location on the map to enable payment.
+                  </div>
+                </div>
               <%# f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
               <%= button_to "Pay", payments_path, method: :post, class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3", data: { turbo: false } %>
             <% end %>
