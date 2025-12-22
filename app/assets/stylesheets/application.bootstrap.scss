@@ -14,6 +14,10 @@ $headings-color: $primary;
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+.text-primary-color {
+  color: $primary;
+}
+
 .font-jaro {
   font-family: 'Jaro', sans-serif;
 }
@@ -22,14 +26,37 @@ $headings-color: $primary;
 }
 #shop-header {
     background: $secondary;
+    margin-top: 0px;
+    @include media-breakpoint-up(md) {
+      margin-top: 0px;
+    }
+    @include media-breakpoint-up(lg) {
+      margin-top: 30px;
+    }
 }
 .section-title {
     color: white;
     font-size: 600%;
 }
+.section-title-primary {
+    color: $primary;
+    font-size: 600%;
+}
 .section-title2 {
-    font-size: 400%;
+    font-size: 300%;
     color: white;
+}
+.section-title2-primary {
+    font-size: 300%;
+    color: $primary;
+}
+.section-title3 {
+    font-size: 200%;
+    color: white;
+}
+.section-title3-primary {
+    font-size: 200%;
+    color: $primary;
 }
 .main-product {
     height: 400px;
@@ -120,4 +147,153 @@ $headings-color: $primary;
 .leaflet-control-geocoder-icon {
   width: 30px;
   height: 30px;
+}
+
+.decorative-divider-padding-top {
+  margin-top: 10px;
+  @include media-breakpoint-up(md) {
+    margin-top: 15px;
+  }
+  @include media-breakpoint-up(lg) {
+    margin-top: 30px;
+  }
+}
+
+#main-container {
+  background: $secondary;
+}
+
+#main-text-area {
+  background: $secondary;
+}
+
+#main-image-area {
+  height: 600px; /* O la altura que desees */
+  overflow: hidden; /* Corta lo que sobre */
+  padding: 0; /* Opcional: quita el espacio interno de la columna */
+}
+
+#main-image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-section {
+  /* Imagen de fondo */
+  background-image: url("products/img3.png"); /* Asegúrate que la imagen esté en `app/assets/images/` */
+  background-size: cover; /* Cubre todo el área */
+  background-position: center center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
+
+  /* Altura del Hero */
+  height: 80vh; /* 60% del alto de la ventana, ajusta a tu gusto */
+  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
+  width: 100%; /* Ocupa todo el ancho */
+
+  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
+  position: relative; /* Necesario para el pseudo-elemento */
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
+  z-index: 1; /* Asegura que la capa esté debajo del texto */
+}
+
+.hero-content {
+  position: relative; /* Asegura que el contenido esté sobre la capa oscura */
+  z-index: 2; /* Mayor que la capa oscura */
+  max-width: 800px; /* Limita el ancho del texto en pantallas grandes */
+}
+
+/* Para que el texto resalte en móviles si la imagen es muy clara */
+@media (max-width: 768px) {
+  .hero-content {
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo más oscuro para el texto en móviles */
+    padding: 1rem;
+    
+  }
+}
+
+#main-products-area {
+  height: 400px; /* O la altura que desees */
+  overflow: hidden; /* Corta lo que sobre */
+  
+}
+
+#main-products-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-product-grid {
+  /* Definimos el ancho completo y una altura fija */
+  width: 100%;
+  height: 350px; /* Puedes ajustar este valor según te guste más */
+  
+  /* ESTO ES LO MÁS IMPORTANTE: */
+  /* Hace que la imagen se recorte para llenar el espacio sin deformarse */
+  object-fit: cover;
+  
+  /* Opcional: Centra la parte importante de la foto si se recorta */
+  object-position: center; 
+  
+  /* Opcional: Un pequeño redondeado para que se vea más moderno */
+  
+}
+
+/* Opcional: Efecto al pasar el ratón para darle vida */
+.product-card:hover .img-product-grid {
+  filter: brightness(0.9);
+  transition: 0.3s ease;
+}
+
+#main-event {
+  background: $secondary;
+}
+
+#clients-container {
+  background: $body-bg;
+}
+
+#clients-image-area {
+  height: 600px; /* O la altura que desees */
+  overflow: hidden; /* Corta lo que sobre */
+  padding: 0; /* Opcional: quita el espacio interno de la columna */
+}
+
+#clients-image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logo-partner {
+  max-height: 60px; /* Controla la altura máxima para que todos se vean parejos */
+  width: auto;      /* Mantiene la proporción */
+  margin: 0 auto;   /* Los centra dentro de su columna */
+  display: block;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.logo-partner:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05); /* Pequeño efecto de zoom al pasar el mouse */
+}
+
+.main-comments {
+  background: $primary;
+}
+
+.stars {
+  color: $primary !important;
 }

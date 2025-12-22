@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "pages/index"
   get "shop/index"
   resources :orders
   resources :products
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "shop#index"
+  root "pages#index"
   post "/add_to_cart/:id" => "shop#add_to_cart", as: :add_to_cart
   post "/remove_from_cart/:id" => "shop#remove_from_cart", as: :remove_from_cart
   get "/shopping_cart" => "shop#shopping_cart"
@@ -25,8 +26,6 @@ Rails.application.routes.draw do
   get "/prepare_order/:id" => "orders#prepare_order"
   get "/shipped/:id" => "orders#shipped"
   get "/delivered/:id" => "orders#delivered"
-
-  # También necesitaremos la ruta de éxito que definimos en el controlador
   get "order_success", to: "orders#success", as: :order_success
   get "cancel_cart", to: "orders#cancel", as: :cancel_cart
 end
