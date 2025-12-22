@@ -7,6 +7,12 @@
     </span>
   </div>
 
+  <%= link_to 'Products', products_path, class: 'btn btn-primary' %>
+  <%= link_to 'Orders', orders_path, class: 'btn btn-primary' %>
+  <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary' %>
+
+  <br><br>
+
   <% if @contacts.any? %>
     <div class="table-responsive">
       <table class="table table-hover table-striped table-bordered align-middle">

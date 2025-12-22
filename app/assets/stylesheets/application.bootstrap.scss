@@ -484,3 +484,21 @@ $headings-color: $primary;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+
+
+.nav-tabs .nav-link {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+  color: #391042 !important; /* Tu color primario */
+  border-bottom: 3px solid #391042 !important;
+  background: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #391042;
+}

@@ -1,55 +1,97 @@
 <div class="contact-page-wrapper d-flex align-items-center justify-content-center">
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-12 col-md-8 col-lg-6">
+      <div class="col-12 col-md-8 col-lg-7">
         
-        <%# Contenedor Blanco Flotante %>
         <div class="contact-card shadow-lg bg-white p-4 p-md-5">
-          <%# Mensajes de éxito o error %>
-        <% if flash[:notice] %>
+          <% if flash[:notice] %>
             <div class="alert alert-primary font-staatliches text-center"><%= flash[:notice] %></div>
-        <% end %>
-          <%# Sección Informativa %>
-          <div class="text-center mb-4">
-            <h1 class="font-staatliches section-title1-primary mb-2">CONTACT INFORMATION</h1>
-            <p class="font-staatliches section-title4-primary">Our address: Chau. de Wavre 950, 1040 Etterbeek, Bélgium</p>
-            <p class="font-staatliches section-title4-primary">Opening hours: Monday to Saturday From 17:00</p>
-            <p class="font-staatliches section-title4-primary">Telephone: 0493 9234 37</p>
-          </div>
+          <% end %>
 
-        <br>
+          <%# Navegación de Pestañas %>
+          <ul class="nav nav-tabs justify-content-center mb-4 border-0" id="contactTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active font-staatliches text-muted border-0" id="message-tab" data-bs-toggle="tab" data-bs-target="#message-pane" type="button" role="tab">CONTACT US</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link font-staatliches text-muted border-0" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking-pane" type="button" role="tab">BOOK A TABLE</button>
+            </li>
+          </ul>
 
-        <div class="text-center">
-            <h1 class="font-staatliches section-title1-primary mb-2">Leave us a message</h1>
-        </div>
+          <div class="tab-content" id="contactTabContent">
+            
+            <%# PANEL 1: MENSAJES DE CONTACTO %>
+            <div class="tab-pane fade show active" id="message-pane" role="tabpanel" tabindex="0">
+              <div class="text-center mb-4 p-4">
+                
+                <p class="font-staatliches section-title4-primary mb-1">Chau. de Wavre 950, 1040 Etterbeek, Bélgium</p>
+                <p class="font-staatliches section-title4-primary mb-1">Monday to Saturday From 17:00</p>
+                <p class="font-staatliches section-title4-primary mb-3">Telephone: 0493 9234 37</p>
+                <h2 class="font-staatliches section-title1-primary mt-4 pt-4">LEAVE US A MESSAGE</h2>
+              </div>
 
-          <%# Formulario con estilo de líneas y botón centrado %>
-            <%= form_with model: @contact, url: create_contact_msg_path, local: true, class: "contact-form" do |f| %>
-            <div class="row">
-                <div class="col-12 col-md-6 mb-4">
-                <%= f.label :name, "Name", class: "form-label font-staatliches text-muted mb-0" %>
-                <%= f.text_field :name, class: "form-control custom-input-line", placeholder: "Your full name" %>
+              <%= form_with model: @contact, url: create_contact_msg_path, local: true, class: "contact-form p-0" do |f| %>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <%= f.label :name, "Name", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.text_field :name, class: "form-control custom-input-line", placeholder: "Your full name" %>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <%= f.label :email, "Email Address", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.email_field :email, class: "form-control custom-input-line", placeholder: "example@mail.com" %>
+                  </div>
                 </div>
-
-                <div class="col-12 col-md-6 mb-4">
-                <%= f.label :email, "Email Address", class: "form-label font-staatliches text-muted mb-0" %>
-                <%= f.email_field :email, class: "form-control custom-input-line", placeholder: "example@mail.com" %>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col-12 mb-5">
-                <%= f.label :message, "Message", class: "form-label font-staatliches text-muted mb-0" %>
-                <%= f.text_area :message, rows: 3, class: "form-control custom-input-line", placeholder: "How can we help you?" %>
+                  <%= f.label :message, "Message", class: "form-label font-staatliches text-muted mb-0" %>
+                  <%= f.text_area :message, rows: 3, class: "form-control custom-input-line", placeholder: "How can we help you?" %>
                 </div>
+                <div class="d-flex justify-content-center">
+                  <%= f.submit "SEND MESSAGE", class: "btn btn-primary-custom font-staatliches py-2 px-5" %>
+                </div>
+              <% end %>
             </div>
 
-            <%# Contenedor para centrar el botón %>
-            <div class="d-flex justify-content-center">
-                <%= f.submit "SEND", class: "btn btn-primary-custom font-staatliches py-2 px-5" %>
-            </div>
-            <% end %>
+            <%# PANEL 2: RESERVAS %>
+            <div class="tab-pane fade" id="booking-pane" role="tabpanel" tabindex="0">
+              <div class="text-center mb-4">
+                <h1 class="font-staatliches section-title1-primary mb-2">BOOK YOUR TABLE</h1>
+                <p class="font-staatliches section-title4-primary">Join us for an unforgettable dinner</p>
+              </div>
 
+              <%= form_with model: @booking, url: create_booking_path, local: true, class: "contact-form" do |f| %>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <%= f.label :name, "Name", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.text_field :name, class: "form-control custom-input-line", required: true %>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <%= f.label :email, "Email Address", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.email_field :email, class: "form-control custom-input-line", required: true %>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4 mb-4">
+                    <%= f.label :date, "Date", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.date_field :date, class: "form-control custom-input-line", min: Date.today %>
+                  </div>
+                  <div class="col-md-4 mb-4">
+                    <%= f.label :time, "Time", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.time_field :time, class: "form-control custom-input-line" %>
+                  </div>
+                  <div class="col-md-4 mb-4">
+                    <%= f.label :people, "People", class: "form-label font-staatliches text-muted mb-0" %>
+                    <%= f.number_field :people, class: "form-control custom-input-line", min: 1, max: 20 %>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                  <%= f.submit "RESERVE NOW", class: "btn btn-primary-custom font-staatliches py-2 px-5" %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>

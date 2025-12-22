@@ -19,8 +19,11 @@ Rails.application.routes.draw do
   root "pages#index"
   get "/about" => "pages#about"
   get "contact", to: "pages#contact", as: :contact_page
+  get "bookings", to: "contacts#bookings", as: :bookings_list
+  delete "bookings/:id", to: "contacts#delete_booking", as: :delete_booking
 
   post "contacts/create", to: "pages#create_contact", as: :create_contact_msg
+  post "bookings/create", to: "pages#create_booking", as: :create_booking
 
   post "/add_to_cart/:id" => "shop#add_to_cart", as: :add_to_cart
   post "/remove_from_cart/:id" => "shop#remove_from_cart", as: :remove_from_cart

@@ -1,7 +1,9 @@
 <div class="container my-5">
   <h2 class="mb-4 text-center">Products</h2>
 
-  <%= link_to "Orders", orders_path, class: "btn btn-primary" %>
+  <%= link_to 'Orders', orders_path, class: 'btn btn-primary' %>
+  <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary' %>
+  <%= link_to 'Messages', contacts_path, class: 'btn btn-primary' %>
   <br>
   <br>
   <% if @products.any? %>
