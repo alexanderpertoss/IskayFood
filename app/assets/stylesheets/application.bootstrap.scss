@@ -221,6 +221,33 @@ $headings-color: $primary;
   }
 }
 
+.hero-section2 {
+  /* Imagen de fondo */
+  background-image: url("products/img3.png"); /* Asegúrate que la imagen esté en `app/assets/images/` */
+  background-size: cover; /* Cubre todo el área */
+  background-position: center center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
+
+  /* Altura del Hero */
+  height: 50vh; /* 60% del alto de la ventana, ajusta a tu gusto */
+  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
+  width: 100%; /* Ocupa todo el ancho */
+
+  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
+  position: relative; /* Necesario para el pseudo-elemento */
+}
+
+.hero-section2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
+  z-index: 1; /* Asegura que la capa esté debajo del texto */
+}
+
 #main-products-area {
   height: 400px; /* O la altura que desees */
   overflow: hidden; /* Corta lo que sobre */
@@ -296,4 +323,70 @@ $headings-color: $primary;
 
 .stars {
   color: $primary !important;
+}
+
+.about-info {
+  font-size: 130% !important;
+}
+
+.secondary-background {
+  background: $secondary;
+}
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.slider-track {
+  display: flex;
+  /* El ancho total es (ancho del slide * total de slides) */
+  width: calc(380px * 8); 
+  animation: scroll-infinite 20s linear infinite;
+}
+
+.slide {
+  width: 380px;
+  padding: 0 15px;
+}
+
+/* Tarjeta contenedora de la foto y el texto */
+.team-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  height: 350px; /* Ajusta la altura que prefieras */
+}
+
+.team-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bloque de texto en la parte inferior */
+.team-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px 10px 15px 10px;
+  text-align: center;
+  /* Degradado oscuro para que el texto blanco resalte */
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+}
+
+.team-info .name {
+  font-size: 1.25rem;
+  margin-bottom: -5px; /* Pega un poco el rol al nombre */
+}
+
+@keyframes scroll-infinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-380px * 4)); }
+}
+
+/* Opcional: Pausar al pasar el mouse */
+.slider-container:hover .slider-track {
+  animation-play-state: paused;
 }

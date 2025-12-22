@@ -1,0 +1,114 @@
+<div class="hero-section2 text-white d-flex align-items-end justify-content-center text-center text-uppercase">
+  <div class="hero-content pb-4"> 
+    <h1 class=" font-staatliches section-title">about us</h1>
+    <p class="lead font-staatliches section-title3">Growing up in Bolivia, our cuisine has an influence of this wonderful country, whose flavors and cultures are very rich.</p>
+  </div>
+</div>
+
+<div class="col d-flex flex-column align-items-center decorative-divider">
+    <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
+</div>
+<div class="container-fluid p-5">
+    <div class="row">
+        <div class="col-12 px-5">
+            <h1 class="font-staatliches text-primary-color">A unique experience</h1>
+            <p class="font-staatliches about-info">
+                We are artisans of passion, masters of fire, and guardians of South American culinary traditions. Inspired by our family and legendary asadores, we have elevated the art of asado to the next level. Passing by the salteñas (premium empanada), the traditional  “Chicharron”, the asados with a wood fire, we are able to customize a  menu for you.<br><br>
+                We are pleased to offer you our best selection of wines, unique and exclusive. Red, pink or white. We are also the first to be able to offer you the “SINGANI” a spirit, drink which will amaze you.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-5 secondary-background">
+    <div class="row">
+        <div class="col-12 px-5 text-center">
+            <h1 class="font-staatliches text-white">Our Team</h1>
+            <h2 class="font-staatliches text-primary-color mb-5">Get to know the people behind the scenes and some of our collaborators</h2>
+        </div>
+    </div>
+
+    <%# Contenedor del Carrusel Infinito %>
+    <div class="slider-container">
+        <div class="slider-track">
+            
+            <%# --- BLOQUE ORIGINAL (4 fotos) --- %>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img15.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Alexander Doe</div>
+                        <div class="role font-jaro text-white small">Founder</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img16.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Maria Garcia</div>
+                        <div class="role font-jaro text-white small">Chef</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img17.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Jean Dupont</div>
+                        <div class="role font-jaro text-white small">Logistics</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img18.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Lucia Smith</div>
+                        <div class="role font-jaro text-white small">Marketing</div>
+                    </div>
+                </div>
+            </div>
+
+            <%# --- BLOQUE DUPLICADO (Para el loop infinito) --- %>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img15.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Alexander Doe</div>
+                        <div class="role font-jaro text-white small">Founder</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img16.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Maria Garcia</div>
+                        <div class="role font-jaro text-white small">Chef</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img17.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Jean Dupont</div>
+                        <div class="role font-jaro text-white small">Logistics</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="team-card">
+                    <%= image_tag "products/img18.jpg", class: "team-img" %>
+                    <div class="team-info">
+                        <div class="name font-staatliches text-white">Lucia Smith</div>
+                        <div class="role font-jaro text-white small">Marketing</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
