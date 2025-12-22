@@ -1,7 +1,7 @@
 <%# 1. Actualiza la tabla de totales (tfoot) %>
 <%= turbo_stream.update "order_summary_totals" do %>
     <tr id="cart_total_row">
-      <th colspan="3" class="text-end fs-5 pt-3">TOTAL:</th>
+      <th colspan="3" class="text-end fs-5 pt-3">TOTAL (INCLUDING DELIVERY):</th>
       <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(@cart.cart_total + @fee) %></td>
     </tr>
   
@@ -18,3 +18,16 @@
   <%= hidden_field_tag :delivery_price, @fee %>
 <% end %>
 
+
+<%= turbo_stream.append "fee_message" do %>
+  <script>
+    (function() {
+      const btn = document.getElementById('pay-button');
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.replace('btn-secondary', 'btn-primary');
+        btn.innerText = "Pay Now";
+      }
+    })();
+  </script>
+<% end %>

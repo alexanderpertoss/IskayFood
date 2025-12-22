@@ -98,7 +98,7 @@
                   </div>
                 </div>
               <%# f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
-              <%= button_to "Pay", payments_path, method: :post, class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3", data: { turbo: false } %>
+              <%= button_to "Pay", payments_path, method: :post, id: "pay-button", disabled: true, class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3", data: { turbo: false } %>
             <% end %>
           </div>
         </div>
