@@ -1,0 +1,57 @@
+<div class="contact-page-wrapper d-flex align-items-center justify-content-center">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        
+        <%# Contenedor Blanco Flotante %>
+        <div class="contact-card shadow-lg bg-white p-4 p-md-5">
+          <%# Mensajes de éxito o error %>
+        <% if flash[:notice] %>
+            <div class="alert alert-primary font-staatliches text-center"><%= flash[:notice] %></div>
+        <% end %>
+          <%# Sección Informativa %>
+          <div class="text-center mb-4">
+            <h1 class="font-staatliches section-title1-primary mb-2">CONTACT INFORMATION</h1>
+            <p class="font-staatliches section-title4-primary">Our address: Chau. de Wavre 950, 1040 Etterbeek, Bélgium</p>
+            <p class="font-staatliches section-title4-primary">Opening hours: Monday to Saturday From 17:00</p>
+            <p class="font-staatliches section-title4-primary">Telephone: 0493 9234 37</p>
+          </div>
+
+        <br>
+
+        <div class="text-center">
+            <h1 class="font-staatliches section-title1-primary mb-2">Leave us a message</h1>
+        </div>
+
+          <%# Formulario con estilo de líneas y botón centrado %>
+            <%= form_with model: @contact, url: create_contact_msg_path, local: true, class: "contact-form" do |f| %>
+            <div class="row">
+                <div class="col-12 col-md-6 mb-4">
+                <%= f.label :name, "Name", class: "form-label font-staatliches text-muted mb-0" %>
+                <%= f.text_field :name, class: "form-control custom-input-line", placeholder: "Your full name" %>
+                </div>
+
+                <div class="col-12 col-md-6 mb-4">
+                <%= f.label :email, "Email Address", class: "form-label font-staatliches text-muted mb-0" %>
+                <%= f.email_field :email, class: "form-control custom-input-line", placeholder: "example@mail.com" %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mb-5">
+                <%= f.label :message, "Message", class: "form-label font-staatliches text-muted mb-0" %>
+                <%= f.text_area :message, rows: 3, class: "form-control custom-input-line", placeholder: "How can we help you?" %>
+                </div>
+            </div>
+
+            <%# Contenedor para centrar el botón %>
+            <div class="d-flex justify-content-center">
+                <%= f.submit "SEND", class: "btn btn-primary-custom font-staatliches py-2 px-5" %>
+            </div>
+            <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

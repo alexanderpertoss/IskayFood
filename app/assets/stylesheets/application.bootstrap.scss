@@ -58,6 +58,10 @@ $headings-color: $primary;
     font-size: 200%;
     color: $primary;
 }
+.section-title4-primary {
+    font-size: 130%;
+    color: $primary;
+}
 .main-product {
     height: 400px;
     background-size: cover;
@@ -389,4 +393,94 @@ $headings-color: $primary;
 /* Opcional: Pausar al pasar el mouse */
 .slider-container:hover .slider-track {
   animation-play-state: paused;
+}
+
+/* Contenedor principal con la imagen de fondo */
+.contact-page-wrapper {
+  background: linear-gradient(#00000080, rgba(0,0,0,0.5)), 
+              url('products/img8.png'); /* Asegúrate de que esta imagen esté en app/assets/images */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
+  min-height: 100vh;
+  padding: 80px 0;
+}
+
+/* La tarjeta blanca */
+.contact-card {
+  border: none;
+  border-top: 5px solid #391042; /* Opcional: una línea púrpura arriba para estilo */
+}
+
+/* Inputs personalizados */
+.custom-input {
+  border: 1px solid #dee2e6;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+  border-color: #391042;
+  box-shadow: 0 0 0 0.25rem rgba(57, 16, 66, 0.25);
+  outline: none;
+}
+
+/* Botón personalizado */
+.btn-primary-custom {
+  background-color: #391042;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-primary-custom:hover {
+  background-color: #2a0b31;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Elimina el cuadro y deja solo la línea inferior */
+.custom-input-line {
+  background-color: transparent !important; /* Asegura que no haya fondo blanco */
+  border: none !important;                  /* Quita los 4 bordes */
+  border-bottom: 2px solid #dee2e6 !important; /* Añade solo la línea inferior */
+  border-radius: 0 !important;              /* Quita el redondeado de Bootstrap */
+  padding-left: 0 !important;               /* Alinea el texto a la izquierda */
+  padding-right: 0 !important;
+  color: #333;
+}
+
+/* Efecto cuando el usuario hace clic (Focus) */
+.custom-input-line:focus {
+  outline: none !important;
+  box-shadow: none !important;              /* Quita el resplandor azul de Bootstrap */
+  border-bottom: 2px solid #391042 !important; /* La línea cambia a tu color primario */
+  transition: border-color 0.4s ease;
+}
+
+/* Opcional: Estilo para el placeholder */
+.custom-input-line::placeholder {
+  color: #adb5bd;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.btn-primary-custom {
+  background-color: #391042;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  min-width: 180px; /* Asegura que el botón no sea demasiado pequeño */
+  border-radius: 4px; /* Un ligero redondeado para que encaje con el estilo minimalista */
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: #2a0b31;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }

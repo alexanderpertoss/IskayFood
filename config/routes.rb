@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :products
   resources :payments, only: [ :create ]
-
+  resources :contacts, only: [ :index, :destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#index"
   get "/about" => "pages#about"
+  get "contact", to: "pages#contact", as: :contact_page
+
+  post "contacts/create", to: "pages#create_contact", as: :create_contact_msg
 
   post "/add_to_cart/:id" => "shop#add_to_cart", as: :add_to_cart
   post "/remove_from_cart/:id" => "shop#remove_from_cart", as: :remove_from_cart

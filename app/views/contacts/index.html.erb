@@ -1,0 +1,49 @@
+<div class="container my-5">
+  <h2 class="mb-4 text-center font-staatliches">Customer Messages</h2>
+
+  <div class="d-flex justify-content-between mb-4">
+    <span class="badge bg-primary d-flex align-items-center px-3">
+      Total Messages: <%= @contacts.count %>
+    </span>
+  </div>
+
+  <% if @contacts.any? %>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col" class="text-center">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Message Snippet</th>
+            <th scope="col" class="text-center">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @contacts.each_with_index do |contact, index| %>
+            <tr>
+              <th scope="row" class="text-center"><%= index + 1 %></th>
+              <td class="small"><%= contact.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+              <td class="fw-bold"><%= contact.name %></td>
+              <td><%= mail_to contact.email, contact.email, class: "text-decoration-none" %></td>
+              <td class="text-muted italic">
+                "<%= truncate(contact.message, length: 60) %>"
+              </td>
+              <td class="text-center">
+                <%# Botón para borrar el mensaje si ya fue atendido %>
+                <%= link_to "Delete", contact_path(contact), 
+                            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+                            class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="alert alert-info text-center" role="alert">
+      No messages received yet.
+    </div>
+  <% end %>
+</div>
