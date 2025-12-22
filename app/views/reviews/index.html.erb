@@ -1,9 +1,13 @@
 <div class="container my-5">
-  <h2 class="mb-4 text-center font-staatliches">Customer Messages</h2>
+  <h2 class="mb-4 text-center font-staatliches">Customer Reviews</h2>
+
+  <% if notice.present? %>
+    <div class="alert alert-success font-staatliches text-center"><%= notice %></div>
+  <% end %>
 
   <div class="d-flex justify-content-between mb-4">
     <span class="badge bg-primary d-flex align-items-center px-3">
-      Total Messages: <%= @contacts.count %>
+      Total Reviews: <%= @reviews.count %>
     </span>
   </div>
 
@@ -16,34 +20,30 @@
 
   <br><br>
 
-  <% if @contacts.any? %>
+  <% if @reviews.any? %>
     <div class="table-responsive">
       <table class="table table-hover table-striped table-bordered align-middle">
-        <thead class="table-dark">
+        <thead class="table-dark font-staatliches">
           <tr>
             <th scope="col" class="text-center">#</th>
-            <th scope="col">Date</th>
             <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Message Snippet</th>
+            <th scope="col">Review Message</th>
             <th scope="col" class="text-center">Options</th>
           </tr>
         </thead>
         <tbody>
-          <% @contacts.each_with_index do |contact, index| %>
+          <% @reviews.each_with_index do |review, index| %>
             <tr>
               <th scope="row" class="text-center"><%= index + 1 %></th>
-              <td class="small"><%= contact.created_at.strftime("%d/%m/%Y %H:%M") %></td>
-              <td class="fw-bold"><%= contact.name %></td>
-              <td><%= mail_to contact.email, contact.email, class: "text-decoration-none" %></td>
+              <td class="fw-bold"><%= review.name %></td>
               <td class="text-muted italic">
-                "<%= truncate(contact.message, length: 60) %>"
+                "<%= truncate(review.message, length: 80) %>"
               </td>
               <td class="text-center">
-                <%# Botón para borrar el mensaje si ya fue atendido %>
-                <%= link_to "Delete", contact_path(contact), 
-                            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
-                            class: "btn btn-danger btn-sm" %>
+                <div class="d-flex justify-content-center gap-2">
+                  <%= link_to "Show", review, class: "btn btn-info btn-sm text-white" %>
+                  <%= link_to "Delete", review, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+                </div>
               </td>
             </tr>
           <% end %>
@@ -52,7 +52,11 @@
     </div>
   <% else %>
     <div class="alert alert-info text-center" role="alert">
-      No messages received yet.
+      No reviews found.
     </div>
   <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to "Add New Review", new_review_path, class: "btn btn-success btn-lg font-staatliches" %>
+  </div>
 </div>

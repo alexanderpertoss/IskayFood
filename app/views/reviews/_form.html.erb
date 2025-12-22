@@ -1,0 +1,32 @@
+<%= form_with(model: review, class: "contact-form") do |form| %>
+  
+  <%# Manejo de Errores con estilo Bootstrap %>
+  <% if review.errors.any? %>
+    <div class="alert alert-danger font-staatliches shadow-sm mb-4">
+      <h5 class="alert-heading"><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h5>
+      <ul class="mb-0">
+        <% review.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# Campo de Nombre %>
+  <div class="mb-4">
+    <%= form.label :name, "Client Name", class: "form-label font-staatliches text-muted mb-0" %>
+    <%= form.text_field :name, class: "form-control custom-input-line", placeholder: "Enter the reviewer's name" %>
+  </div>
+
+  <%# Campo de Mensaje %>
+  <div class="mb-5">
+    <%= form.label :message, "Review Content", class: "form-label font-staatliches text-muted mb-0" %>
+    <%= form.text_area :message, rows: 4, class: "form-control custom-input-line", placeholder: "What did the customer say?" %>
+  </div>
+
+  <%# Botón de Guardar Centrado %>
+  <div class="d-flex justify-content-center">
+    <%= form.submit "SAVE REVIEW", class: "btn btn-primary-custom font-staatliches py-2 px-5" %>
+  </div>
+
+<% end %>

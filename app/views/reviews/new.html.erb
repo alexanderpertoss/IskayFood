@@ -1,0 +1,17 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5">
+        <h1 class="font-staatliches text-center section-title1-primary mb-4">NEW REVIEW</h1>
+        
+        <%= render "form", review: @review %>
+
+        <div class="text-center mt-4">
+          <%= link_to reviews_path, class: "text-muted text-decoration-none small font-staatliches" do %>
+            <i class="bi bi-arrow-left"></i> BACK TO REVIEWS
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

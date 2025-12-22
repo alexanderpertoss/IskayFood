@@ -1,0 +1,17 @@
+<div class="card shadow-sm mb-4" id="<%= dom_id review %>">
+  <div class="card-body">
+    <div class="d-flex align-items-center mb-3">
+      <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+        <%= review.name[0].upcase %>
+      </div>
+      <h5 class="card-title mb-0 ms-3 font-staatliches"><%= review.name %></h5>
+    </div>
+    
+    <p class="card-text text-secondary italic">
+      <i class="bi bi-quote"></i> <%= review.message %>
+    </p>
+    
+    <hr>
+    <small class="text-muted">Publicado el: <%= review.created_at&.strftime("%d/%m/%Y") %></small>
+  </div>
+</div>

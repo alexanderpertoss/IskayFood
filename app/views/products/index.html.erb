@@ -2,8 +2,11 @@
   <h2 class="mb-4 text-center">Products</h2>
 
   <%= link_to 'Orders', orders_path, class: 'btn btn-primary' %>
+  <%= link_to 'Products', products_path, class: 'btn btn-primary' %>
   <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary' %>
   <%= link_to 'Messages', contacts_path, class: 'btn btn-primary' %>
+  <%= link_to 'Reviews', reviews_path, class: 'btn btn-primary' %>
+  <%= link_to 'Stripe Dashboard', "https://dashboard.stripe.com/", class: 'btn btn-primary', target: "_blank" %>
   <br>
   <br>
   <% if @products.any? %>
