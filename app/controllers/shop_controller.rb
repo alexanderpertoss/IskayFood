@@ -58,7 +58,7 @@ class ShopController < ApplicationController
       Stripe.api_key = "sk_test_51SgtKUINuHdo5ddVr8jz3OGxzPumj9sDQyeBK9qejvW4Xlwx2KSSc3bsh8stMiezl5Czpzs7WRxx4g60BY4bcTHU00gEMmAomD"
 
       session = Stripe::Checkout::Session.create({
-        payment_method_types: [ "bancontact", "card" ],
+        payment_method_types: [ "bancontact", "card", "klarna" ],
         line_items: [ {
           price_data: {
             currency: "eur",
