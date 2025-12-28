@@ -1,16 +1,48 @@
-<nav id="navigation-bar" class="container-fluid bg-light">
-    <div class="row p-4">
-        <div id="navigation-logo" class="col-6 col-md-5 col-lg-2 d-flex align-items-center">
+<nav id="navigation-bar" class="container-fluid bg-light shadow-sm">
+    <div class="row p-4 align-items-center">
+        <div id="navigation-logo" class="col-12 col-md-4 col-lg-2 d-flex justify-content-center justify-content-md-start align-items-center mb-3 mb-md-0">
             <%= link_to root_path do %>
-                <%= image_tag "logo_black.png", class: "img-fluid", alt: "IskayFood Logo" %>
+                <%= image_tag "logo_black.png", class: "img-fluid", alt: "IskayFood Logo", style: "max-height: 90px;" %>
             <% end %>
         </div>
-        <div id="navigation-links" class="col d-flex flex-column flex-lg-row align-items-end align-items-lg-center justify-content-end gap-4 text-uppercase">
-            <%= link_to "About", "/about", class: "text-decoration-none h3 font-staatliches" %>
-            <%= link_to "Shop", shop_index_path, class: "text-decoration-none h3 font-staatliches" %>
-            <%= link_to "Singani", products_path, class: "text-decoration-none h3 font-staatliches" %>
-            <%= link_to "Amazónica", products_path, class: "text-decoration-none h3 font-staatliches" %>
-            <%= link_to "Contact", "/contact", class: "text-decoration-none h3 font-staatliches" %>
+
+        <div id="navigation-links" class="col d-flex justify-content-end align-items-center gap-4 p-3">
+            
+            <%= link_to "ABOUT US", "/about", class: "nav-link-custom h4 font-staatliches mb-0" %>
+
+            <div class="dropdown custom-dropdown">
+                <a class="nav-link-custom h4 font-staatliches mb-0 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    SERVICES
+                </a>
+                <ul class="dropdown-menu border-0 shadow">
+                    <li class="dropend">
+                        <a class="dropdown-item dropdown-toggle d-flex justify-content-between align-items-center" href="#">CATERING</a>
+                        <ul class="dropdown-menu shadow">
+                            <li><a class="dropdown-item" href="/services/catering/asado">ASADO</a></li>
+                            <li><a class="dropdown-item" href="/services/catering/saltena">SALTEÑA</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-item" href="/services/sandwich-shop">SANDWICH SHOP</a></li>
+                    <li><a class="dropdown-item" href="/services/bar">BAR</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown custom-dropdown">
+                <a class="nav-link-custom h4 font-staatliches mb-0 dropdown-toggle" href="<%= shop_index_path %>" role="button" data-bs-toggle="dropdown">
+                    PRODUCTS
+                </a>
+                <ul class="dropdown-menu border-0 shadow">
+                    <li><a class="dropdown-item" href="/products/saltena">SALTEÑA</a></li>
+                    <li><a class="dropdown-item" href="/products/singani">SINGANI</a></li>
+                    <li><a class="dropdown-item" href="/products/amazonica">AMAZÓNICA</a></li>
+                    <li><a class="dropdown-item" href="/products/empanadas">EMPANADAS</a></li>
+                    <li><a class="dropdown-item" href="/products/pralines">PRALINES</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item fw-bold" href="<%= shop_index_path %>">VIEW ALL SHOP</a></li>
+                </ul>
+            </div>
+
+            <%= link_to "CONTACT", "/contact", class: "nav-link-custom h4 font-staatliches mb-0" %>
         </div>
     </div>
 </nav>

@@ -26,12 +26,12 @@ $headings-color: $primary;
 }
 #shop-header {
     background: $secondary;
-    margin-top: 0px;
+    margin-top: -50px;
     @include media-breakpoint-up(md) {
       margin-top: 0px;
     }
     @include media-breakpoint-up(lg) {
-      margin-top: 30px;
+      margin-top: 10px;
     }
 }
 .section-title {
@@ -122,6 +122,51 @@ $headings-color: $primary;
 // 2. Estado Escondido (Se activa con JavaScript)
 .navbar-hidden {
   top: -1000px !important; // Empuja la barra fuera de la vista (debe ser más que la altura de la barra)
+}
+/* Estilo base para los links */
+.nav-link-custom {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.nav-link-custom:hover {
+    color: $primary; /* Tu color primario */
+}
+
+/* Manejo de Dropdowns anidados */
+.dropdown-menu {
+    border-radius: 0;
+    margin-top: 0;
+}
+
+/* Efecto para que el sub-menú se abra al pasar el mouse en desktop */
+@media (min-width: 992px) {
+    .dropend:hover > .dropdown-menu {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 100%; /* Lo empuja a la derecha */
+        margin-top: 0;
+    }
+}
+
+/* Estilo de los items del dropdown */
+.dropdown-item {
+    font-family: 'Staatliches', sans-serif;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    color: #555;
+}
+
+.dropdown-item:hover {
+    background-color: $primary;
+    color: white !important;
+}
+
+/* Flechita para indicar que hay más niveles */
+.dropdown-toggle::after {
+    vertical-align: middle;
 }
 // Clase de utilidad para el padding del cuerpo
 .body-padding-compensation {
@@ -469,7 +514,7 @@ $headings-color: $primary;
 }
 
 .btn-primary-custom {
-  background-color: #391042;
+  background-color: $primary;
   color: white;
   border: none;
   font-size: 1.2rem;
@@ -480,7 +525,7 @@ $headings-color: $primary;
 }
 
 .btn-primary-custom:hover {
-  background-color: #2a0b31;
+  background-color: black;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
@@ -494,11 +539,11 @@ $headings-color: $primary;
 }
 
 .nav-tabs .nav-link.active {
-  color: #391042 !important; /* Tu color primario */
-  border-bottom: 3px solid #391042 !important;
+  color: $primary !important; /* Tu color primario */
+  border-bottom: 3px solid $primary !important;
   background: transparent;
 }
 
 .nav-tabs .nav-link:hover {
-  color: #391042;
+  color: $primary
 }
