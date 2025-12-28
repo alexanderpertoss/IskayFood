@@ -1,7 +1,7 @@
 <%# 1. Actualiza la tabla de totales (tfoot) %>
 <%= turbo_stream.update "order_summary_totals" do %>
     <tr id="cart_total_row">
-      <th colspan="3" class="text-end fs-5 pt-3">TOTAL (INCLUDING DELIVERY):</th>
+      <th colspan="3" class="text-end fs-5 pt-3 font-staatliches">TOTAL (INCLUDING DELIVERY):</th>
       <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(@cart.cart_total + @fee) %></td>
     </tr>
   

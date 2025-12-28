@@ -3,8 +3,8 @@
 
 <%# ID CRÍTICO: Usamos el ID del CartProduct (item.id) para referenciar la fila %>
 <tr id="cart_item_<%= item.id %>"> 
-  <td>
-    <h5 class="my-0"><%= item.product.name %></h5>
+  <td class="font-staatliches">
+    <h5 class="my-0 font-staatliches"><%= item.product.name %></h5>
     <small class="text-muted"><%= truncate(item.product.description, length: 40) %></small>
   </td>
   

@@ -3,7 +3,7 @@
 </div>
 
 <div id="decorative-divider" class="col d-flex flex-column align-items-center">
-    <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
+    <%= image_tag "patron_decorativo_grey.png", class: "img-fluid" %>
 </div>
 
 
@@ -12,10 +12,10 @@
     <div id="cart_content" class="row g-5">
       
       <div class="col-lg-7">
-        <h2 class="mb-4 fs-3 text-uppercase">Summary</h2>
+        <h2 class="mb-4 fs-3 text-uppercase font-staatliches">Summary</h2>
 
-        <div class="table-responsive">
-          <table class="table align-middle font-staatliches">
+        <div class="table-responsive  font-staatliches">
+          <table class="table align-middle">
             <thead class="table-light">
               <tr>
                 <th scope="col">Product</th>
@@ -47,12 +47,12 @@
       <div class="col-lg-5">
         <div class="card shadow-sm border-light">
           <div class="card-body p-4">
-            <h2 class="mb-4 fs-3 text-uppercase">Order details</h2>
+            <h2 class="mb-4 fs-3 text-uppercase font-staatliches">Order details</h2>
             
             <%# Utilizamos un formulario genérico. Asumimos una ruta POST a confirm_order_path %>
             <%= form_with url: confirm_order_path, method: :post, local: true do |f| %>
 
-              <h4 class="mb-3 text-primary text-uppercase">Contact Information</h4>
+              <h4 class="mb-3 text-primary text-uppercase font-staatliches">Contact Information</h4>
               <div class="row g-3 mb-4 text-uppercase font-staatliches">
                 <div class="col-sm-6">
                   
@@ -70,7 +70,7 @@
                 </div>
               </div>
 
-              <h4 class="mb-3 text-primary text-uppercase">Shipping Address</h4>
+              <h4 class="mb-3 text-primary text-uppercase font-staatliches">Shipping Address</h4>
 
               <div class="container mt-4" data-controller="shipping-map">
                 
@@ -93,12 +93,12 @@
               <%# CAMBIO AQUÍ: Contenedor para el mensaje del costo de envío %>
                 <div id="fee_message" class="mb-3">
                   <%# Mensaje inicial para guiar al usuario %>
-                  <div class="alert alert-warning py-2 small">
+                  <div class="alert alert-primary py-2 small font-staatliches">
                     Please select a shipping location on the map to enable payment.
                   </div>
                 </div>
-              <%# f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3" %>
-              <%= button_to "Pay", payments_path, method: :post, id: "pay-button", disabled: true, class: "w-100 btn btn-primary btn-lg font-jaro text-uppercase p-3", data: { turbo: false } %>
+              <%# f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-staatliches text-uppercase p-3" %>
+              <%= button_to "Pay", payments_path, method: :post, id: "pay-button", disabled: true, class: "w-100 btn btn-primary btn-lg font-staatliches text-uppercase p-3", data: { turbo: false } %>
             <% end %>
           </div>
         </div>
@@ -107,8 +107,8 @@
     </div>
   <% else %>
     <div class="alert text-center py-4">
-      <p class="mb-0 fs-5 text-uppercase font-jaro">Your cart is empty. ¡Add some products!</p>
-      <%= link_to "Go to the shop", "/shop/index", class: "btn btn-primary mt-3 font-jaro text-uppercase p-3" %>
+      <p class="mb-0 fs-5 text-uppercase font-staatliches">Your cart is empty. ¡Add some products!</p>
+      <%= link_to "Go to the shop", "/shop/index", class: "btn btn-primary mt-3 font-staatliches text-uppercase p-3" %>
     </div>
   <% end %>
 </div>
