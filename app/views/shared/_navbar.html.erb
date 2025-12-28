@@ -6,43 +6,42 @@
             <% end %>
         </div>
 
-        <div id="navigation-links" class="col d-flex justify-content-end align-items-center gap-4 p-3">
-            
-            <%= link_to "ABOUT US", "/about", class: "nav-link-custom h4 font-staatliches mb-0" %>
+        <div id="navigation-links" class="col-12 col-lg d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center align-content-center gap-2 gap-lg-4 text-uppercase mt-3 mt-lg-0">
+    
+            <%# ABOUT US - Pequeño en móvil, h3 en Desktop %>
+            <%= link_to "ABOUT US", "/about", class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" %>
 
+            <%# SERVICES DROPDOWN %>
             <div class="dropdown custom-dropdown">
-                <a class="nav-link-custom h4 font-staatliches mb-0 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown">
                     SERVICES
                 </a>
-                <ul class="dropdown-menu border-0 shadow">
-                    <li class="dropend">
-                        <a class="dropdown-item dropdown-toggle d-flex justify-content-between align-items-center" href="#">CATERING</a>
-                        <ul class="dropdown-menu shadow">
-                            <li><a class="dropdown-item" href="/services/catering/asado">ASADO</a></li>
-                            <li><a class="dropdown-item" href="/services/catering/saltena">SALTEÑA</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="dropdown-item" href="/services/sandwich-shop">SANDWICH SHOP</a></li>
-                    <li><a class="dropdown-item" href="/services/bar">BAR</a></li>
+                <ul class="dropdown-menu border-0 shadow text-center fs-5">
+                    <%# Catering con sub-menú (Asado y Salteña) %>
+                    <li><a class="dropdown-item" href="#">CATERING</a></li>
+                    <li><a class="dropdown-item" href="#">SANDWICH SHOP</a></li>
+                    <li><a class="dropdown-item" href="#">BAR</a></li>
                 </ul>
             </div>
 
+            <%# PRODUCTS DROPDOWN %>
             <div class="dropdown custom-dropdown">
-                <a class="nav-link-custom h4 font-staatliches mb-0 dropdown-toggle" href="<%= shop_index_path %>" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown">
                     PRODUCTS
                 </a>
-                <ul class="dropdown-menu border-0 shadow">
-                    <li><a class="dropdown-item" href="/products/saltena">SALTEÑA</a></li>
-                    <li><a class="dropdown-item" href="/products/singani">SINGANI</a></li>
-                    <li><a class="dropdown-item" href="/products/amazonica">AMAZÓNICA</a></li>
-                    <li><a class="dropdown-item" href="/products/empanadas">EMPANADAS</a></li>
-                    <li><a class="dropdown-item" href="/products/pralines">PRALINES</a></li>
+                <ul class="dropdown-menu border-0 shadow text-center text-lg-start">
+                    <li><a class="dropdown-item" href="#">SALTEÑA</a></li>
+                    <li><a class="dropdown-item" href="#">SINGANI</a></li>
+                    <li><a class="dropdown-item" href="#">AMAZÓNICA</a></li>
+                    <li><a class="dropdown-item" href="#">EMPANADAS</a></li>
+                    <li><a class="dropdown-item" href="#">PRALINES</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item fw-bold" href="<%= shop_index_path %>">VIEW ALL SHOP</a></li>
+                    <li><a class="dropdown-item fw-bold" href="/shop/index">SHOP</a></li>
                 </ul>
             </div>
 
-            <%= link_to "CONTACT", "/contact", class: "nav-link-custom h4 font-staatliches mb-0" %>
+            <%# CONTACT %>
+            <%= link_to "CONTACT", "/contact", class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" %>
         </div>
     </div>
 </nav>

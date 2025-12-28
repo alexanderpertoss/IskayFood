@@ -26,7 +26,6 @@ $headings-color: $primary;
 }
 #shop-header {
     background: $secondary;
-    margin-top: -50px;
     @include media-breakpoint-up(md) {
       margin-top: 0px;
     }
@@ -133,45 +132,52 @@ $headings-color: $primary;
 .nav-link-custom:hover {
     color: $primary; /* Tu color primario */
 }
+/* --- TAMAÑO DE FUENTE RESPONSIVO --- */
 
-/* Manejo de Dropdowns anidados */
-.dropdown-menu {
-    border-radius: 0;
-    margin-top: 0;
+//* 1. Normalizar la altura de todos los elementos del menú */
+#navigation-links > a, 
+#navigation-links > .dropdown {
+  display: flex;
+  align-items: center; /* Centra el texto internamente */
+  height: 100%;       /* Iguala alturas */
+  line-height: 1;     /* Elimina espacios extra de línea */
 }
 
-/* Efecto para que el sub-menú se abra al pasar el mouse en desktop */
-@media (min-width: 992px) {
-    .dropend:hover > .dropdown-menu {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 100%; /* Lo empuja a la derecha */
-        margin-top: 0;
-    }
+/* 2. Ajuste específico para el botón del dropdown */
+#navigation-links .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+  background: transparent;
 }
 
-/* Estilo de los items del dropdown */
-.dropdown-item {
-    font-family: 'Staatliches', sans-serif;
-    font-size: 1.1rem;
-    padding: 10px 20px;
-    color: #555;
-}
-
-.dropdown-item:hover {
-    background-color: $primary;
-    color: white !important;
-}
-
-/* Flechita para indicar que hay más niveles */
+/* 3. Corrección de la flecha (caret) de Bootstrap */
 .dropdown-toggle::after {
-    vertical-align: middle;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  /* Asegura que la flecha no empuje el texto hacia arriba */
+  display: inline-block; 
+}
+
+/* 4. Reset de márgenes en móviles para evitar saltos */
+@media (max-width: 991px) {
+  #navigation-links {
+    min-height: 50px; /* Da un área de colisión estable */
+  }
+  
+  #navigation-links a, 
+  #navigation-links .dropdown-toggle {
+    margin: 0 !important; /* Elimina márgenes que puedan desalinear */
+    font-size: 0.75rem !important; /* Letra bien pequeña para que entre en una fila */
+    letter-spacing: 0.1px !important;
+  }
 }
 // Clase de utilidad para el padding del cuerpo
 .body-padding-compensation {
     // Valor grande para Mobile/MD (por defecto)
-    padding-top: 330px !important; 
+    padding-top: 2px !important; 
 }
 
 // Sobrescribe el valor a partir de la resolución LG (PC)
