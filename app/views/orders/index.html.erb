@@ -81,27 +81,28 @@
                         <i class="bi bi-eye"></i>
                       <% end %>
 
-                      <% if order.status != "Shipped" and order.status != "Delivered" and order.status != "Cancelled" %>
-                        <%= link_to "/cancelled/#{order.id}", class: 'btn btn-outline-danger', title: "Cancel Order" do %>
-                          <i class="bi bi-x-circle"></i>
-                        <% end %>
-                      <% end %>
-
                       <% if order.status == "Recently created" %>
-                        <%= link_to edit_order_path(order), class: "btn btn-outline-info", title: "Mark as Preparing" do %>
-                           <i class="bi bi-fire"></i>
+                        <%= button_to prepare_order_order_path(order), method: :post, class: "btn btn-outline-info" do %>
+                          <i class="bi bi-fire"></i>
                         <% end %>
                       <% end %>
 
                       <% if order.status == "Preparing order" %>
-                        <%= link_to "/shipped/#{order.id}", class: "btn btn-outline-primary", title: "Mark as Shipped" do %>
+                        <%= link_to edit_order_path(order), method: :get, class: "btn btn-outline-primary" do %>
                           <i class="bi bi-truck"></i>
                         <% end %>
                       <% end %>
 
                       <% if order.status == "Shipped" %>
-                        <%= link_to "/delivered/#{order.id}", class: "btn btn-outline-success", title: "Mark as Delivered" do %>
+                        <%= button_to delivered_order_path(order), method: :post, class: "btn btn-outline-success" do %>
                           <i class="bi bi-check-circle-fill"></i>
+                        <% end %>
+                      <% end %>
+
+                      <%# Botón de Cancelar %>
+                      <% if ["Shipped", "Delivered", "Cancelled"].exclude?(order.status) %>
+                        <%= button_to mark_as_cancelled_order_path(order), method: :post, class: "btn btn-outline-danger", data: { confirm: "Are you sure?" } do %>
+                          <i class="bi bi-x-lg"></i>
                         <% end %>
                       <% end %>
                     </div>

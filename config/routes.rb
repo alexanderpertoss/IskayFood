@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :reviews
   get "pages/index"
   get "shop/index"
-  resources :orders
   resources :products
   resources :payments, only: [ :create ]
   resources :contacts, only: [ :index, :destroy ]
@@ -36,10 +35,20 @@ Rails.application.routes.draw do
   post "/confirm_order" => "shop#confirm_order", as: :confirm_order
   post "/shop/update_delivery_fee", to: "shop#update_delivery_fee", as: :update_delivery_fee
 
-  get "/prepare_order/:id" => "orders#prepare_order"
-  get "/shipped/:id" => "orders#shipped"
-  get "/delivered/:id" => "orders#delivered"
-  get "/cancelled/:id" => "orders#cancelled"
+
+  resources :orders do
+    member do
+      post :prepare_order
+      post :shipped
+      post :delivered
+      post :mark_as_cancelled # O mark_as_cancelled si le cambiaste el nombre
+    end
+  end
+  # get "/prepare_order/:id" => "orders#prepare_order"
+  # get "/shipped/:id" => "orders#shipped"
+  # get "/delivered/:id" => "orders#delivered"
+  # get "/cancelled/:id" => "orders#cancelled"
+
   get "order_success", to: "orders#success", as: :order_success
   get "cancel_cart", to: "orders#cancel", as: :cancel_cart
   get "/order_status_check/:id", to: "orders#order_status_check"

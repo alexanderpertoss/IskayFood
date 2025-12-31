@@ -79,12 +79,12 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
-  def cancelled
-    @order = Order.find(params[:id])
-    @order.status = "Cancelled"
-    @order.save!
-    redirect_to orders_path
-  end
+  # def cancelled
+  #  @order = Order.find(params[:id])
+  #  @order.status = "Cancelled"
+  #  @order.save!
+  #  redirect_to orders_path
+  # end
 
   def success
     # Ahora sí, el pedido es firme: vaciamos el carrito
@@ -94,8 +94,20 @@ class OrdersController < ApplicationController
     redirect_to @order
   end
 
+  # def cancel
+  #  redirect_to root_path
+  # end
+
+  def mark_as_cancelled
+    @order = Order.find(params[:id])
+    @order.status = "Cancelled"
+    @order.save!
+    redirect_to orders_path, notice: "Order was cancelled."
+  end
+
+  # Este es el que usa Stripe o procesos de interrupción
   def cancel
-    redirect_to root_path
+    redirect_to root_path, notice: "Process interrupted."
   end
 
   def order_status_check
