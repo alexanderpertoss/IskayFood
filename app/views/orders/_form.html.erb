@@ -1,9 +1,10 @@
-<%= form_with(model: order) do |form| %>
+<%= form_with(model: order, class: "contact-form") do |form| %>
+  
+  <%# Panel de Errores con estilo Bootstrap %>
   <% if order.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
-      <ul>
+    <div class="alert alert-danger font-staatliches shadow-sm mb-4">
+      <h5 class="alert-heading"><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h5>
+      <ul class="mb-0 small">
         <% order.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,37 +12,19 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :total, style: "display: block" %>
-    <%= form.text_field :total %>
+  <%# Único campo editable: Shipping Code %>
+  <div class="mb-5">
+    <%= form.label :shipping_code, "SHIPPING / TRACKING CODE", class: "form-label font-staatliches text-muted mb-0" %>
+    <%= form.text_field :shipping_code, 
+        class: "form-control custom-input-line", 
+        placeholder: "Enter tracking number (e.g., DHL-12345)...",
+        autofocus: true %>
+    <small class="text-muted font-jaro mt-2 d-block">This code will be visible to the customer for order tracking.</small>
   </div>
 
-  <div>
-    <%= form.label :customer_name, style: "display: block" %>
-    <%= form.text_field :customer_name %>
+  <%# Botón de Guardar Centrado %>
+  <div class="d-flex justify-content-center gap-3">
+    <%= form.submit "UPDATE SHIPPING CODE", class: "btn btn-primary-custom font-staatliches py-2 px-5 shadow-sm" %>
   </div>
 
-  <div>
-    <%= form.label :customer_shipping_address, style: "display: block" %>
-    <%= form.text_field :customer_shipping_address %>
-  </div>
-
-  <div>
-    <%= form.label :customer_phone, style: "display: block" %>
-    <%= form.text_field :customer_phone %>
-  </div>
-
-  <div>
-    <%= form.label :customer_email, style: "display: block" %>
-    <%= form.text_field :customer_email %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

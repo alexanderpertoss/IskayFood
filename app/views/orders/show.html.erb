@@ -14,7 +14,10 @@
       <div class="text-center mb-5 p-4 bg-light rounded shadow-sm border border-success">
         <h1 class="display-4 mb-3 text-uppercase">Order Confirmed!</h1>
         <p class="lead font-staatliches">Thank you for your purchase. Your order details are below.</p>
-        <div class="badge bg-secondary fs-5 font-staatliches">Status: <%= @order.status.capitalize %></div>
+        <div class="badge bg-secondary fs-5 font-staatliches">Status: <%= @order.status.capitalize %></div><br><br>
+        <% if @order.status == "Shipped" %>
+          <p class="lead font-staatliches">The tracking code for your order is: <%= @order.shipping_code %></p>
+        <% end %>
       </div>
       
       <div class="row g-5">

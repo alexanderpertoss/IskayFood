@@ -1,85 +1,108 @@
 <div class="container my-5">
-  
-  <div class="d-flex align-items-center mb-4">
-    <h1 class="h3 fw-bold text-primary">📦 Order Management Dashboard</h1>
-    <%# Opcional: Botón para crear nueva orden si es necesario %>
+  <h2 class="mb-4 text-center font-staatliches section-title1-primary">Order Management</h2>
+
+  <%# Navegación del Dashboard unificada %>
+  <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+    <%= link_to 'Orders', orders_path, class: 'btn btn-primary-custom font-staatliches active' %>
+    <%= link_to 'Products', products_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Messages', contacts_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Reviews', reviews_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Clients', clients_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Services', services_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Stripe Dashboard', "https://dashboard.stripe.com/", class: 'btn btn-primary-custom font-staatliches', target: "_blank" %>
   </div>
 
-  <%= link_to 'Orders', orders_path, class: 'btn btn-primary' %>
-  <%= link_to 'Products', products_path, class: 'btn btn-primary' %>
-  <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary' %>
-  <%= link_to 'Messages', contacts_path, class: 'btn btn-primary' %>
-  <%= link_to 'Reviews', reviews_path, class: 'btn btn-primary' %>
-  <%= link_to 'Stripe Dashboard', "https://dashboard.stripe.com/", class: 'btn btn-primary', target: "_blank" %>
-  <br><br>
+  <% if notice.present? %>
+    <div class="alert alert-success font-staatliches text-center shadow-sm"><%= notice %></div>
+  <% end %>
 
-  <div class="card shadow-lg">
+  <div class="card shadow-sm border-0 rounded-3">
     <div class="card-body p-0">
-      
       <% if @orders.any? %>
         <div class="table-responsive">
           <table class="table table-hover align-middle mb-0">
-            <thead class="table-dark">
+            <thead class="table-dark font-staatliches">
               <tr>
-                <th scope="col" class="text-uppercase">Order ID</th>
-                <th scope="col" class="text-uppercase">Customer Name</th>
-                <th scope="col" class="text-uppercase">Total</th>
-                <th scope="col" class="text-uppercase">Status</th>
-                <th scope="col" class="text-uppercase">Date</th>
-                <th scope="col" class="text-uppercase">Actions</th>
+                <th scope="col" class="ps-4">ORDER ID</th>
+                <th scope="col">CUSTOMER</th>
+                <th scope="col">TOTAL</th>
+                <th scope="col" class="text-center">STATUS</th>
+                <th scope="col">DATE</th>
+                <th scope="col" class="text-center pe-4">ACTIONS</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="font-staatliches">
               <% @orders.each do |order| %>
-                <tr class="order-row-<%= order.status.downcase %>">
-                  
-                  <%# ID y Link a la vista de detalle %>
-                  <td>
-                    <%= link_to "##{order.id}", order_path(order), class: 'fw-bold text-decoration-none' %>
+                <tr>
+                  <%# ID con estilo de enlace %>
+                  <td class="ps-4">
+                    <%= link_to "##{order.id}", order_path(order), class: 'fw-bold text-decoration-none text-primary' %>
                   </td>
                   
-                  <%# Nombre del Cliente %>
+                  <%# Info del Cliente %>
                   <td>
-                    <%= order.customer_name %>
-                    <small class="d-block text-muted"><%= order.customer_email %></small>
+                    <div class="d-flex flex-column">
+                      <span class="fw-bold"><%= order.customer_name %></span>
+                      <small class="text-muted" style="font-size: 0.8rem;"><%= order.customer_email %></small>
+                    </div>
                   </td>
                   
-                  <%# Total de la Orden %>
-                  <td>
-                    <span class="fs-6 fw-bold text-success"><%= number_to_currency(order.total) %></span>
+                  <%# Total con formato moneda local %>
+                  <td class="fw-bold text-success">
+                    Bs. <%= number_to_currency(order.total, precision: 2, unit: '') %>
                   </td>
                   
-                  <%# Estado de la Orden (Con badge de color) %>
-                  <td>
-                    <% status_class = case order.status.downcase %>
-                                       <% when 'confirmed' then 'bg-success' %>
-                                       <% when 'pending' then 'bg-warning text-dark' %>
-                                       <% when 'shipped' then 'bg-info' %>
-                                       <% when 'canceled' then 'bg-danger' %>
-                                       <% else 'bg-secondary' %>
-                                     <% end %>
-                    <span class="badge <%= status_class %>"><%= order.status.capitalize %></span>
+                  <%# Estado con Badges personalizados %>
+                  <td class="text-center">
+                    <% status_class = case order.status
+                         when "Recently created" then 'bg-warning text-dark'
+                         when "Preparing order" then 'bg-info text-white'
+                         when "Shipped" then 'bg-primary'
+                         when "Delivered" then 'bg-success'
+                         when "Cancelled" then 'bg-danger'
+                         else 'bg-secondary'
+                       end %>
+                    <span class="badge <%= status_class %> rounded-pill px-3 py-2" style="font-size: 0.75rem;">
+                      <%= order.status.upcase %>
+                    </span><br>
+                    <%= "Tracking code: " + order.shipping_code.to_s unless order.shipping_code.nil? %>
                   </td>
                   
-                  <%# Fecha de Creación %>
+                  <%# Fecha formateada %>
                   <td>
-                    <small><%= order.created_at.strftime("%b %d, %Y") %></small>
+                    <small class="text-muted"><%= order.created_at.strftime("%b %d, %Y") %></small>
                   </td>
                   
-                  <%# Acciones %>
-                  <td>
-                    <div class="btn-group btn-group-sm" role="group">
-                      <%= link_to 'View', order_path(order), class: 'btn btn-outline-primary' %>
-                      <%# Ejemplo de botón para cambiar estado (requeriría lógica AJAX/Turbo) %>
-                      <%# <%= button_to 'Ship', ship_order_path(order), method: :post, class: 'btn btn-outline-info' %>
+                  <%# Botones de Acción / Workflow %>
+                  <td class="text-center pe-4">
+                    <div class="btn-group btn-group-sm shadow-sm" role="group">
+                      <%= link_to "#", class: 'btn btn-outline-dark', title: "View Details" do %>
+                        <i class="bi bi-eye"></i>
+                      <% end %>
+
+                      <% if order.status != "Shipped" and order.status != "Delivered" and order.status != "Cancelled" %>
+                        <%= link_to "/cancelled/#{order.id}", class: 'btn btn-outline-danger', title: "Cancel Order" do %>
+                          <i class="bi bi-x-circle"></i>
+                        <% end %>
+                      <% end %>
+
                       <% if order.status == "Recently created" %>
-                        <%= link_to "Change to: Preparing", "/prepare_order/#{order.id}", class: "btn btn-outline-secondary" %>
+                        <%= link_to edit_order_path(order), class: "btn btn-outline-info", title: "Mark as Preparing" do %>
+                           <i class="bi bi-fire"></i>
+                        <% end %>
                       <% end %>
+
                       <% if order.status == "Preparing order" %>
-                        <%= link_to "Change to: Shipped", "/shipped/#{order.id}", class: "btn btn-outline-secondary" %>
+                        <%= link_to "/shipped/#{order.id}", class: "btn btn-outline-primary", title: "Mark as Shipped" do %>
+                          <i class="bi bi-truck"></i>
+                        <% end %>
                       <% end %>
+
                       <% if order.status == "Shipped" %>
-                        <%= link_to "Change to: Delivered", "/delivered/#{order.id}", class: "btn btn-outline-secondary" %>
+                        <%= link_to "/delivered/#{order.id}", class: "btn btn-outline-success", title: "Mark as Delivered" do %>
+                          <i class="bi bi-check-circle-fill"></i>
+                        <% end %>
                       <% end %>
                     </div>
                   </td>
@@ -89,11 +112,11 @@
           </table>
         </div>
       <% else %>
-        <div class="alert alert-info mb-0 text-center py-4">
-          No orders found.
+        <div class="alert alert-info m-4 text-center py-5 font-jaro">
+          <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+          No orders registered yet.
         </div>
       <% end %>
-      
     </div>
   </div>
 </div>

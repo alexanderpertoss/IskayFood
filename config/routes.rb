@@ -39,8 +39,10 @@ Rails.application.routes.draw do
   get "/prepare_order/:id" => "orders#prepare_order"
   get "/shipped/:id" => "orders#shipped"
   get "/delivered/:id" => "orders#delivered"
+  get "/cancelled/:id" => "orders#cancelled"
   get "order_success", to: "orders#success", as: :order_success
   get "cancel_cart", to: "orders#cancel", as: :cancel_cart
+  get "/order_status_check/:id", to: "orders#order_status_check"
 
   get "/control_panel", to: "pages#control_panel", as: :control_panel
 end

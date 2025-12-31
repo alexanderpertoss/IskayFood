@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[ show edit update destroy order_status_check ]
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.all.order(created_at: :desc)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -36,9 +36,10 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    @order.status = "Shipped"
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: "Order was successfully updated.", status: :see_other }
+        format.html { redirect_to orders_path, notice: "Order was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,21 +61,28 @@ class OrdersController < ApplicationController
   def prepare_order
     @order = Order.find(params[:id])
     @order.status = "Preparing order"
-    @order.save
+    @order.save!
     redirect_to orders_path
   end
 
   def shipped
     @order = Order.find(params[:id])
     @order.status = "Shipped"
-    @order.save
+    @order.save!
     redirect_to orders_path
   end
 
   def delivered
     @order = Order.find(params[:id])
     @order.status = "Delivered"
-    @order.save
+    @order.save!
+    redirect_to orders_path
+  end
+
+  def cancelled
+    @order = Order.find(params[:id])
+    @order.status = "Cancelled"
+    @order.save!
     redirect_to orders_path
   end
 
@@ -87,7 +95,10 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    redirect_to "/shopping_cart"
+    redirect_to root_path
+  end
+
+  def order_status_check
   end
 
   private
@@ -98,6 +109,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.expect(order: [ :total, :customer_name, :customer_shipping_address, :customer_phone, :customer_email, :status ])
+      params.expect(order: [ :total, :customer_name, :customer_shipping_address, :customer_phone, :customer_email, :status, :shipping_code ])
     end
 end

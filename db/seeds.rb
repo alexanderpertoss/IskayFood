@@ -68,3 +68,6 @@ products_data.each do |data|
 end
 
 puts "✅ Se han creado #{Product.count} productos exitosamente."
+
+
+ User.create! email_address: "example@email.com", password: "123456", password_confirmation: "123456"
