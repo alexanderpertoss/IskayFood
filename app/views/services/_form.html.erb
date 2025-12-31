@@ -1,0 +1,52 @@
+<%= form_with(model: service, class: "contact-form") do |form| %>
+  
+  <%# Panel de Errores %>
+  <% if service.errors.any? %>
+    <div class="alert alert-danger font-staatliches shadow-sm mb-4">
+      <h5 class="alert-heading"><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h5>
+      <ul class="mb-0 small">
+        <% service.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# Nombre del Servicio %>
+  <div class="mb-4">
+    <%= form.label :name, "SERVICE NAME", class: "form-label font-staatliches text-muted mb-0" %>
+    <%= form.text_field :name, class: "form-control custom-input-line", placeholder: "e.g. Premium Catering, Wedding Bar..." %>
+  </div>
+
+  <%# Descripción del Servicio %>
+  <div class="mb-4">
+    <%= form.label :description, "DESCRIPTION", class: "form-label font-staatliches text-muted mb-0" %>
+    <%= form.text_area :description, rows: 4, class: "form-control custom-input-line", placeholder: "Describe the details of the service..." %>
+  </div>
+
+  <%# Carga de Imágenes %>
+  <div class="mb-5">
+    <%= form.label :images, "SERVICE PORTFOLIO IMAGES", class: "form-label font-staatliches text-muted mb-0" %>
+    <div class="custom-file-upload p-3 border rounded bg-light mt-2 text-center">
+      <%= form.file_field :images, multiple: true, accept: "image/*", class: "form-control" %>
+      <small class="text-muted font-jaro mt-2 d-block">You can select multiple photos for this service</small>
+    </div>
+    
+    <%# Previsualización de imágenes existentes al editar %>
+    <% if service.images.attached? && service.persisted? %>
+      <div class="mt-3 d-flex flex-wrap gap-2 justify-content-center">
+        <% service.images.each do |image| %>
+          <div class="position-relative">
+            <%= image_tag image, class: "img-thumbnail shadow-sm", style: "width: 65px; height: 65px; object-fit: cover; border-radius: 8px;" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# Botón de Acción %>
+  <div class="d-flex justify-content-center">
+    <%= form.submit "SAVE SERVICE", class: "btn btn-primary-custom font-staatliches py-2 px-5 shadow-sm" %>
+  </div>
+
+<% end %>

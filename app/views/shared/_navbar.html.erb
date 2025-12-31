@@ -42,6 +42,15 @@
 
             <%# CONTACT %>
             <%= link_to "CONTACT", "/contact", class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" %>
+
+            <%# CONTACT %>
+            <%= link_to "CONTROL PANEL", control_panel_path, class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" if authenticated? %>
+        
+            <%# SESSION %>
+            <%= button_to "Log out", session_path, 
+                class: "btn-link-custom font-staatliches mb-0 fs-4 fs-lg-3", 
+                method: :delete if authenticated? %>
+
         </div>
     </div>
 </nav>

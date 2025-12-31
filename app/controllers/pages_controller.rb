@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  allow_unauthenticated_access except: %i[ control_panel ]
+
   def index
   end
   def about
@@ -25,6 +27,9 @@ class PagesController < ApplicationController
       @contact = Contact.new
       render :contact, status: :unprocessable_entity
     end
+  end
+
+  def control_panel
   end
 
   private

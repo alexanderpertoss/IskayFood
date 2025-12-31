@@ -1,0 +1,19 @@
+<div id="<%= dom_id service %>">
+  <p>
+    <strong>Name:</strong>
+    <%= service.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= service.description %>
+  </p>
+
+  <p>
+    <strong>Images:</strong>
+    <% service.images.each do |image| %>
+      <div><%= link_to image.filename, image %></div>
+    <% end %>
+  </p>
+
+</div>

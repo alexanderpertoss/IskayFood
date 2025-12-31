@@ -1,0 +1,46 @@
+<%= form_with(model: client, class: "contact-form") do |form| %>
+  
+  <%# Manejo de Errores con Estilo Bootstrap %>
+  <% if client.errors.any? %>
+    <div class="alert alert-danger font-staatliches shadow-sm mb-4">
+      <h5 class="alert-heading"><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h5>
+      <ul class="mb-0 small">
+        <% client.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# Campo de Nombre del Cliente %>
+  <div class="mb-4">
+    <%= form.label :name, "CLIENT NAME", class: "form-label font-staatliches text-muted mb-0" %>
+    <%= form.text_field :name, class: "form-control custom-input-line", placeholder: "Enter client or company name..." %>
+  </div>
+
+  <%# Campo de Carga de Imágenes (Múltiple) %>
+  <div class="mb-5">
+    <%= form.label :images, "CLIENT LOGOS / PHOTOS", class: "form-label font-staatliches text-muted mb-0" %>
+    <div class="custom-file-upload p-3 border rounded bg-light mt-2 text-center">
+      <%= form.file_field :images, multiple: true, accept: "image/*", class: "form-control" %>
+      <small class="text-muted font-jaro mt-2 d-block">You can select multiple files</small>
+    </div>
+    
+    <%# Vista previa de imágenes ya cargadas (si estamos editando) %>
+    <% if client.images.attached? && client.persisted? %>
+      <div class="mt-3 d-flex flex-wrap gap-2 justify-content-center">
+        <% client.images.each do |image| %>
+          <div class="position-relative">
+            <%= image_tag image, class: "img-thumbnail", style: "width: 60px; height: 60px; object-fit: cover;" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# Botón de Guardar Centrado %>
+  <div class="d-flex justify-content-center">
+    <%= form.submit "SAVE CLIENT", class: "btn btn-primary-custom font-staatliches py-2 px-5 shadow-sm" %>
+  </div>
+
+<% end %>

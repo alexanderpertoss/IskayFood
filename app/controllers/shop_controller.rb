@@ -3,6 +3,8 @@ require "json"
 
 class ShopController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [ :confirm_order ]
+  allow_unauthenticated_access
+
   def index
     @ninth_product = Product.order(created_at: :asc).offset(8).first
     @eigth_product = Product.order(created_at: :asc).offset(7).first

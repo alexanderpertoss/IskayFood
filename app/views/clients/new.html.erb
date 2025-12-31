@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <%# Tarjeta elegante con bordes redondeados y sombra suave %>
+      <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5">
+        
+        <%# Título con tu tipografía principal %>
+        <h1 class="font-staatliches text-center section-title1-primary mb-4">REGISTER NEW CLIENT</h1>
+        
+        <p class="text-center text-muted small mb-4 font-jaro">
+          Add a new brand or company to your portfolio.
+        </p>
+
+        <%# Renderizado del formulario que acabamos de estilizar %>
+        <%= render "form", client: @client %>
+
+        <hr class="my-4">
+
+        <%# Enlace para volver atrás con icono %>
+        <div class="text-center">
+          <%= link_to clients_path, class: "text-decoration-none text-muted font-staatliches small-hover" do %>
+            <i class="bi bi-arrow-left"></i> BACK TO CLIENTS LIST
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

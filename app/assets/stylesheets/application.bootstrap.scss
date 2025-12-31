@@ -553,3 +553,32 @@ $headings-color: $primary;
 .nav-tabs .nav-link:hover {
   color: $primary
 }
+
+.btn-link-custom {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  color: #333; /* O el color de tus otros links */
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-link-custom:hover {
+  color: #391042; /* Tu color púrpura de hover */
+}
+
+/* Ajuste para que se alinee perfectamente con los otros links en el flexbox */
+#navigation-links form {
+  display: inline;
+  margin: 0;
+}
+
+.table-thumbnail {
+  width: 60px; 
+  height: 60px; 
+  object-fit: cover;
+}

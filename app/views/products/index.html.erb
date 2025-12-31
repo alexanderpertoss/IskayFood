@@ -1,36 +1,80 @@
 <div class="container my-5">
-  <h2 class="mb-4 text-center">Products</h2>
+  <h2 class="mb-4 text-center font-staatliches section-title1-primary">Product Inventory</h2>
 
-  <%= link_to 'Orders', orders_path, class: 'btn btn-primary' %>
-  <%= link_to 'Products', products_path, class: 'btn btn-primary' %>
-  <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary' %>
-  <%= link_to 'Messages', contacts_path, class: 'btn btn-primary' %>
-  <%= link_to 'Reviews', reviews_path, class: 'btn btn-primary' %>
-  <%= link_to 'Stripe Dashboard', "https://dashboard.stripe.com/", class: 'btn btn-primary', target: "_blank" %>
-  <br>
-  <br>
+  <%# Navegación del Dashboard unificada %>
+  <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+    <%= link_to 'Orders', orders_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Products', products_path, class: 'btn btn-primary-custom font-staatliches active' %>
+    <%= link_to 'Bookings', bookings_list_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Messages', contacts_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Reviews', reviews_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Clients', clients_path, class: 'btn btn-primary-custom font-staatliches' %>
+    <%= link_to 'Stripe Dashboard', "https://dashboard.stripe.com/", class: 'btn btn-primary-custom font-staatliches', target: "_blank" %>
+  </div>
+
+  <% if notice.present? %>
+    <div class="alert alert-success font-staatliches text-center shadow-sm"><%= notice %></div>
+  <% end %>
+
   <% if @products.any? %>
-    <div class="table-responsive">
-      <table class="table table-hover table-striped table-bordered align-middle">
-        <thead class="table-dark">
+    <div class="table-responsive shadow-sm rounded">
+      <table class="table table-hover table-striped table-bordered align-middle mb-0">
+        <thead class="table-dark font-staatliches text-center">
           <tr>
-            <th scope="col" class="text-center">#</th>
+            <th scope="col" style="width: 50px;">#</th>
+            <th scope="col" style="width: 100px;">Preview</th>
             <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col" class="text-end">^Price</th>
-            <th scope="col" class="text-center">Options</th>
+            <th scope="col" class="d-none d-md-table-cell">Description</th>
+            <th scope="col">Weight</th>
+            <th scope="col" class="text-end">Price</th>
+            <th scope="col" style="width: 180px;">Options</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="font-staatliches">
           <% @products.each_with_index do |product, index| %>
             <tr>
-              <th scope="row" class="text-center"><%= index + 1 %></th>
-              <td><%= product.name %></td>
-              <td><%= truncate(product.description, length: 70, separator: ' ') %></td>
-              <td class="text-end">Bs. <%= number_to_currency(product.price, precision: 2, unit: '') %></td>
+              <th scope="row" class="text-center text-muted"><%= index + 1 %></th>
+              
+              <%# Galería de miniaturas %>
               <td class="text-center">
-                <%= link_to "Edit", edit_product_path(product), class: "btn btn-warning btn-sm" %>
-                
+                <div class="d-flex justify-content-center gap-1">
+                  <% if product.images.attached? %>
+                    <%# Mostramos solo la primera para no saturar la tabla, o un mini grid %>
+                    <%= image_tag product.images.first, class: "img-thumbnail", 
+                                  style: "width: 50px; height: 50px; object-fit: cover;" %>
+                  <% else %>
+                    <i class="bi bi-box-seam text-muted fs-3"></i>
+                  <% end %>
+                </div>
+              </td>
+
+              <td class="fw-bold"><%= product.name %></td>
+              
+              <td class="d-none d-md-table-cell text-muted small">
+                <%= truncate(product.description, length: 60) %>
+              </td>
+
+              <td class="text-center">
+                <span class="badge bg-light text-dark border">
+                  <%= product.weight %> kg
+                </span>
+              </td>
+
+              <td class="text-end fw-bold">
+                Bs. <%= number_to_currency(product.price, precision: 2, unit: '') %>
+              </td>
+
+              <td class="text-center">
+                <div class="d-flex justify-content-center gap-2">
+                  <%= link_to edit_product_path(product), class: "btn btn-warning btn-sm", title: "Edit" do %>
+                    <i class="bi bi-pencil-square"></i> Edit
+                  <% end %>
+                  
+                  <%= link_to product, data: { turbo_method: :delete, turbo_confirm: "¿Are you sure you want to delete #{product.name}?" }, 
+                              class: "btn btn-danger btn-sm", title: "Delete" do %>
+                    <i class="bi bi-trash"></i> Delete
+                  <% end %>
+                </div>
               </td>
             </tr>
           <% end %>
@@ -38,12 +82,14 @@
       </table>
     </div>
   <% else %>
-    <div class="alert alert-info text-center" role="alert">
-      No available products
+    <div class="alert alert-info text-center mt-4" role="alert">
+      No available products.
     </div>
   <% end %>
 
-  <div class="text-center mt-4">
-    <%= link_to "Add new product", new_product_path, class: "btn btn-success btn-lg" %>
+  <div class="text-center mt-5">
+    <%= link_to new_product_path, class: "btn btn-success btn-lg font-staatliches px-5 shadow" do %>
+      <i class="bi bi-plus-circle"></i> ADD NEW PRODUCT
+    <% end %>
   </div>
 </div>

@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-7">
+      <%# Tarjeta con diseño consistente %>
+      <div class="card shadow-lg border-0 rounded-4 p-4 p-md-5">
+        
+        <%# Título principal con Staatliches %>
+        <h1 class="font-staatliches text-center section-title1-primary mb-2">CREATE NEW SERVICE</h1>
+        
+        <p class="text-center text-muted small mb-5 font-jaro">
+          Define a new experience or culinary category for your clients.
+        </p>
+
+        <%# Renderizado del formulario estilizado %>
+        <%= render "form", service: @service %>
+
+        <hr class="my-4 opacity-25">
+
+        <%# Navegación de retorno %>
+        <div class="text-center">
+          <%= link_to services_path, class: "text-decoration-none text-muted font-staatliches small-hover" do %>
+            <i class="bi bi-arrow-left"></i> BACK TO SERVICES LIST
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :services
+  resources :clients
+  resource :session
+  resources :passwords, param: :token
   resources :reviews
   get "pages/index"
   get "shop/index"
@@ -37,4 +41,6 @@ Rails.application.routes.draw do
   get "/delivered/:id" => "orders#delivered"
   get "order_success", to: "orders#success", as: :order_success
   get "cancel_cart", to: "orders#cancel", as: :cancel_cart
+
+  get "/control_panel", to: "pages#control_panel", as: :control_panel
 end
