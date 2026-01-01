@@ -14,6 +14,15 @@ $headings-color: $primary;
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+html, body {
+  overflow-x: hidden; /* Prohíbe el scroll lateral */
+  width: 100%;
+}
+
+#main-container, #about-us-main, #main-event, #clients-container {
+  overflow: hidden; /* Corta cualquier desborde de sus filas internas */
+}
+
 .text-primary-color {
   color: $primary;
 }
@@ -117,6 +126,11 @@ $headings-color: $primary;
   // Asegura que esté sobre el contenido y el FAB
   z-index: 1030; 
   transition: top 0.5s ease-in-out; // Suaviza la animación de entrada/salida
+  overflow-x: hidden; /* Evita que la barra cause scroll horizontal */
+}
+#navigation-bar .row {
+    margin-right: 0;
+    margin-left: 0;
 }
 // 2. Estado Escondido (Se activa con JavaScript)
 .navbar-hidden {
@@ -167,7 +181,7 @@ $headings-color: $primary;
     min-height: 50px; /* Da un área de colisión estable */
   }
   
-  #navigation-links a, 
+  #navigation-links a,
   #navigation-links .dropdown-toggle {
     margin: 0 !important; /* Elimina márgenes que puedan desalinear */
     font-size: 0.75rem !important; /* Letra bien pequeña para que entre en una fila */
@@ -553,28 +567,32 @@ $headings-color: $primary;
 .nav-tabs .nav-link:hover {
   color: $primary
 }
-
-.btn-link-custom {
-  background: none !important;
-  border: none !important;
-  padding: 0 !important;
-  color: #333; /* O el color de tus otros links */
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.3s ease;
+/* Asegura que el formulario del logout no empuje el botón hacia abajo */
+#navigation-links form {
   display: inline-flex;
   align-items: center;
-}
-
-.btn-link-custom:hover {
-  color: #391042; /* Tu color púrpura de hover */
-}
-
-/* Ajuste para que se alinee perfectamente con los otros links en el flexbox */
-#navigation-links form {
-  display: inline;
   margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* Forzamos que el botón no tenga paddings internos que lo desvíen */
+#navigation-links .btn-link-custom {
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1; /* Esto es clave para la alineación vertical */
+}
+
+@media (max-width: 991px) {
+  #navigation-links .btn-link-custom {
+    margin: 0 !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1px !important;
+    
+  }
 }
 
 .table-thumbnail {
@@ -583,3 +601,26 @@ $headings-color: $primary;
   object-fit: cover;
 }
 
+
+
+/* Ajuste para que los textos gigantes no desborden en móvil */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 350% !important; /* Bajamos de 600% a 350% en móvil */
+    word-wrap: break-word;
+  }
+  .section-title-primary {
+    font-size: 350% !important;
+  }
+  .section-title2, .section-title2-primary {
+    font-size: 200% !important; /* Bajamos de 300% a 200% */
+  }
+  .section-title3, .section-title3-primary {
+    font-size: 150% !important;
+  }
+  
+  /* Evita que el padding excesivo en móviles empuje el contenido */
+  #main-text-area, #about-us-main .col, #clients-container .col-12, #main-event .row {
+    padding: 2rem !important; 
+  }
+}
