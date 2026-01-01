@@ -185,8 +185,8 @@ html, body {
   #navigation-links a,
   #navigation-links .dropdown-toggle {
     margin: 0 !important; /* Elimina márgenes que puedan desalinear */
-    font-size: 0.75rem !important; /* Letra bien pequeña para que entre en una fila */
-    letter-spacing: 0.1px !important;
+    font-size: 0.9rem !important; /* Letra bien pequeña para que entre en una fila */
+    letter-spacing: 0.2px !important;
   }
 }
 // Clase de utilidad para el padding del cuerpo
@@ -639,7 +639,7 @@ html, body {
     z-index: 10000 !important; 
   /* Si el menú se sigue cortando o aparece detrás, 
      forzamos el contexto de visualización */
-    position: absolute !important;
+    //position: absolute !important;
     overflow: visible !important;
 }
 
@@ -660,12 +660,53 @@ html, body {
     padding-left: 25px; /* Pequeño efecto de desplazamiento al hover */
 }
 
-/* Ajuste para móviles */
+/* Ajuste para móviles - Limpieza total de desbordamientos */
 @media (max-width: 991px) {
+    /* 1. Forzamos que el contenedor de links permita que los hijos crezcan hacia abajo */
+    #navigation-links {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 1. El submenú flota sobre TODO, no ocupa espacio en el flujo */
     .dropdown-menu-custom {
-        background-color: #f8f9fa; /* Un tono gris muy claro para diferenciar del fondo */
-        width: 100%;
-        position: relative !important; /* En móvil que fluya con el contenido */
+        position: fixed !important; /* Cambiamos a FIXED para que no empuje nada */
+        top: 180px !important;      /* Ajusta este valor según la altura de tu barra */
+        left: 5% !important;        /* Margen pequeño a la izquierda */
+        right: 5% !important;       /* Margen pequeño a la derecha */
+        //width: 90% !important;      /* Ancho casi total de la pantalla */
+        margin: 0 auto !important;
+        
+        /* Estética limpia */
+        background-color: white !important;
+        //border: 1px solid rgba(0,0,0,0.1) !important;
+        //box-shadow: 0 15px 35px rgba(0,0,0,0.2) !important;
+        z-index: 99999 !important;
+        
+        /* Animación sin movimiento lateral */
+        display: block !important;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(0px) !important; 
+        transition: opacity 0.3s ease, visibility 0.3s;
+    }
+
+    /* Estado abierto */
+    .dropdown-menu-custom.show {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /* 2. Evitamos que el contenedor de links se entere de que hay un menú abierto */
+    #navigation-links .dropdown {
+        position: static !important;
+    }
+
+    /* 3. Ajustamos los items para que sean fáciles de tocar en celular */
+    .dropdown-menu-custom .dropdown-item {
+        padding: 15px !important;
+        //border-bottom: 1px solid #eee;
     }
 }
 
