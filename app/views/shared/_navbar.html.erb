@@ -13,29 +13,30 @@
 
             <%# SERVICES DROPDOWN %>
             <div class="dropdown custom-dropdown">
-                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     SERVICES
                 </a>
-                <ul class="dropdown-menu border-0 shadow text-center fs-5">
-                    <%# Catering con sub-menú (Asado y Salteña) %>
+                <%# Eliminamos fs-5 y añadimos una clase personalizada para el texto %>
+                <ul class="dropdown-menu border-0 shadow text-center dropdown-menu-custom">
                     <li><a class="dropdown-item" href="#">CATERING</a></li>
+                    
                     <li><a class="dropdown-item" href="#">SANDWICH SHOP</a></li>
+                    
                     <li><a class="dropdown-item" href="#">BAR</a></li>
                 </ul>
             </div>
 
             <%# PRODUCTS DROPDOWN %>
             <div class="dropdown custom-dropdown">
-                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     PRODUCTS
                 </a>
-                <ul class="dropdown-menu border-0 shadow text-center text-lg-start">
+                <ul class="dropdown-menu border-0 shadow text-center text-lg-start dropdown-menu-custom">
                     <li><a class="dropdown-item" href="#">SALTEÑA</a></li>
                     <li><a class="dropdown-item" href="#">SINGANI</a></li>
                     <li><a class="dropdown-item" href="#">AMAZÓNICA</a></li>
                     <li><a class="dropdown-item" href="#">EMPANADAS</a></li>
                     <li><a class="dropdown-item" href="#">PRALINES</a></li>
-                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item fw-bold" href="/shop/index">SHOP</a></li>
                 </ul>
             </div>

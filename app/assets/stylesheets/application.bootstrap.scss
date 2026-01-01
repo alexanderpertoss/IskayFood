@@ -124,9 +124,8 @@ html, body {
   top: 0;
   width: 100%;
   // Asegura que esté sobre el contenido y el FAB
-  z-index: 1030; 
+  z-index: 9999 !important;
   transition: top 0.5s ease-in-out; // Suaviza la animación de entrada/salida
-  overflow-x: hidden; /* Evita que la barra cause scroll horizontal */
 }
 #navigation-bar .row {
     margin-right: 0;
@@ -147,7 +146,9 @@ html, body {
     color: $primary; /* Tu color primario */
 }
 /* --- TAMAÑO DE FUENTE RESPONSIVO --- */
-
+#navigation-links {
+  overflow: visible !important; 
+}
 //* 1. Normalizar la altura de todos los elementos del menú */
 #navigation-links > a, 
 #navigation-links > .dropdown {
@@ -623,4 +624,97 @@ html, body {
   #main-text-area, #about-us-main .col, #clients-container .col-12, #main-event .row {
     padding: 2rem !important; 
   }
+}
+
+
+/* 1. Forzar que el menú aparezca ABAJO del texto */
+.custom-dropdown {
+    position: relative; /* Asegura el contexto de posicionamiento */
+}
+
+.dropdown-menu-custom {
+    top: 100% !important;   /* Lo posiciona justo debajo del parent */
+    //margin-top: 10px !important; /* Separación elegante */
+    transform: none !important;  /* Evita que Popper.js lo mande hacia arriba */
+    z-index: 10000 !important; 
+  /* Si el menú se sigue cortando o aparece detrás, 
+     forzamos el contexto de visualización */
+    position: absolute !important;
+    overflow: visible !important;
+}
+
+/* 2. Estética de los items del submenú */
+.dropdown-menu-custom .dropdown-item {
+    font-family: 'Staatliches', sans-serif; /* Mantenemos la marca pero... */
+    font-size: 1.1rem !important;           /* Tamaño más pequeño y refinado */
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    color: #333;
+    transition: all 0.2s ease;
+    z-index: 10000 !important;
+}
+
+.dropdown-menu-custom .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: $primary; /* Usa tu variable de color */
+    padding-left: 25px; /* Pequeño efecto de desplazamiento al hover */
+}
+
+/* Ajuste para móviles */
+@media (max-width: 991px) {
+    .dropdown-menu-custom {
+        background-color: #f8f9fa; /* Un tono gris muy claro para diferenciar del fondo */
+        width: 100%;
+        position: relative !important; /* En móvil que fluya con el contenido */
+    }
+}
+
+/* 1. Animación suave de entrada */
+.dropdown-menu-custom {
+  /* Reset de Bootstrap para permitir la animación */
+  //display: block !important; 
+  visibility: hidden;
+  opacity: 0;
+  margin-top: 0; 
+  transform: translateY(15px); /* Empieza un poco más abajo */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  
+  /* Estética del menú */
+  border-radius: 12px !important;
+  padding: 10px 0 !important;
+}
+
+/* Estado cuando el menú se abre */
+.dropdown-menu-custom.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(10px); /* Cae suavemente a su posición */
+}
+
+/* 2. Dividers elegantes (Líneas finas que no tocan los bordes) */
+.dropdown-menu-custom li:not(:last-child) {
+  position: relative;
+}
+
+.dropdown-menu-custom li:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 60%; /* La línea solo ocupa el 60% del ancho */
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Color muy suave */
+  padding-top: 2px;
+}
+
+/* 3. Ajuste de los items para que no choquen con el divider */
+.dropdown-menu-custom .dropdown-item {
+  padding: 8px 20px !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px;
+  background: transparent !important;
+  color: #333 !important;
+  transition: color 0.2s ease;
+}
+
+.dropdown-menu-custom .dropdown-item:hover {
+  color: $primary !important; /* Tu color de marca */
 }
