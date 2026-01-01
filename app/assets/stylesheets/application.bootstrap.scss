@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Staatliches&display=swap);
 
-$headings-font-family: 'Jaro', sans-serif;
+$headings-font-family: 'Staatliches', sans-serif;
 
 $primary: #393E46;
 $secondary: black;
@@ -308,6 +308,60 @@ html, body {
 }
 
 .hero-section2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
+  z-index: 1; /* Asegura que la capa esté debajo del texto */
+}
+
+.hero-section3 {
+  /* Imagen de fondo */
+  background-image: url("products/img10.png"); /* Asegúrate que la imagen esté en `app/assets/images/` */
+  background-size: cover; /* Cubre todo el área */
+  background-position: center center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
+
+  /* Altura del Hero */
+  height: 50vh; /* 60% del alto de la ventana, ajusta a tu gusto */
+  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
+  width: 100%; /* Ocupa todo el ancho */
+
+  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
+  position: relative; /* Necesario para el pseudo-elemento */
+}
+
+.hero-section3::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
+  z-index: 1; /* Asegura que la capa esté debajo del texto */
+}
+
+.hero-section4 {
+  /* Imagen de fondo */
+  background-image: url("products/img11.jpeg"); /* Asegúrate que la imagen esté en `app/assets/images/` */
+  background-size: cover; /* Cubre todo el área */
+  background-position: center center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que se repita */
+
+  /* Altura del Hero */
+  height: 50vh; /* 60% del alto de la ventana, ajusta a tu gusto */
+  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
+  width: 100%; /* Ocupa todo el ancho */
+
+  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
+  position: relative; /* Necesario para el pseudo-elemento */
+}
+
+.hero-section4::before {
   content: "";
   position: absolute;
   top: 0;
@@ -758,4 +812,49 @@ html, body {
 
 .dropdown-menu-custom .dropdown-item:hover {
   color: $primary !important; /* Tu color de marca */
+}
+
+.details-col1 {
+  background-color: $primary;
+}
+.details-col2 {
+  background-color: $secondary;
+}
+.details-col2 img {
+  object-fit: cover !important;
+}
+.row-date {
+  padding: 20px;
+}
+.row-details {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.detail-title {
+  font-size: 500% !important;
+}
+
+/* El contenedor que actúa como marco */
+.image-frame {
+  width: 100%;
+  height: 650px; /* Define aquí la altura del rectángulo */
+  overflow: hidden; /* Corta lo que sobre de la imagen */
+  //border: 8px solid white; /* Marco estilo "fotografía" */
+  border-radius: 4px;
+}
+
+/* La imagen dentro del marco */
+.framed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* REGLA CLAVE: Llena el espacio sin deformarse */
+  object-position: center; /* Centra la parte importante de la imagen */
+  display: block;
+}
+
+/* Ajuste para celulares (marco más pequeño) */
+@media (max-width: 768px) {
+  .image-frame {
+    height: 250px; /* Altura reducida para pantallas pequeñas */
+  }
 }

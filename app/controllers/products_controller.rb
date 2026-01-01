@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  allow_unauthenticated_access only: %i[ show ]
 
   # GET /products or /products.json
   def index

@@ -1,10 +1,83 @@
-<p style="color: green"><%= notice %></p>
+<div class="hero-section3 text-white d-flex align-items-end justify-content-center text-center text-uppercase">
+  <div class="hero-content pb-4"> 
+    <h1 class=" font-staatliches section-title">Amazónica</h1>
+    <p class="lead font-staatliches section-title3">Born from the encounter between the purple corn of the Andes and the acai of the Amazon</p>
+  </div>
+</div>
 
-<%= render @product %>
+<div class="container-fluid">
+  <div class="row text-uppercase text-white">
+    <div class="col-12 col-md-6 col-lg-6 details-col2">
+      <h5 class="pt-3 text-white">History</h5>
+      <br>
+      <div class="row-details">
+        <span class="row-date">2025</span> Best Botanical Blend
+        <hr class="divider">
+      </div>
+      <div class="row-details">
+        <span class="row-date">2024</span> Gold Medal – Bittersweet Category
+        <hr class="divider">
+      </div>
+      <div class="row-details">
+        <span class="row-date">2023</span> Best Sustainable Packaging
+        <hr class="divider">
+      </div>
+      <div class="row-details">
+        <span class="row-date">2022</span> Editor's Choice – Best Aperitif
+        <hr class="divider">
+      </div>
+      <div class="row-details">
+        <span class="row-date">2021</span> Most Elegant Bottle Design
+        <hr class="divider">
+      </div>
+      <div class="row-details">
+        <span class="row-date">2020</span> Inauguration
+        <hr class="divider">
+      </div>
+      <div class="p-3 d-flex justify-content-center">
+        <%= button_to "Buy", "#", class: "btn btn-primary font-staatliches" %>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-6 details-col1 p-0 overflow-hidden">
+      <%= image_tag "products/img5.png", class: "img-fluid w-100 d-block" %>
+    </div>
 
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
 
-  <%= button_to "Destroy this product", @product, method: :delete %>
+    <div class="col-12 col-md-6 col-lg-6 details-col2 p-0 overflow-hidden">
+      <%= image_tag "products/img13.jpg", class: "img-fluid w-100 d-block" %>
+    </div>
+    <div class="col-12 col-md-6 col-lg-6 details-col1">
+      <h5 class="pt-4 text-white">Information</h5>
+      <br>
+      <div class="row-details">
+        <span class="row-date">2025</span> Best Botanical Blend
+        <hr class="divider">
+      </div>
+      <div class="row-details">
+        <span class="row-date">2024</span> Gold Medal – Bittersweet Category
+        <hr class="divider">
+      </div>
+    
+      <div class="row-details">
+        <span class="row-date">2022</span> Editor's Choice – Best Aperitif
+        <hr class="divider">
+      </div>
+      <div class="p-3 d-flex justify-content-center">
+        <%= button_to "Buy", "#", class: "btn btn-secondary font-staatliches" %>
+      </div>
+      <div class="row-details d-flex justify-content-center">
+        <span class="text-white font-staatliches detail-title">EST. 2022</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="image-frame shadow-sm">
+        <%= image_tag "products/img10.png", class: "framed-img" %>
+      </div>
+    </div>  
+  </div>
 </div>
