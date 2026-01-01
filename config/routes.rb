@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#index"
-  get "/about" => "pages#about"
+  get "about", to: "pages#about", as: :about_page
   get "contact", to: "pages#contact", as: :contact_page
   get "bookings", to: "contacts#bookings", as: :bookings_list
   delete "bookings/:id", to: "contacts#delete_booking", as: :delete_booking
