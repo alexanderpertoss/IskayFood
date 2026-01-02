@@ -3,7 +3,7 @@
 </div>
 
 <div id="decorative-divider" class="col d-flex flex-column align-items-center">
-    <%= image_tag "patron_decorativo.png", class: "img-fluid" %>
+    <%= image_tag "patron_decorativo_grey.png", class: "img-fluid" %>
 </div>
 
 
@@ -12,11 +12,10 @@
     <div class="col-lg-10">
       
       <div class="text-center mb-5 p-4 bg-light rounded shadow-sm border border-success">
-        <h1 class="display-4 mb-3 text-uppercase">Order Confirmed!</h1>
-        <p class="lead font-staatliches">Thank you for your purchase. Your order details are below.</p>
+        <p class="lead font-anarrow">Thank you for your purchase. Your order details are below.</p>
         <div class="badge bg-secondary fs-5 font-staatliches">Status: <%= @order.status.capitalize %></div><br><br>
         <% if @order.status == "Shipped" %>
-          <p class="lead font-staatliches">The tracking code for your order is: <%= @order.shipping_code %></p>
+          <p class="lead font-anarrow">The tracking code for your order is: <%= @order.shipping_code %></p>
         <% end %>
       </div>
       
@@ -24,8 +23,8 @@
         
         <div class="col-md-7">
           <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">
-              <h2 class="h5 mb-0">Order Summary</h2>
+            <div class="card-header bg-secondary text-white">
+              <h2 class="h5 mb-0 text-white">Order Summary</h2>
             </div>
             <div class="card-body p-0">
               
@@ -43,7 +42,7 @@
                 <% end %>
                 
                 <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                  <span class="fw-bold fs-5 font-staatliches">ORDER TOTAL (INCLUDING DELIVERY)</span>
+                  <span class="fw-bold fs-5 font-anarrow">ORDER TOTAL (INCLUDING DELIVERY)</span>
                   <strong class="fs-5 text-primary"><%= number_to_currency(@order.total + @order.delivery_price) %></strong>
                 </li>
               </ul>
@@ -55,7 +54,7 @@
         <div class="col-md-5">
           <div class="card shadow-sm border-secondary">
             <div class="card-header bg-secondary text-white">
-              <h2 class="h5 mb-0">Customer & Shipping Details</h2>
+              <h2 class="h5 mb-0 text-white">Customer & Shipping Details</h2>
             </div>
             <div class="card-body">
               

@@ -1,5 +1,11 @@
-<div class="contact-page-wrapper d-flex align-items-center justify-content-center">
-  <div class="container-fluid">
+<div class="contact-page-wrapper d-flex align-items-center justify-content-center jarallax">
+  <%# Capa de imagen Parallax %>
+  <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img8.png") %>');"></div>
+  
+  <%# Overlay oscuro para legibilidad (Sustituye al gradiente del CSS) %>
+  <div class="jarallax-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1;"></div>
+
+  <div class="container-fluid" style="z-index: 2; position: relative;">
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-7">
         
@@ -24,9 +30,9 @@
             <div class="tab-pane fade show active" id="message-pane" role="tabpanel" tabindex="0">
               <div class="text-center mb-4 p-4">
                 
-                <p class="font-staatliches section-title4-primary mb-1">Chau. de Wavre 950, 1040 Etterbeek, Bélgium</p>
-                <p class="font-staatliches section-title4-primary mb-1">Monday to Saturday From 17:00</p>
-                <p class="font-staatliches section-title4-primary mb-3">Telephone: 0493 9234 37</p>
+                <p class="font-anarrow section-title4-primary mb-1">Chau. de Wavre 950, 1040 Etterbeek, Bélgium</p>
+                <p class="font-anarrow section-title4-primary mb-1">Monday to Saturday From 17:00</p>
+                <p class="font-anarrow section-title4-primary mb-3">Telephone: 0493 9234 37</p>
                 <h2 class="font-staatliches section-title1-primary mt-4 pt-4">LEAVE US A MESSAGE</h2>
               </div>
 
@@ -55,7 +61,7 @@
             <div class="tab-pane fade" id="booking-pane" role="tabpanel" tabindex="0">
               <div class="text-center mb-4">
                 <h1 class="font-staatliches section-title1-primary mb-2">BOOK YOUR TABLE</h1>
-                <p class="font-staatliches section-title4-primary">Join us for an unforgettable dinner</p>
+                <p class="font-anarrow section-title4-primary">Join us for an unforgettable dinner</p>
               </div>
 
               <%= form_with model: @booking, url: create_booking_path, local: true, class: "contact-form" do |f| %>

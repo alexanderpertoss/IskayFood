@@ -1,8 +1,16 @@
-<div class="hero-section2 text-white d-flex align-items-end justify-content-center text-center text-uppercase">
-  <div class="hero-content pb-4"> 
-    <h1 class=" font-staatliches section-title">about us</h1>
-    <p class="lead font-staatliches section-title3">Growing up in Bolivia, our cuisine has an influence of this wonderful country, whose flavors and cultures are very rich.</p>
+<div class="hero-section2 text-white d-flex align-items-end justify-content-center text-center text-uppercase jarallax">
+  
+  <%# La imagen de fondo controlada por Jarallax %>
+  <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img3.png") %>');"></div>
+
+  <%# El contenido que permanece estático encima %>
+  <div class="hero-content pb-4" style="z-index: 2;"> 
+    <h1 class="font-staatliches section-title">about us</h1>
+    <p class="lead font-staatliches section-title3">
+      Growing up in Bolivia, our cuisine has an influence of this wonderful country, whose flavors and cultures are very rich.
+    </p>
   </div>
+  
 </div>
 
 <div class="col d-flex flex-column align-items-center decorative-divider">
@@ -13,7 +21,7 @@
     <div class="row">
         <div class="col-12 px-5">
             <h1 class="font-staatliches text-primary-color">A unique experience</h1>
-            <p class="font-staatliches about-info">
+            <p class="font-anarrow about-info">
                 We are artisans of passion, masters of fire, and guardians of South American culinary traditions. Inspired by our family and legendary asadores, we have elevated the art of asado to the next level. Passing by the salteñas (premium empanada), the traditional  “Chicharron”, the asados with a wood fire, we are able to customize a  menu for you.<br><br>
                 We are pleased to offer you our best selection of wines, unique and exclusive. Red, pink or white. We are also the first to be able to offer you the “SINGANI” a spirit, drink which will amaze you.
             </p>
@@ -21,11 +29,15 @@
     </div>
 </div>
 
+<div class="col d-flex flex-column align-items-center decorative-divider">
+    <%= image_tag "patron_decorativo_grey.png", class: "img-fluid" %>
+</div>
+
 <div class="container-fluid p-5 secondary-background">
     <div class="row">
         <div class="col-12 px-5 text-center">
             <h1 class="font-staatliches text-white">Our Team</h1>
-            <h2 class="font-staatliches text-white mb-5">Get to know the people behind the scenes and some of our collaborators</h2>
+            <h2 class="font-anarrow text-white mb-5">Get to know the people behind the scenes and some of our collaborators</h2>
         </div>
     </div>
 

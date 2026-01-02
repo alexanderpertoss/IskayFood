@@ -1,18 +1,20 @@
 
 
-<div id="main-container" class="container-fluid">
+<div id="main-container" class="container-fluid p-0 overflow-hidde">
     <div class="row g-0">
-        <div class="col-12 col-md-5 col-lg-5 p-5" id="main-text-area">
+        <div class="col-12 col-md-5 col-lg-5 p-5 d-flex flex-column justify-content-center" id="main-text-area">
             <div id="main-text-area-content" class="section-title3 font-staatliches">
                 We are artisans of passion, masters of fire, and guardians of South American culinary traditions.
             </div>
-            <br><br><br>
-            <div id="main-text-area-button">
+            
+            <div id="main-text-area-button" class="mt-5">
                 <%= link_to "Shop Now", shop_index_path, class: "btn btn-primary text-white font-staatliches text-uppercase p-3", data: { turbo_stream: true } %>
             </div>
         </div>
-        <div class="col-12 col-md-7 col-lg-7 p-0" id="main-image-area">
-            <%= image_tag "products/img12.png" %>
+
+        <%# Columna de la imagen con Parallax %>
+        <div class="col-12 col-md-7 col-lg-7 p-0 jarallax" id="main-image-area" style="min-height: 500px;">
+            <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img1.png") %>');"></div>
         </div>
     </div>
 </div>
@@ -26,67 +28,78 @@
         <div class="col d-flex flex-column align-items-left p-5 section-title2-primary font-staatliches">
             Inspired by our family and legendary asadores, we have elevated the art of asado to the next level.<br>
             <div id="about-us-main-button">
-                <%= link_to "About Us", "/about", class: "btn btn-primary text-white font-staatliches text-uppercase p-3", data: { turbo_stream: true } %>
+                <%= link_to "About Us", "/about", class: "btn btn-secondary text-white font-staatliches text-uppercase p-3", data: { turbo_stream: true } %>
             </div>
         </div>  
     </div>
 </div>
 
+<div class="col d-flex flex-column align-items-center decorative-divider">
+    <%= image_tag "patron_decorativo_grey.png", class: "img-fluid" %>
+</div>
 
-<div class="hero-section text-white d-flex align-items-end justify-content-center text-center text-uppercase">
+<div class="hero-section text-white d-flex align-items-end justify-content-center text-center text-uppercase jarallax">
+  
+  <%# CAPA 1: La imagen (solo esta se mueve) %>
+  <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img3.png") %>');"></div>
+
+  <%# CAPA 2: El contenido (se queda estático encima) %>
   <div class="hero-content pb-4"> 
-    <h1 class=" font-staatliches section-title">bolivian influence</h1>
-    <p class="lead font-staatliches section-title3">Growing up in Bolivia, our cuisine has an influence of this wonderful country, whose flavors and cultures are very rich.</p>
+    <h1 class="font-staatliches section-title">bolivian influence</h1>
+    <p class="lead font-staatliches section-title3">
+      Growing up in Bolivia, our cuisine has an influence of this wonderful country, whose flavors and cultures are very rich.
+    </p>
   </div>
+
 </div>
 
 <div class="container my-4">
   <div class="row g-4"> <%# g-4 añade espacio uniforme entre las tarjetas %>
     
-    <div class="col-12 col-md-6 mb-4">
+    <div class="col-6 col-md-6 mb-4">
         <div class="product-card">
             <div class="product-image-container">
             <%= image_tag "products/img1.png", class: "img-fluid img-product-grid" %>
             </div>
             <div class="product-info mt-2">
             <h3 class="section-title1-primary font-staatliches mb-0">ASADO</h3>
-            <p class="text-primary-color font-staatliches">Asado is more than just a meal in South America. It is a social event, a celebration of life and gastronomy.</p>
+            <p class="text-primary-color font-anarrow">Asado is more than just a meal in South America. It is a social event, a celebration of life and gastronomy.</p>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 mb-4">
+    <div class="col-6 col-md-6 mb-4">
         <div class="product-card">
             <div class="product-image-container">
             <%= image_tag "products/img6.png", class: "img-fluid img-product-grid" %>
             </div>
             <div class="product-info mt-2">
             <h3 class="section-title1-primary font-staatliches mb-0">SANDWICH SHOP</h3>
-            <p class="text-primary-color font-staatliches">Every sandwich is a culinary work of art. Our chefs work tirelessly to  create unique recipes that combine tradition and innovation.</p>
+            <p class="text-primary-color font-anarrow">Every sandwich is a culinary work of art. Our chefs work tirelessly to  create unique recipes that combine tradition and innovation.</p>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 mb-4">
+    <div class="col-6 col-md-6 mb-4">
         <div class="product-card">
             <div class="product-image-container">
             <%= image_tag "products/img10.png", class: "img-fluid img-product-grid" %>
             </div>
             <div class="product-info mt-2">
             <h3 class="section-title1-primary font-staatliches mb-0">AMAZÓNICA BEER</h3>
-            <p class="text-primary-color font-staatliches">Born from the encounter between the purple corn of the Andes and the acai of the Amazon, it embodies the diversity, strength and warmth of Latinos in Belgium.</p>
+            <p class="text-primary-color font-anarrow">Born from the encounter between the purple corn of the Andes and the acai of the Amazon, it embodies the diversity, strength and warmth of Latinos in Belgium.</p>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 mb-4">
+    <div class="col-6 col-md-6 mb-4">
         <div class="product-card">
             <div class="product-image-container">
             <%= image_tag "products/img3.jpg", class: "img-fluid img-product-grid" %>
             </div>
             <div class="product-info mt-2">
             <h3 class="section-title1-primary font-staatliches mb-0">SALTEÑA</h3>
-            <p class="text-primary-color font-staatliches">The salteña, although bearing the name of the city of Salta in  Argentina, is actually a Bolivian specialty, mainly from the region of  Potosi.</p>
+            <p class="text-primary-color font-anarrow">The salteña, although bearing the name of the city of Salta in  Argentina, is actually a Bolivian specialty, mainly from the region of  Potosi.</p>
             </div>
         </div>
     </div>
@@ -105,45 +118,47 @@
             ORGANIZE AN EVENT?
         </div>
         <div class="col-12 section-title-primary font-staatliches lh-1 mb-0">
-          <%= link_to "FIND US", "shop_index_path", class: "text-reset text-decoration-none" %>
+          <%= link_to "FIND US", contact_page_path, class: "text-reset text-decoration-none" %>
         </div>
     </div>
 </div>
 
 <div id="clients-container" class="container-fluid p-0">
     <div class="row g-0">
-        <div class="col-12 col-md-6 col-lg-6 p-5">
+        <div class="col-12 col-md-6 col-lg-6 p-5 d-flex flex-column justify-content-center">
             <div id="main-text-area-content" class="section-title3-primary font-staatliches">
-                We are pleased to offer you our best selection of wines, unique and exclusive. Red, pink or white. We are also the first to be able to offer you  “SINGANI”, A DRINK THAT WILL AMAZE YOU. Some of our main clients are:
+                We are pleased to offer you our best selection of wines, unique and exclusive. Red, pink or white. <br>We are also the first to be able to offer you “SINGANI”, A DRINK THAT WILL AMAZE YOU. Some of our happy clients are:
             </div>
             <br><br>
             <div class="container py-5 text-center">
                 <%# Fila de los primeros 3 logos %>
                 <div class="row justify-content-center mb-4 align-items-center">
                     <div class="col-4 col-md-3">
-                    <%= image_tag "products/logoipsum-347.png", class: "img-fluid logo-partner" %>
+                        <%= image_tag "products/logoipsum-347.png", class: "img-fluid logo-partner" %>
                     </div>
                     <div class="col-4 col-md-3">
-                    <%= image_tag "products/logoipsum-358.png", class: "img-fluid logo-partner" %>
+                        <%= image_tag "products/logoipsum-358.png", class: "img-fluid logo-partner" %>
                     </div>
                     <div class="col-4 col-md-3">
-                    <%= image_tag "products/logoipsum-391.png", class: "img-fluid logo-partner" %>
+                        <%= image_tag "products/logoipsum-391.png", class: "img-fluid logo-partner" %>
                     </div>
                 </div>
 
                 <%# Fila de los últimos 2 logos %>
                 <div class="row justify-content-center align-items-center">
                     <div class="col-4 col-md-3">
-                    <%= image_tag "products/logoipsum-405.png", class: "img-fluid logo-partner" %>
+                        <%= image_tag "products/logoipsum-405.png", class: "img-fluid logo-partner" %>
                     </div>
                     <div class="col-4 col-md-3">
-                    <%= image_tag "products/logoipsum-414.png", class: "img-fluid logo-partner" %>
+                        <%= image_tag "products/logoipsum-414.png", class: "img-fluid logo-partner" %>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-6 p-0" id="clients-image-area">
-            <%= image_tag "products/img21.webp" %>
+
+        <%# COLUMNA DERECHA CON PARALLAX %>
+        <div class="col-12 col-md-6 col-lg-6 p-0 jarallax" id="clients-image-area" style="min-height: 500px;">
+            <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img21.webp") %>');"></div>
         </div>
     </div>
 </div>

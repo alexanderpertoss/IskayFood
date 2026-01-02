@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Staatliches&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Staatliches&display=swap);
 
 $headings-font-family: 'Staatliches', sans-serif;
 
@@ -15,12 +16,12 @@ $headings-color: $primary;
 @import 'bootstrap-icons/font/bootstrap-icons';
 
 html, body {
-  overflow-x: hidden; /* Prohíbe el scroll lateral */
+  overflow-x: hidden; 
   width: 100%;
 }
 
 #main-container, #about-us-main, #main-event, #clients-container {
-  overflow: hidden; /* Corta cualquier desborde de sus filas internas */
+  overflow: hidden; 
 }
 
 .text-primary-color {
@@ -32,6 +33,9 @@ html, body {
 }
 .font-staatliches {
     font-family: "Staatliches", sans-serif;
+}
+.font-anarrow {
+    font-family: "Archivo Narrow", sans-serif;
 }
 #shop-header {
     background: $secondary;
@@ -118,24 +122,24 @@ html, body {
   justify-content: center;
   align-items: center;
 }
-// 1. Estado Base (Fija la barra arriba, siempre visible)
+
 #navigation-bar {
-  position: fixed; // CRÍTICO: Fija la barra al tope de la ventana
+  position: fixed; 
   top: 0;
   width: 100%;
-  // Asegura que esté sobre el contenido y el FAB
+  
   z-index: 9999 !important;
-  transition: top 0.5s ease-in-out; // Suaviza la animación de entrada/salida
+  transition: top 0.5s ease-in-out; 
 }
 #navigation-bar .row {
     margin-right: 0;
     margin-left: 0;
 }
-// 2. Estado Escondido (Se activa con JavaScript)
+
 .navbar-hidden {
-  top: -1000px !important; // Empuja la barra fuera de la vista (debe ser más que la altura de la barra)
+  top: -1000px !important; 
 }
-/* Estilo base para los links */
+
 .nav-link-custom {
     text-decoration: none;
     color: #333;
@@ -143,22 +147,22 @@ html, body {
 }
 
 .nav-link-custom:hover {
-    color: $primary; /* Tu color primario */
+    color: $primary; 
 }
-/* --- TAMAÑO DE FUENTE RESPONSIVO --- */
+
 #navigation-links {
   overflow: visible !important; 
 }
-//* 1. Normalizar la altura de todos los elementos del menú */
+
 #navigation-links > a, 
 #navigation-links > .dropdown {
   display: flex;
-  align-items: center; /* Centra el texto internamente */
-  height: 100%;       /* Iguala alturas */
-  line-height: 1;     /* Elimina espacios extra de línea */
+  align-items: center; 
+  height: 100%;       
+  line-height: 1;     
 }
 
-/* 2. Ajuste específico para el botón del dropdown */
+
 #navigation-links .dropdown-toggle {
   display: flex;
   align-items: center;
@@ -168,37 +172,37 @@ html, body {
   background: transparent;
 }
 
-/* 3. Corrección de la flecha (caret) de Bootstrap */
+
 .dropdown-toggle::after {
   margin-left: 0.25rem;
   vertical-align: middle;
-  /* Asegura que la flecha no empuje el texto hacia arriba */
+  
   display: inline-block; 
 }
 
-/* 4. Reset de márgenes en móviles para evitar saltos */
+
 @media (max-width: 991px) {
   #navigation-links {
-    min-height: 50px; /* Da un área de colisión estable */
+    min-height: 50px; 
   }
   
   #navigation-links a,
   #navigation-links .dropdown-toggle {
-    margin: 0 !important; /* Elimina márgenes que puedan desalinear */
-    font-size: 0.9rem !important; /* Letra bien pequeña para que entre en una fila */
+    margin: 0 !important; 
+    font-size: 0.9rem !important; 
     letter-spacing: 0.2px !important;
   }
 }
-// Clase de utilidad para el padding del cuerpo
+
 .body-padding-compensation {
-    // Valor grande para Mobile/MD (por defecto)
+    
     padding-top: 210px !important; 
 }
 
-// Sobrescribe el valor a partir de la resolución LG (PC)
+
 @include media-breakpoint-up(lg) {
     .body-padding-compensation {
-        // Valor más pequeño para Desktop
+        
         padding-top: 120px !important; 
     }
 }
@@ -206,7 +210,7 @@ html, body {
   background: $secondary;
 }
 
-/* Asegura que el buscador no quede detrás de otros elementos */
+
 .leaflet-control-geocoder {
   z-index: 1000;
   background: white;
@@ -238,31 +242,44 @@ html, body {
 }
 
 #main-image-area {
-  height: 600px; /* O la altura que desees */
-  overflow: hidden; /* Corta lo que sobre */
-  padding: 0; /* Opcional: quita el espacio interno de la columna */
+  min-height: 600px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: relative;
 }
 
-#main-image-area img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+#main-image-area .jarallax-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+
+@media (min-width: 768px) {
+    #main-container .row {
+        display: flex;
+        align-items: stretch; 
+    }
 }
 
 .hero-section {
-  /* Imagen de fondo */
-  background-image: url("products/img3.png"); /* Asegúrate que la imagen esté en `app/assets/images/` */
-  background-size: cover; /* Cubre todo el área */
-  background-position: center center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que se repita */
+  
+  
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
 
-  /* Altura del Hero */
-  height: 80vh; /* 60% del alto de la ventana, ajusta a tu gusto */
-  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
-  width: 100%; /* Ocupa todo el ancho */
+  
+  height: 80vh; 
+  min-height: 400px; 
+  width: 100%; 
 
-  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
-  position: relative; /* Necesario para el pseudo-elemento */
+  
+  position: relative; 
 }
 
 .hero-section::before {
@@ -272,41 +289,45 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
-  z-index: 1; /* Asegura que la capa esté debajo del texto */
+  background-color: rgba(0, 0, 0, 0.3); /* Capa oscura al 30% */
+  z-index: 1; 
 }
 
 .hero-content {
-  position: relative; /* Asegura que el contenido esté sobre la capa oscura */
-  z-index: 2; /* Mayor que la capa oscura */
-  max-width: 800px; /* Limita el ancho del texto en pantallas grandes */
+  position: relative; 
+  z-index: 2; 
+  width: 100%; 
 }
 
-/* Para que el texto resalte en móviles si la imagen es muy clara */
+
 @media (max-width: 768px) {
   .hero-content {
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo más oscuro para el texto en móviles */
+    
     padding: 1rem;
     
   }
 }
 
 .hero-section2 {
-  /* Imagen de fondo */
-  background-image: url("products/img3.png"); /* Asegúrate que la imagen esté en `app/assets/images/` */
-  background-size: cover; /* Cubre todo el área */
-  background-position: center center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que se repita */
-
-  /* Altura del Hero */
-  height: 50vh; /* 60% del alto de la ventana, ajusta a tu gusto */
-  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
-  width: 100%; /* Ocupa todo el ancho */
-
-  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
-  position: relative; /* Necesario para el pseudo-elemento */
+  position: relative;
+  overflow: hidden;
+  height: 50vh; /* Ajusta la altura a tu gusto (ej. 60vh o 80vh) */
+  min-height: 50px;
 }
 
+/* Estilos de la imagen para asegurar el efecto cover */
+.hero-section2 .jarallax-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+/* Opcional: Oscurecer un poco el fondo para que el texto blanco resalte más */
 .hero-section2::before {
   content: "";
   position: absolute;
@@ -314,24 +335,24 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
-  z-index: 1; /* Asegura que la capa esté debajo del texto */
+  background-color: rgba(0, 0, 0, 0.3); /* Capa oscura al 30% */
+  z-index: 1;
 }
 
 .hero-section3 {
-  /* Imagen de fondo */
-  background-image: url("products/img10.png"); /* Asegúrate que la imagen esté en `app/assets/images/` */
-  background-size: cover; /* Cubre todo el área */
-  background-position: center center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que se repita */
+  
+  background-image: url("products/img10.png"); 
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
 
-  /* Altura del Hero */
-  height: 50vh; /* 60% del alto de la ventana, ajusta a tu gusto */
-  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
-  width: 100%; /* Ocupa todo el ancho */
+  
+  height: 50vh; 
+  min-height: 400px; 
+  width: 100%; 
 
-  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
-  position: relative; /* Necesario para el pseudo-elemento */
+  
+  position: relative; 
 }
 
 .hero-section3::before {
@@ -341,24 +362,24 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
-  z-index: 1; /* Asegura que la capa esté debajo del texto */
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1; 
 }
 
 .hero-section4 {
-  /* Imagen de fondo */
-  background-image: url("products/img11.jpeg"); /* Asegúrate que la imagen esté en `app/assets/images/` */
-  background-size: cover; /* Cubre todo el área */
-  background-position: center center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que se repita */
+  
+  //background-image: url("products/img11.jpeg"); 
+  background-size: cover; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
 
-  /* Altura del Hero */
-  height: 50vh; /* 60% del alto de la ventana, ajusta a tu gusto */
-  min-height: 400px; /* Asegura una altura mínima en pantallas muy pequeñas */
-  width: 100%; /* Ocupa todo el ancho */
+  
+  height: 50vh; 
+  min-height: 400px; 
+  width: 100%; 
 
-  /* Efecto de superposición oscura (opcional, para que el texto resalte) */
-  position: relative; /* Necesario para el pseudo-elemento */
+  
+  position: relative; 
 }
 
 .hero-section4::before {
@@ -368,13 +389,13 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Capa oscura semitransparente */
-  z-index: 1; /* Asegura que la capa esté debajo del texto */
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1; 
 }
 
 #main-products-area {
-  height: 400px; /* O la altura que desees */
-  overflow: hidden; /* Corta lo que sobre */
+  height: 400px; 
+  overflow: hidden; 
   
 }
 
@@ -385,22 +406,19 @@ html, body {
 }
 
 .img-product-grid {
-  /* Definimos el ancho completo y una altura fija */
   width: 100%;
-  height: 350px; /* Puedes ajustar este valor según te guste más */
-  
-  /* ESTO ES LO MÁS IMPORTANTE: */
-  /* Hace que la imagen se recorte para llenar el espacio sin deformarse */
+  height: 350px; 
   object-fit: cover;
-  
-  /* Opcional: Centra la parte importante de la foto si se recorta */
   object-position: center; 
-  
-  /* Opcional: Un pequeño redondeado para que se vea más moderno */
-  
 }
 
-/* Opcional: Efecto al pasar el ratón para darle vida */
+/* Ajuste para celulares */
+@media (max-width: 767px) {
+  .img-product-grid {
+    height: 250px; /* Altura reducida para móvil */
+  }
+}
+
 .product-card:hover .img-product-grid {
   filter: brightness(0.9);
   transition: 0.3s ease;
@@ -415,20 +433,33 @@ html, body {
 }
 
 #clients-image-area {
-  height: 600px; /* O la altura que desees */
-  overflow: hidden; /* Corta lo que sobre */
-  padding: 0; /* Opcional: quita el espacio interno de la columna */
+  min-height: 600px; 
+  overflow: hidden; 
+  position: relative;
+  padding: 0; 
 }
 
-#clients-image-area img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+#clients-image-area .jarallax-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
 }
+
+@media (min-width: 768px) {
+    #clients-container .row {
+        display: flex;
+        align-items: stretch;
+    }
+}
+
 .logo-partner {
-  max-height: 60px; /* Controla la altura máxima para que todos se vean parejos */
-  width: auto;      /* Mantiene la proporción */
-  margin: 0 auto;   /* Los centra dentro de su columna */
+  max-height: 60px; 
+  width: auto;      
+  margin: 0 auto;   
   display: block;
   filter: grayscale(100%);
   opacity: 0.6;
@@ -438,11 +469,11 @@ html, body {
 .logo-partner:hover {
   filter: grayscale(0%);
   opacity: 1;
-  transform: scale(1.05); /* Pequeño efecto de zoom al pasar el mouse */
+  transform: scale(1.05); 
 }
 
 .main-comments {
-  background: $primary;
+  background: $secondary;
 }
 
 .stars {
@@ -464,7 +495,7 @@ html, body {
 
 .slider-track {
   display: flex;
-  /* El ancho total es (ancho del slide * total de slides) */
+  
   width: calc(380px * 8); 
   animation: scroll-infinite 20s linear infinite;
 }
@@ -474,12 +505,12 @@ html, body {
   padding: 0 15px;
 }
 
-/* Tarjeta contenedora de la foto y el texto */
+
 .team-card {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  height: 350px; /* Ajusta la altura que prefieras */
+  height: 350px; 
 }
 
 .team-img {
@@ -488,7 +519,7 @@ html, body {
   object-fit: cover;
 }
 
-/* Bloque de texto en la parte inferior */
+
 .team-info {
   position: absolute;
   bottom: 0;
@@ -496,13 +527,13 @@ html, body {
   width: 100%;
   padding: 40px 10px 15px 10px;
   text-align: center;
-  /* Degradado oscuro para que el texto blanco resalte */
+  
   background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
 }
 
 .team-info .name {
   font-size: 1.25rem;
-  margin-bottom: -5px; /* Pega un poco el rol al nombre */
+  margin-bottom: -5px; 
 }
 
 @keyframes scroll-infinite {
@@ -510,29 +541,44 @@ html, body {
   100% { transform: translateX(calc(-380px * 4)); }
 }
 
-/* Opcional: Pausar al pasar el mouse */
+
 .slider-container:hover .slider-track {
   animation-play-state: paused;
 }
 
-/* Contenedor principal con la imagen de fondo */
 .contact-page-wrapper {
-  background: linear-gradient(#00000080, rgba(0,0,0,0.5)), 
-              url('products/img8.png'); /* Asegúrate de que esta imagen esté en app/assets/images */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed; /* Mantiene el fondo fijo al hacer scroll */
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   padding: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* La tarjeta blanca */
+/* Aseguramos que la imagen ocupe todo el espacio */
+.contact-page-wrapper .jarallax-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Estilo para las pestañas (opcional, para que se vean más modernas) */
+.contact-page-wrapper .nav-tabs .nav-link.active {
+  background-color: transparent;
+  border-bottom: 2px solid var(--bs-primary) !important;
+  color: var(--bs-primary) !important;
+}
+
 .contact-card {
   border: none;
-  border-top: 5px solid #391042; /* Opcional: una línea púrpura arriba para estilo */
+  border-top: 5px solid #391042; 
 }
 
-/* Inputs personalizados */
+
 .custom-input {
   border: 1px solid #dee2e6;
   padding: 12px;
@@ -546,7 +592,7 @@ html, body {
   outline: none;
 }
 
-/* Botón personalizado */
+
 .btn-primary-custom {
   background-color: #391042;
   color: white;
@@ -562,26 +608,26 @@ html, body {
   transform: translateY(-2px);
 }
 
-/* Elimina el cuadro y deja solo la línea inferior */
+
 .custom-input-line {
-  background-color: transparent !important; /* Asegura que no haya fondo blanco */
-  border: none !important;                  /* Quita los 4 bordes */
-  border-bottom: 2px solid #dee2e6 !important; /* Añade solo la línea inferior */
-  border-radius: 0 !important;              /* Quita el redondeado de Bootstrap */
-  padding-left: 0 !important;               /* Alinea el texto a la izquierda */
+  background-color: transparent !important; 
+  border: none !important;                  
+  border-bottom: 2px solid #dee2e6 !important; 
+  border-radius: 0 !important;              
+  padding-left: 0 !important;               
   padding-right: 0 !important;
   color: #333;
 }
 
-/* Efecto cuando el usuario hace clic (Focus) */
+
 .custom-input-line:focus {
   outline: none !important;
-  box-shadow: none !important;              /* Quita el resplandor azul de Bootstrap */
-  border-bottom: 2px solid #391042 !important; /* La línea cambia a tu color primario */
+  box-shadow: none !important;              
+  border-bottom: 2px solid #391042 !important; 
   transition: border-color 0.4s ease;
 }
 
-/* Opcional: Estilo para el placeholder */
+
 .custom-input-line::placeholder {
   color: #adb5bd;
   font-size: 0.9rem;
@@ -594,8 +640,8 @@ html, body {
   border: none;
   font-size: 1.2rem;
   letter-spacing: 2px;
-  min-width: 180px; /* Asegura que el botón no sea demasiado pequeño */
-  border-radius: 4px; /* Un ligero redondeado para que encaje con el estilo minimalista */
+  min-width: 180px; 
+  border-radius: 4px; 
   transition: all 0.3s ease;
 }
 
@@ -614,7 +660,7 @@ html, body {
 }
 
 .nav-tabs .nav-link.active {
-  color: $primary !important; /* Tu color primario */
+  color: $primary !important; 
   border-bottom: 3px solid $primary !important;
   background: transparent;
 }
@@ -622,7 +668,7 @@ html, body {
 .nav-tabs .nav-link:hover {
   color: $primary
 }
-/* Asegura que el formulario del logout no empuje el botón hacia abajo */
+
 #navigation-links form {
   display: inline-flex;
   align-items: center;
@@ -631,14 +677,14 @@ html, body {
   vertical-align: middle;
 }
 
-/* Forzamos que el botón no tenga paddings internos que lo desvíen */
+
 #navigation-links .btn-link-custom {
   background: none;
   border: none;
   padding: 0;
   display: inline-flex;
   align-items: center;
-  line-height: 1; /* Esto es clave para la alineación vertical */
+  line-height: 1; 
 }
 
 @media (max-width: 991px) {
@@ -658,49 +704,47 @@ html, body {
 
 
 
-/* Ajuste para que los textos gigantes no desborden en móvil */
+
 @media (max-width: 768px) {
   .section-title {
-    font-size: 350% !important; /* Bajamos de 600% a 350% en móvil */
+    font-size: 350% !important; 
     word-wrap: break-word;
   }
   .section-title-primary {
     font-size: 350% !important;
   }
   .section-title2, .section-title2-primary {
-    font-size: 200% !important; /* Bajamos de 300% a 200% */
+    font-size: 200% !important; 
   }
   .section-title3, .section-title3-primary {
     font-size: 150% !important;
   }
   
-  /* Evita que el padding excesivo en móviles empuje el contenido */
+  
   #main-text-area, #about-us-main .col, #clients-container .col-12, #main-event .row {
     padding: 2rem !important; 
   }
 }
 
 
-/* 1. Forzar que el menú aparezca ABAJO del texto */
+
 .custom-dropdown {
-    position: relative; /* Asegura el contexto de posicionamiento */
+    position: relative; 
 }
 
 .dropdown-menu-custom {
-    top: 100% !important;   /* Lo posiciona justo debajo del parent */
-    //margin-top: 10px !important; /* Separación elegante */
-    transform: none !important;  /* Evita que Popper.js lo mande hacia arriba */
+    top: 100% !important;   
+    
+    transform: none !important;  
     z-index: 10000 !important; 
-  /* Si el menú se sigue cortando o aparece detrás, 
-     forzamos el contexto de visualización */
-    //position: absolute !important;
+    
     overflow: visible !important;
 }
 
-/* 2. Estética de los items del submenú */
+
 .dropdown-menu-custom .dropdown-item {
-    font-family: 'Staatliches', sans-serif; /* Mantenemos la marca pero... */
-    font-size: 1.1rem !important;           /* Tamaño más pequeño y refinado */
+    font-family: 'Staatliches', sans-serif; 
+    font-size: 1.1rem !important;           
     letter-spacing: 1px;
     padding: 8px 20px;
     color: #333;
@@ -710,35 +754,35 @@ html, body {
 
 .dropdown-menu-custom .dropdown-item:hover {
     background-color: #f8f9fa;
-    color: $primary; /* Usa tu variable de color */
-    padding-left: 25px; /* Pequeño efecto de desplazamiento al hover */
+    color: $primary; 
+    padding-left: 25px; 
 }
 
-/* Ajuste para móviles - Limpieza total de desbordamientos */
+
 @media (max-width: 991px) {
-    /* 1. Forzamos que el contenedor de links permita que los hijos crezcan hacia abajo */
+    
     #navigation-links {
         flex-direction: row;
         justify-content: center;
         align-items: center;
     }
 
-    /* 1. El submenú flota sobre TODO, no ocupa espacio en el flujo */
+    
     .dropdown-menu-custom {
-        position: fixed !important; /* Cambiamos a FIXED para que no empuje nada */
-        top: 180px !important;      /* Ajusta este valor según la altura de tu barra */
-        left: 5% !important;        /* Margen pequeño a la izquierda */
-        right: 5% !important;       /* Margen pequeño a la derecha */
-        //width: 90% !important;      /* Ancho casi total de la pantalla */
+        position: fixed !important; 
+        top: 180px !important;      
+        left: 5% !important;        
+        right: 5% !important;       
+        
         margin: 0 auto !important;
         
-        /* Estética limpia */
+        
         background-color: white !important;
-        //border: 1px solid rgba(0,0,0,0.1) !important;
-        //box-shadow: 0 15px 35px rgba(0,0,0,0.2) !important;
+        
+        
         z-index: 99999 !important;
         
-        /* Animación sin movimiento lateral */
+        
         display: block !important;
         visibility: hidden;
         opacity: 0;
@@ -746,47 +790,47 @@ html, body {
         transition: opacity 0.3s ease, visibility 0.3s;
     }
 
-    /* Estado abierto */
+    
     .dropdown-menu-custom.show {
         visibility: visible;
         opacity: 1;
     }
 
-    /* 2. Evitamos que el contenedor de links se entere de que hay un menú abierto */
+    
     #navigation-links .dropdown {
         position: static !important;
     }
 
-    /* 3. Ajustamos los items para que sean fáciles de tocar en celular */
+    
     .dropdown-menu-custom .dropdown-item {
         padding: 15px !important;
-        //border-bottom: 1px solid #eee;
+        
     }
 }
 
-/* 1. Animación suave de entrada */
+
 .dropdown-menu-custom {
-  /* Reset de Bootstrap para permitir la animación */
-  //display: block !important; 
+  
+  
   visibility: hidden;
   opacity: 0;
   margin-top: 0; 
-  transform: translateY(15px); /* Empieza un poco más abajo */
+  transform: translateY(15px); 
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   
-  /* Estética del menú */
+  
   border-radius: 12px !important;
   padding: 10px 0 !important;
 }
 
-/* Estado cuando el menú se abre */
+
 .dropdown-menu-custom.show {
   visibility: visible;
   opacity: 1;
-  transform: translateY(10px); /* Cae suavemente a su posición */
+  transform: translateY(10px); 
 }
 
-/* 2. Dividers elegantes (Líneas finas que no tocan los bordes) */
+
 .dropdown-menu-custom li:not(:last-child) {
   position: relative;
 }
@@ -794,13 +838,13 @@ html, body {
 .dropdown-menu-custom li:not(:last-child)::after {
   content: "";
   display: block;
-  width: 60%; /* La línea solo ocupa el 60% del ancho */
+  width: 60%; 
   margin: 0 auto;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Color muy suave */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); 
   padding-top: 2px;
 }
 
-/* 3. Ajuste de los items para que no choquen con el divider */
+
 .dropdown-menu-custom .dropdown-item {
   padding: 8px 20px !important;
   font-size: 0.95rem !important;
@@ -811,11 +855,11 @@ html, body {
 }
 
 .dropdown-menu-custom .dropdown-item:hover {
-  color: $primary !important; /* Tu color de marca */
+  color: $primary !important; 
 }
 
 .details-col1 {
-  background-color: $primary;
+  background-color: $secondary;
 }
 .details-col2 {
   background-color: $secondary;
@@ -834,27 +878,134 @@ html, body {
   font-size: 500% !important;
 }
 
-/* El contenedor que actúa como marco */
+
 .image-frame {
   width: 100%;
-  height: 650px; /* Define aquí la altura del rectángulo */
-  overflow: hidden; /* Corta lo que sobre de la imagen */
-  //border: 8px solid white; /* Marco estilo "fotografía" */
+  height: 650px; 
+  overflow: hidden; 
+  
   border-radius: 4px;
 }
 
-/* La imagen dentro del marco */
+
 .framed-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* REGLA CLAVE: Llena el espacio sin deformarse */
-  object-position: center; /* Centra la parte importante de la imagen */
+  object-fit: cover; 
+  object-position: center; 
   display: block;
 }
 
-/* Ajuste para celulares (marco más pequeño) */
+
 @media (max-width: 768px) {
   .image-frame {
-    height: 250px; /* Altura reducida para pantallas pequeñas */
+    height: 250px; 
   }
 }
+
+
+
+.custom-cart-table {
+    border-collapse: separate;
+    border-spacing: 0 15px; 
+}
+
+.custom-cart-table thead th {
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+
+#map {
+    transition: all 0.3s ease;
+}
+
+#map:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.leaflet-marker-icon {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+
+@media (max-width: 991px) {
+    .sticky-lg-top {
+        position: relative !important;
+        top: 0 !important;
+    }
+}
+
+.jarallax {
+  position: relative;
+  overflow: hidden;
+  //height: 80vh; 
+  //min-height: 400px;
+}
+
+.jarallax-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  object-position: center;
+  z-index: -1; 
+}
+
+@media (max-width: 768px) {
+  .jarallax {
+    height: 300px !important;
+  }
+}
+
+/* Estilos para el texto de la tarjeta de producto */
+.product-info h3 {
+  font-size: 2rem; /* Tamaño normal en escritorio */
+}
+
+.product-info p {
+  font-size: 1.1rem; /* Tamaño normal en escritorio */
+}
+
+.product-name {
+  font-size: 120%;
+}
+
+/* --- AJUSTE PARA CELULARES --- */
+@media (max-width: 767px) {
+  .product-info h3 {
+    font-size: 1.4rem !important; /* Título más compacto */
+    line-height: 1.2;
+  }
+  
+  .product-info p {
+    font-size: 0.85rem !important; /* Descripción más pequeña para que no ocupe tanto espacio */
+    line-height: 1.3;
+  }
+}
+
+#details-image-parallax {
+  position: relative;
+}
+
+#details-image-parallax .jarallax-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* En móviles, le damos una altura fija para que no colapse */
+@media (max-width: 767px) {
+  #details-image-parallax {
+    height: 350px !important;
+    min-height: 350px !important;
+  }
+}
+

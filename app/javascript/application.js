@@ -11,6 +11,10 @@ document.addEventListener('turbo:load', () => {
   // Temporizador para esconder si el scroll se detiene
   let scrollTimeout;
 
+  jarallax(document.querySelectorAll('.jarallax'), {
+    speed: 0.5
+  });
+
   window.addEventListener('scroll', () => {
     // 1. Detectar la Dirección del Scroll
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -38,4 +42,8 @@ document.addEventListener('turbo:load', () => {
     }, 3000); // <-- AJUSTA ESTE TIEMPO (en milisegundos)
     
   }, false);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  
 });

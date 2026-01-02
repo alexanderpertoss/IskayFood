@@ -1,7 +1,7 @@
 <div id="product_controls_<%= product.id %>"
      class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
 
-  <h3 class="text-white text-uppercase font-staatliches"><%= product.name %></h3>
+  <h3 class="text-white font-anarrow product-name"><%= product.name %> - <%= number_to_currency(product.price) %></h3>
 
   <%# Controles de Cantidad (Grupo de botones) %>
   <div class="btn-group" role="group">

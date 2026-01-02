@@ -28,4 +28,11 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  number:
+    currency:
+      format:
+        unit: "€"
+        precision: 2
+        separator: ","
+        delimiter: "."
+        format: "%n %u" # Esto pone el símbolo a la derecha: 25,00 €

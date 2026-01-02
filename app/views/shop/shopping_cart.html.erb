@@ -1,27 +1,29 @@
 <div id="shop-header" class="col d-flex flex-column align-items-center text-uppercase p-3">
-    <div class="section-title font-staatliches">Cart</div>
+    <div class="section-title font-staatliches">Shopping cart</div>
 </div>
 
-<div id="decorative-divider" class="col d-flex flex-column align-items-center">
+<div id="decorative-divider" class="col d-flex flex-column align-items-center mb-5">
     <%= image_tag "patron_decorativo_grey.png", class: "img-fluid" %>
 </div>
 
-
-<div class="container my-5">
+<div class="container mb-5">
   <% if @cart.cart_products.any? %>
     <div id="cart_content" class="row g-5">
       
+      <%# COLUMNA IZQUIERDA: RESUMEN %>
       <div class="col-lg-7">
-        <h2 class="mb-4 fs-3 text-uppercase font-staatliches">Summary</h2>
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <h2 class="fs-2 text-uppercase font-staatliches mb-0">Order Summary</h2>
+          <span class="text-muted font-staatliches"><%= @cart.cart_products.count %> Items</span>
+        </div>
 
-        <div class="table-responsive  font-staatliches">
-          <table class="table align-middle">
-            <thead class="table-light">
+        <div class="table-responsive">
+          <table class="table align-middle custom-cart-table font-staatliches">
+            <thead class="text-muted small">
               <tr>
-                <th scope="col">Product</th>
-                <th scope="col" class="text-center">Quantity</th>
-                <th scope="col" class="text-end">Price (per unit)</th>
-                <th scope="col" class="text-end">Subtotal</th>
+                <th scope="col" class="border-0 ps-0">PRODUCT</th>
+                <th scope="col" class="border-0 text-center">QTY</th>
+                <th scope="col" class="border-0 text-end pe-0">SUBTOTAL</th>
               </tr>
             </thead>
             <tbody>
@@ -29,76 +31,72 @@
                 <%= render 'shop/cart_product_row', item: item %>
               <% end %>
             </tbody>
-            
-            <%# CAMBIO AQUÍ: ID correcto para el Turbo Stream %>
-            <tfoot id="order_summary_totals">
-              <tr id="cart_total_row">
-                <th colspan="3" class="text-end fs-5 pt-3">TOTAL:</th>
-                <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(@cart.cart_total) %></td>
-              </tr>
-            </tfoot>
           </table>
         </div>
-        <hr class="my-4">
-        
-        
+
+        <div id="order_summary_totals" class="bg-light p-4 rounded-3 mt-4 border-start border-primary border-4">
+           <div class="d-flex justify-content-between align-items-center" id="cart_total_row">
+              <span class="fs-4 font-staatliches">TOTAL AMOUNT:</span>
+              <span class="fs-3 fw-bold text-dark font-staatliches"><%= number_to_currency(@cart.cart_total) %></span>
+           </div>
+        </div>
+
+        <div class="mt-4">
+           <%= link_to "← Continue Shopping", "/shop/index", class: "text-decoration-none text-muted font-staatliches small" %>
+        </div>
       </div>
       
+      <%# COLUMNA DERECHA: FORMULARIO %>
       <div class="col-lg-5">
-        <div class="card shadow-sm border-light">
-          <div class="card-body p-4">
-            <h2 class="mb-4 fs-3 text-uppercase font-staatliches">Order details</h2>
+        <div class="card shadow-lg border-0 rounded-4 sticky-lg-top" style="top: 120px; z-index: 10;">
+          <div class="card-body p-4 p-xl-5">
+            <h2 class="mb-4 fs-3 text-uppercase font-staatliches border-bottom pb-2 text-primary">Checkout Details</h2>
             
-            <%# Utilizamos un formulario genérico. Asumimos una ruta POST a confirm_order_path %>
             <%= form_with url: confirm_order_path, method: :post, local: true do |f| %>
 
-              <h4 class="mb-3 text-primary text-uppercase font-staatliches">Contact Information</h4>
-              <div class="row g-3 mb-4 text-uppercase font-staatliches">
-                <div class="col-sm-6">
-                  
-                  <%= f.text_field :customer_name, class: "form-control", required: true, placeholder: "Name" %>
-                </div>
-                <div class="col-sm-6">
-
-                  <div id="delivery_cost"></div>
-                  
-                  <%= f.text_field :customer_phone, class: "form-control", required: true, placeholder: "Phone number" %>
-                </div>
-                <div class="col-12">
-                  
-                  <%= f.email_field :customer_email, class: "form-control", placeholder: "Email address" %>
+              <div class="mb-4">
+                <p class="small text-muted font-staatliches mb-3">CONTACT INFORMATION</p>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <%= f.text_field :customer_name, class: "form-control custom-input-line", required: true, placeholder: "FULL NAME" %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= f.text_field :customer_phone, class: "form-control custom-input-line", required: true, placeholder: "PHONE NUMBER" %>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= f.email_field :customer_email, class: "form-control custom-input-line", placeholder: "EMAIL" %>
+                  </div>
                 </div>
               </div>
 
-              <h4 class="mb-3 text-primary text-uppercase font-staatliches">Shipping Address</h4>
-
-              <div class="container mt-4" data-controller="shipping-map">
+              <div class="mb-4" data-controller="shipping-map">
+                <p class="small text-muted font-staatliches mb-2">SHIPPING LOCATION</p>
                 
-
-                <div class="mb-3">
-                  <label class="form-label text-uppercase">Selected Address:</label>
-                  <div id="address-display" class="p-2 border bg-light rounded text-muted">
-                    Click on the map to select your location
-                  </div>
+                <div id="address-display" class="p-3 mb-3 border-0 bg-light rounded-3 small font-staatliches text-muted shadow-sm">
+                  <i class="bi bi-geo-alt-fill me-2 text-primary"></i> 
+                  <span>Click on the map to set delivery address</span>
                 </div>
 
-                <div id="map" style="height: 400px; width: 100%; border-radius: 8px; border: 1px solid #ddd; z-index: 1;"></div>
+                <div id="map" class="shadow-sm rounded-3 mb-3 border" style="height: 300px; width: 100%;"></div>
 
+                <%# Hidden fields %>
                 <input type="hidden" id="postal_code" name="order[postal_code]">
                 <input type="hidden" id="country_code" name="order[country_code]">
                 <input type="hidden" id="shipping_address" name="order[shipping_address]" required="true">
               </div>
               
-              <hr class="my-4">
-              <%# CAMBIO AQUÍ: Contenedor para el mensaje del costo de envío %>
-                <div id="fee_message" class="mb-3">
-                  <%# Mensaje inicial para guiar al usuario %>
-                  <div class="alert alert-primary py-2 small font-staatliches">
-                    Please select a shipping location on the map to enable payment.
-                  </div>
+              <div id="fee_message" class="mb-4">
+                <div class="alert alert-info py-3 border-0 rounded-3 small font-staatliches text-center shadow-sm">
+                  <i class="bi bi-info-circle me-2"></i> Shipping cost will be calculated on the map.
                 </div>
-              <%# f.submit "Confirm order (Pay)", class: "w-100 btn btn-primary btn-lg font-staatliches text-uppercase p-3" %>
-              <%= button_to "Pay", payments_path, method: :post, id: "pay-button", disabled: true, class: "w-100 btn btn-primary btn-lg font-staatliches text-uppercase p-3", data: { turbo: false } %>
+              </div>
+
+              <%= button_to payments_path, method: :post, id: "pay-button", disabled: true, 
+                  class: "w-100 btn btn-primary-custom py-3 font-anarrow fs-4 shadow", 
+                  data: { turbo: false } do %>
+                PROCEED TO PAYMENT <i class="bi bi-arrow-right ms-2"></i>
+              <% end %>
+
             <% end %>
           </div>
         </div>
@@ -106,9 +104,12 @@
       
     </div>
   <% else %>
-    <div class="alert text-center py-4">
-      <p class="mb-0 fs-5 text-uppercase font-staatliches">Your cart is empty. ¡Add some products!</p>
-      <%= link_to "Go to the shop", "/shop/index", class: "btn btn-primary mt-3 font-staatliches text-uppercase p-3" %>
+    <div class="text-center py-5">
+      <div class="mb-4">
+         <i class="bi bi-cart-x text-muted" style="font-size: 5rem;"></i>
+      </div>
+      <h3 class="font-staatliches text-uppercase">Your bag is empty</h3>
+      <%= link_to "DISCOVER OUR PRODUCTS", "/shop/index", class: "btn btn-primary-custom mt-3 px-5 py-3" %>
     </div>
   <% end %>
 </div>

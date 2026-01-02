@@ -1,9 +1,9 @@
 <%# 1. Actualiza la tabla de totales (tfoot) %>
 <%= turbo_stream.update "order_summary_totals" do %>
-    <tr id="cart_total_row">
-      <th colspan="3" class="text-end fs-5 pt-3 font-staatliches">TOTAL (INCLUDING DELIVERY):</th>
-      <td class="text-end fs-5 pt-3 fw-bold text-success"><%= number_to_currency(@cart.cart_total + @fee) %></td>
-    </tr>
+    <div class="d-flex justify-content-between align-items-center" id="cart_total_row">
+      <span class="fs-4 font-staatliches">TOTAL (INCLUDING DELIVERY):</span>
+      <span class="fs-3 fw-bold text-dark font-staatliches"><%= number_to_currency(@cart.cart_total + @fee) %></span>
+    </div>
   
 <% end %>
 <%# 2. Actualiza el mensaje informativo debajo del título de Shipping %>
@@ -26,7 +26,9 @@
       if (btn) {
         btn.disabled = false;
         btn.classList.replace('btn-secondary', 'btn-primary');
-        btn.innerText = "Pay Now";
+
+        const total_amount = "<%= number_to_currency(@cart.cart_total + @fee) %>";
+        btn.innerText = `Pay Now (${total_amount})`;
       }
     })();
   </script>

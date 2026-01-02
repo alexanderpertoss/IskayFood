@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy order_status_check ]
+  allow_unauthenticated_access only: %i[ show ]
 
   # GET /orders or /orders.json
   def index
