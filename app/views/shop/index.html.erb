@@ -8,13 +8,13 @@
             <div class="col-12 col-md-6 col-lg-6 co d-flex flex-column gap-3">
                 <div>
                     <div class="position-relative overflow-hidden shadow-sm main-product"
-                        style="background-image: url('<%= image_path("products/img11.jpeg") %>');">
+                        style="background-image: url('<%= url_for(@first_product.images.fourth) if @first_product.images.attached? %>');">
                         <%= render 'shop/product_controls', product: @first_product %>
                     </div>
                 </div>
                 <div>
                     <div class="position-relative overflow-hidden shadow-sm main-product"
-                        style="background-image: url('<%= image_path("products/img7.png") %>');">
+                        style="background-image: url('<%= url_for(@second_product.images.first) if @second_product.images.attached? %>');">
                         <%= render 'shop/product_controls', product: @second_product %>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
             <div class="col d-flex flex-column gap-3">
                 <div>
                     <div class="position-relative overflow-hidden shadow-sm main-product-large"
-                        style="background-image: url('<%= image_path("products/img10.png") %>');">
+                        style="background-image: url('<%= url_for(@third_product.images.fifth) if @third_product.images.attached? %>');">
                         <%= render 'shop/product_controls', product: @third_product %>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
             
             <div class="masonry-item">
                 <div class="position-relative overflow-hidden shadow-sm"
-                    style="background-image: url('<%= image_path("products/img10.png") %>'); 
+                    style="background-image: url('<%= url_for(@fourth_product.images.fifth) if @fourth_product.images.attached? %>'); 
                             min-height: 450px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
                     <%= render 'shop/product_controls', product: @fourth_product %>
@@ -51,7 +51,7 @@
 
             <div class="masonry-item">
                 <div class="position-relative overflow-hidden shadow-sm"
-                    style="background-image: url('<%= image_path("products/img9.png") %>'); 
+                    style="background-image: url('<%= url_for(@fifth_product.images.fifth) if @fifth_product.images.attached? %>'); 
                             min-height: 350px; /* Simulación de alturas diferentes */
                             background-size: cover; background-position: center;">
                     <%= render 'shop/product_controls', product: @fifth_product %>

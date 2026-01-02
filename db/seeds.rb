@@ -9,65 +9,63 @@
 #   end
 #
 ## Limpia la tabla antes de sembrar para evitar duplicados
-puts "Limpiando tabla de productos..."
+# Limpiar datos previos para evitar duplicados al re-ejecutar el seed
+puts "Cleaning database..."
 Product.destroy_all
+Service.destroy_all
 
-puts "Creando 9 productos de ejemplo..."
+puts "Creating products..."
 
-products_data = [
+Product.create!([
   {
-    name: "Pique Macho",
-    description: "Un plato tradicional cochabambino abundante con carne de res, salchicha, papas fritas, huevo duro, y rodajas de tomate y locoto.",
-    price: 65.00
+    name: "Salteña",
+    description: "The crown jewel of Bolivian street food. A savory pastry filled with a rich, juicy stew of meat, potatoes, and traditional spices, baked to golden perfection.",
+    price: 4.50,
+    weight: 0.180
   },
   {
-    name: "Majadito Batido",
-    description: "Clásico del oriente boliviano. Arroz cocido y luego 'batido' con charque de res, huevo frito y plátano frito.",
-    price: 55.00
+    name: "Singani",
+    description: "A unique and exclusive spirit distilled from Muscat of Alexandria grapes grown in the high-altitude valleys of the Andes. Crystal clear with intense floral aromas.",
+    price: 35.00,
+    weight: 0.750
   },
   {
-    name: "Silpancho Clásico",
-    description: "Fino filete de carne apanado sobre una cama de arroz y papas picadas, coronado con huevo frito.",
-    price: 58.50
+    name: "Amazónica",
+    description: "An exotic craft beer infused with Açaí berries from the Amazon rainforest. A refreshing, deep-purple brew with subtle fruity notes and a smooth finish.",
+    price: 6.00,
+    weight: 0.330
   },
   {
-    name: "Fricasé Paceño",
-    description: "Caldo picante de cerdo con mote, chuño, papa y un toque de ají amarillo. Ideal para levantar el ánimo.",
-    price: 62.00
+    name: "Empanadas",
+    description: "Artisanal hand-folded pastries with a variety of fillings, including creamy cheese and seasoned vegetables, representing the diverse flavors of South America.",
+    price: 3.50,
+    weight: 0.120
   },
   {
-    name: "Pacumutu Oriental",
-    description: "Brochetas de carne de res marinada, asadas a la parrilla, servidas con yuca y arroz.",
-    price: 48.00
-  },
-  {
-    name: "Cuñapé (Unidad)",
-    description: "Pan de almidón y queso, horneado hasta dorar. Perfecto para el desayuno o la tarde.",
-    price: 5.00
-  },
-  {
-    name: "Salteña de Pollo",
-    description: "Empanada jugosa rellena de un guiso dulce y picante con pollo, papa, huevo y aceitunas.",
-    price: 12.00
-  },
-  {
-    name: "Sopa de Maní",
-    description: "Cremosa sopa a base de maní molido, acompañada de papas fritas y fideos.",
-    price: 35.00
-  },
-  {
-    name: "Pescado a la Plancha",
-    description: "Filete de trucha o surubí a la plancha, servido con ensalada fresca y arroz blanco.",
-    price: 75.00
+    name: "Pralines",
+    description: "Exquisite handmade chocolates using the finest Bolivian cacao, combined with caramelized nuts to create a sophisticated and crunchy indulgence.",
+    price: 12.00,
+    weight: 0.150
   }
-]
+])
 
-# Itera sobre los datos y crea los registros
-products_data.each do |data|
-  Product.create!(data)
-end
+puts "Creating services..."
 
-puts "✅ Se han creado #{Product.count} productos exitosamente."
+Service.create!([
+  {
+    name: "Catering",
+    description: "Bring the authentic flavors of Bolivia to your private events. We offer customized menus and professional service for weddings, corporate meetings, and celebrations."
+  },
+  {
+    name: "Sandwich Shop",
+    description: "Every sandwich is a culinary work of art. Our chefs work tirelessly to create unique recipes that combine tradition and innovation in every bite."
+  },
+  {
+    name: "Bar",
+    description: "A sophisticated space dedicated to South American spirits. Specializing in Singani-based cocktails and a curated selection of regional wines and craft beers."
+  }
+])
+puts "Creating user..."
+User.create! email_address: "example@email.com", password: "123456", password_confirmation: "123456"
 
-
- User.create! email_address: "example@email.com", password: "123456", password_confirmation: "123456"
+puts "Seeds created successfully! Created #{Product.count} products, #{Service.count} services and the user."

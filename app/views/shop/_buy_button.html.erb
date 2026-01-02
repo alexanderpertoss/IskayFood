@@ -1,11 +1,11 @@
-<div id="product_controls_<%= product.id %>" 
+<div id="product_controls_<%= product.id unless product.nil? %>" 
      class="position-absolute top-0 start-0 w-100 p-4 main-product-background text-white d-flex justify-content-between align-items-center">
   
-  <h3 class="text-white font-anarrow product-name"><%= product.name %> - <%= number_to_currency(product.price) %></h3>
+  <h3 class="text-white font-anarrow product-name"><%= product.name unless product.nil? %> - <%= number_to_currency(product.price) unless product.nil? %></h3>
   
   <%= button_to "Buy", 
                 add_to_cart_path(id: product.id),
                 form_class: "d-inline", 
                 class: "btn btn-secondary text-white font-staatliches text-uppercase",
-                data: { turbo_stream: true } %>
+                data: { turbo_stream: true } unless product.nil? %>
 </div>

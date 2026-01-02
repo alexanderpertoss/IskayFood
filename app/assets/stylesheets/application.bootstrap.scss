@@ -24,6 +24,25 @@ html, body {
   overflow: hidden; 
 }
 
+/* Sobrescritura global de botones de Bootstrap */
+.btn {
+  border-radius: 0 !important; /* Bordes totalmente cuadrados */
+  text-transform: uppercase;   /* Estética elegante y de impacto */
+  font-family: 'Staatliches', sans-serif; /* Tu fuente principal */
+  letter-spacing: 1px;
+  padding: 12px 30px;          /* Más espaciados para un look premium */
+  transition: all 0.3s ease;   /* Animación suave al pasar el mouse */
+  border-width: 2px;           /* Bordes un poco más gruesos */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.btn:hover {
+  transform: translateY(-2px); /* Pequeña elevación */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra elegante */
+}
+
 .text-primary-color {
   color: $primary;
 }

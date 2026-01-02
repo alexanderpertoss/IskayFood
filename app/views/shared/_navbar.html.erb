@@ -18,11 +18,9 @@
                 </a>
                 <%# Eliminamos fs-5 y añadimos una clase personalizada para el texto %>
                 <ul class="dropdown-menu border-0 shadow text-center dropdown-menu-custom">
-                    <li><a class="dropdown-item" href="#">CATERING</a></li>
-                    
-                    <li><a class="dropdown-item" href="#">SANDWICH SHOP</a></li>
-                    
-                    <li><a class="dropdown-item" href="#">BAR</a></li>
+                    <% Service.all.order(created_at: :asc).each do |service| %>
+                        <li><%= link_to service.name, service_path(service), class: "dropdown-item" %></li>
+                    <% end %>
                 </ul>
             </div>
 
@@ -32,11 +30,9 @@
                     PRODUCTS
                 </a>
                 <ul class="dropdown-menu border-0 shadow text-center text-lg-start dropdown-menu-custom">
-                    <li><a class="dropdown-item" href="#">SALTEÑA</a></li>
-                    <li><a class="dropdown-item" href="#">SINGANI</a></li>
-                    <li><a class="dropdown-item" href="#">AMAZÓNICA</a></li>
-                    <li><a class="dropdown-item" href="#">EMPANADAS</a></li>
-                    <li><a class="dropdown-item" href="#">PRALINES</a></li>
+                    <% Product.all.order(created_at: :asc).each do |product| %>
+                        <li><%= link_to product.name, product_path(product), class: "dropdown-item" %></li>
+                    <% end %>
                     <li><a class="dropdown-item fw-bold" href="/shop/index">SHOP</a></li>
                 </ul>
             </div>

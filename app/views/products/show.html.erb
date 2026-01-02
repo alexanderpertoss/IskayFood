@@ -1,13 +1,35 @@
 <div class="hero-section2 text-white d-flex align-items-end justify-content-center text-center text-uppercase jarallax">
   
-  <%# La imagen de fondo controlada por Jarallax %>
-  <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img10.png") %>');"></div>
+  <% if @product.id == 1 %>
+    <%# La imagen de fondo controlada por Jarallax %>
+    <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.last) if @product.images.attached? %>');"></div>
+  <% end %>
+
+  <% if @product.id == 2 %>
+    <%# La imagen de fondo controlada por Jarallax %>
+    <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.third) if @product.images.attached? %>');"></div>
+  <% end %>
+
+  <% if @product.id == 3 %>
+    <%# La imagen de fondo controlada por Jarallax %>
+    <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.fifth) if @product.images.attached? %>');"></div>
+  <% end %>
+
+  <% if @product.id == 4 %>
+    <%# La imagen de fondo controlada por Jarallax %>
+    <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.fourth) if @product.images.attached? %>');"></div>
+  <% end %>
+
+  <% if @product.id == 5 %>
+    <%# La imagen de fondo controlada por Jarallax %>
+    <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.fourth) if @product.images.attached? %>');"></div>
+  <% end %>
 
   <%# El contenido que permanece estático encima %>
   <div class="hero-content pb-4" style="z-index: 2;"> 
-    <h1 class="font-staatliches section-title">Amazónica</h1>
+    <h1 class="font-staatliches section-title"><%= @product.name %></h1>
     <p class="lead font-staatliches section-title3">
-      Born from the encounter between the purple corn of the Andes and the acai of the Amazon
+      <%= @product.description %>
     </p>
   </div>
   
@@ -20,10 +42,9 @@
 <div class="container-fluid p-5">
     <div class="row">
         <div class="col-12 px-5">
-            <h1 class="font-staatliches text-primary-color">A unique experience</h1>
+            <h1 class="font-staatliches text-primary-color">The unique taste of <%= @product.name %></h1>
             <p class="font-anarrow about-info">
-                We are artisans of passion, masters of fire, and guardians of South American culinary traditions. Inspired by our family and legendary asadores, we have elevated the art of asado to the next level. Passing by the salteñas (premium empanada), the traditional  “Chicharron”, the asados with a wood fire, we are able to customize a  menu for you.<br><br>
-                We are pleased to offer you our best selection of wines, unique and exclusive. Red, pink or white. We are also the first to be able to offer you the “SINGANI” a spirit, drink which will amaze you.
+                <%= @product.description %>
             </p>
         </div>
     </div>
@@ -34,69 +55,46 @@
 </div>
 
 <div class="container-fluid">
-  <div class="row text-uppercase text-white">
-    <div class="col-12 col-md-6 col-lg-6 details-col2">
-      <h5 class="pt-3 text-white">History</h5>
-      <br>
-      <div class="row-details">
-        <span class="row-date">2025</span> Best Botanical Blend
-        <hr class="divider">
+  <div class="row text-white">
+    <div class="col-12 col-md-6 col-lg-6 details-col2 p-5 d-flex flex-column justify-content-center">
+      
+      <%# Descripción llamativa %>
+      <div class="product-description-highlight my-4">
+        <p class="font-anarrow text-white display-6 lh-sm">
+          <%= @product.description %>
+        </p>
       </div>
-      <div class="row-details">
-        <span class="row-date">2024</span> Gold Medal – Bittersweet Category
-        <hr class="divider">
-      </div>
-      <div class="row-details">
-        <span class="row-date">2023</span> Best Sustainable Packaging
-        <hr class="divider">
-      </div>
-      <div class="row-details">
-        <span class="row-date">2022</span> Editor's Choice – Best Aperitif
-        <hr class="divider">
-      </div>
-      <div class="row-details">
-        <span class="row-date">2021</span> Most Elegant Bottle Design
-        <hr class="divider">
-      </div>
-      <div class="row-details">
-        <span class="row-date">2020</span> Inauguration
-        <hr class="divider">
-      </div>
-      <div class="p-3 d-flex justify-content-center">
-        <%= button_to "Buy", "#", class: "btn btn-primary font-staatliches" %>
+      
+      <div class="p-3 d-flex justify-content-center mt-auto">
+        <%= button_to "Buy Now", "#", class: "btn btn-primary font-staatliches px-5 py-3 fs-5" %>
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-6 p-0 jarallax overflow-hidden" id="details-image-parallax" style="min-height: 500px;">
-      <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img5.png") %>');"></div>
+      <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.first) if @product.images.attached? %>');"></div>
     </div>
 
 
 
     <div class="col-12 col-md-6 col-lg-6 p-0 jarallax overflow-hidden" id="details-image-parallax" style="min-height: 500px;">
-      <div class="jarallax-img" style="background-image: url('<%= asset_path("products/img13.jpg") %>');"></div>
+      <% if @product.id == 1 or @product.id == 2 or @product.id == 4 %>
+        <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.fourth) if @product.images.attached? %>');"></div>
+      <% end %>
+      <% if @product.id == 3 or @product.id == 5 %>
+        <div class="jarallax-img" style="background-image: url('<%= url_for(@product.images.second) if @product.images.attached? %>');"></div>
+      <% end %>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-6 details-col1">
-      <h5 class="pt-4 text-white">Information</h5>
-      <br>
-      <div class="row-details">
-        <span class="row-date">2025</span> Best Botanical Blend
-        <hr class="divider">
+    <div class="col-12 col-md-6 col-lg-6 details-col2 p-5 d-flex flex-column justify-content-center">
+      
+      <%# Descripción llamativa %>
+      <div class="product-description-highlight my-4">
+        <p class="font-anarrow text-white display-6 lh-sm">
+          <%= @product.description %>
+        </p>
       </div>
-      <div class="row-details">
-        <span class="row-date">2024</span> Gold Medal – Bittersweet Category
-        <hr class="divider">
-      </div>
-    
-      <div class="row-details">
-        <span class="row-date">2022</span> Editor's Choice – Best Aperitif
-        <hr class="divider">
-      </div>
-      <div class="p-3 d-flex justify-content-center">
-        <%= button_to "Buy", "#", class: "btn btn-secondary font-staatliches" %>
-      </div>
-      <div class="row-details d-flex justify-content-center">
-        <span class="text-white font-staatliches detail-title">EST. 2022</span>
+      
+      <div class="p-3 d-flex justify-content-center mt-auto">
+        <%= button_to "Buy Now", "#", class: "btn btn-primary font-staatliches px-5 py-3 fs-5" %>
       </div>
     </div>
   </div>
