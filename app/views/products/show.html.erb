@@ -89,12 +89,84 @@
       <%# Descripción llamativa %>
       <div class="product-description-highlight my-4">
         <p class="font-anarrow text-white display-6 lh-sm">
-          <%= @product.description %>
+          <% if @product.id == 4  %>
+            <span class="font-staatliches">Offer on business</span><br>
+            Elevate your business gatherings with our premium artisanal empanada catering. We blend South American tradition with professional elegance, delivering the perfect hand-held culinary experience for your meetings, conferences, and corporate events.
+          <% else %>
+            <%= @product.description %>
+          <% end %>
         </p>
       </div>
       
       <div class="p-3 d-flex justify-content-center mt-auto">
-        <%= button_to "Buy Now", "#", class: "btn btn-primary font-staatliches px-5 py-3 fs-5" %>
+        <button type="button" 
+          class="btn btn-primary font-staatliches px-5 py-3 fs-5" 
+          data-bs-toggle="modal" 
+          data-bs-target="#quoteModal">
+          REQUEST IT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="quoteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 rounded-0 bg-dark text-white shadow-lg">
+      
+      <div class="modal-header border-0 p-4 pb-0">
+        <h2 class="modal-title text-white font-staatliches fs-1" id="quoteModalLabel">CATERING INQUIRY</h2>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4 p-md-5">
+        <form id="catering-simulation-form" onsubmit="event.preventDefault(); alert('We received your request and we will contact you as soon as possible!'); bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();">
+          
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <input type="text" class="form-control custom-input-line" placeholder="Full name" required>
+            </div>
+            <div class="col-md-6 mb-4">
+              <input type="text" class="form-control custom-input-line" placeholder="Company name">
+            </div>
+          </div>
+
+           <div class="row">
+            <div class="col-md-6 mb-4">
+              <input type="text" class="form-control custom-input-line" placeholder="Email" required>
+            </div>
+            <div class="col-md-6 mb-4">
+              <input type="text" class="form-control custom-input-line" placeholder="Phone number">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <label class="form-label font-staatliches mb-0 text-white">Type of Event</label>
+              <select class="form-select custom-input-line">
+                <option selected>Corporate Lunch</option>
+                <option>Conference</option>
+                <option>Office Celebration</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-4">
+              <label class="form-label font-staatliches mb-0 text-white">Estimated Guests</label>
+              <input type="number" class="form-control custom-input-line" placeholder="e.g. 50">
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label class="form-label font-staatliches mb-0">Additional Details</label>
+            <textarea class="form-control custom-input-line" rows="3" placeholder="Dietary restrictions, preferred date, etc."></textarea>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary py-3 fs-5">SEND REQUEST</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
