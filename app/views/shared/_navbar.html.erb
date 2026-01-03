@@ -1,53 +1,48 @@
-<nav id="navigation-bar" class="container-fluid bg-light shadow-sm">
+<nav id="navigation-bar" class="container-fluid bg-black shadow-sm">
     <div class="row p-4 align-items-center">
         <div id="navigation-logo" class="col-12 col-lg-2 d-flex justify-content-center justify-content-lg-start align-items-center mb-3 mb-lg-0">
             <%= link_to root_path do %>
-                <%= image_tag "logo_black.png", class: "img-fluid", alt: "IskayFood Logo", style: "max-height: 90px;" %>
+                <%# Nota: Cambia logo_black por una versión blanca del logo si la tienes %>
+                <%= image_tag "logo_white.png", class: "img-fluid", alt: "IskayFood Logo", style: "max-height: 90px;" %>
             <% end %>
         </div>
 
         <div id="navigation-links" class="col-12 col-lg d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center align-content-center gap-2 gap-lg-4 text-uppercase mt-3 mt-lg-0">
-    
-            <%# ABOUT US - Pequeño en móvil, h3 en Desktop %>
-            <%= link_to "ABOUT US", "/about", class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" %>
+            
+            <%= link_to "ABOUT US", "/about", class: "nav-link-custom font-staatliches mb-0 fs-4 fs-lg-3 text-white" %>
 
             <%# SERVICES DROPDOWN %>
             <div class="dropdown custom-dropdown">
-                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     SERVICES
                 </a>
-                <%# Eliminamos fs-5 y añadimos una clase personalizada para el texto %>
-                <ul class="dropdown-menu border-0 shadow text-center dropdown-menu-custom">
+                <ul class="dropdown-menu border-0 rounded-0 shadow text-center dropdown-menu-custom text-white">
                     <% Service.all.order(created_at: :asc).each do |service| %>
-                        <li><%= link_to service.name, service_path(service), class: "dropdown-item" %></li>
+                        <li><%= link_to service.name, service_path(service), class: "dropdown-item text-white" %></li>
                     <% end %>
                 </ul>
             </div>
 
             <%# PRODUCTS DROPDOWN %>
             <div class="dropdown custom-dropdown">
-                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link-custom font-staatliches mb-0 dropdown-toggle fs-4 fs-lg-3 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     PRODUCTS
                 </a>
-                <ul class="dropdown-menu border-0 shadow text-center text-lg-start dropdown-menu-custom">
+                <ul class="dropdown-menu border-0 rounded-0 shadow text-center text-lg-start dropdown-menu-custom">
                     <% Product.all.order(created_at: :asc).each do |product| %>
-                        <li><%= link_to product.name, product_path(product), class: "dropdown-item" %></li>
+                        <li><%= link_to product.name, product_path(product), class: "dropdown-item text-white" %></li>
                     <% end %>
-                    <li><a class="dropdown-item fw-bold" href="/shop/index">SHOP</a></li>
+                    <li><%= link_to "SHOP", "/shop/index", class: "dropdown-item fw-bold text-white" %></li>
                 </ul>
             </div>
 
-            <%# CONTACT %>
-            <%= link_to "CONTACT", "/contact", class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" %>
+            <%= link_to "CONTACT", "/contact", class: "nav-link-custom font-staatliches mb-0 fs-4 fs-lg-3 text-white" %>
 
-            <%# CONTACT %>
-            <%= link_to "CONTROL PANEL", control_panel_path, class: "text-decoration-none font-staatliches mb-0 fs-4 fs-lg-3" if authenticated? %>
+            <%= link_to "CONTROL PANEL", control_panel_path, class: "nav-link-custom font-staatliches mb-0 fs-4 fs-lg-3 text-warning text-white" if authenticated? %>
         
-            <%# SESSION %>
             <%= button_to "Log out", session_path, 
-                class: "btn-link-custom font-staatliches mb-0 fs-4 fs-lg-3", 
+                class: "btn-link-custom font-staatliches mb-0 fs-4 fs-lg-3 bg-transparent border-0 text-white", 
                 method: :delete if authenticated? %>
-
         </div>
     </div>
 </nav>

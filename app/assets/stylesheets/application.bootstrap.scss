@@ -6,7 +6,7 @@ $headings-font-family: 'Staatliches', sans-serif;
 
 $primary: #393E46;
 $secondary: black;
-$body-bg: #f8f9fa;  
+$body-bg: white;  
 $font-family-sans-serif: 'Poppins', sans-serif;
 $border-radius: 0.5rem;
 
@@ -14,6 +14,7 @@ $headings-color: $primary;
 
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
 
 html, body {
   overflow-x: hidden; 
@@ -159,16 +160,6 @@ html, body {
   top: -1000px !important; 
 }
 
-.nav-link-custom {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s;
-}
-
-.nav-link-custom:hover {
-    color: $primary; 
-}
-
 #navigation-links {
   overflow: visible !important; 
 }
@@ -227,6 +218,10 @@ html, body {
 }
 .bg-cart {
   background: $secondary;
+}
+
+.bg-black {
+    background-color: #000000 !important;
 }
 
 
@@ -592,6 +587,7 @@ html, body {
   color: var(--bs-primary) !important;
 }
 
+
 .contact-card {
   border: none;
   border-top: 5px solid #391042; 
@@ -704,8 +700,15 @@ html, body {
   display: inline-flex;
   align-items: center;
   line-height: 1; 
+  color: #ffffff;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
 }
 
+.nav-link-custom {
+  text-decoration: none;
+}
 @media (max-width: 991px) {
   #navigation-links .btn-link-custom {
     margin: 0 !important;
@@ -751,7 +754,7 @@ html, body {
     position: relative; 
 }
 
-.dropdown-menu-custom {
+/*.dropdown-menu-custom {
     top: 100% !important;   
     
     transform: none !important;  
@@ -760,7 +763,7 @@ html, body {
     overflow: visible !important;
 }
 
-
+*/
 .dropdown-menu-custom .dropdown-item {
     font-family: 'Staatliches', sans-serif; 
     font-size: 1.1rem !important;           
@@ -771,9 +774,30 @@ html, body {
     z-index: 10000 !important;
 }
 
+/* Estilo para los Dropdowns (Menús desplegables) */
+.dropdown-menu-custom {
+    background-color: #111111 !important; /* Negro ligeramente más suave para contraste */
+    border-radius: 0 !important; /* Bordes cuadrados */
+    border: 1px solid #333 !important; /* Borde sutil */
+    padding: 10px 0;
+    color: white;
+}
+
+/*.dropdown-item {
+    color: #ffffff !important;
+    font-family: 'Staatliches', sans-serif;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+}*/
+
 .dropdown-menu-custom .dropdown-item:hover {
     background-color: #f8f9fa;
-    color: $primary; 
     padding-left: 25px; 
 }
 
@@ -796,7 +820,7 @@ html, body {
         margin: 0 auto !important;
         
         
-        background-color: white !important;
+        background-color: #000000 !important;
         
         
         z-index: 99999 !important;
@@ -869,12 +893,12 @@ html, body {
   font-size: 0.95rem !important;
   letter-spacing: 0.5px;
   background: transparent !important;
-  color: #333 !important;
+  color: white !important;
   transition: color 0.2s ease;
 }
 
 .dropdown-menu-custom .dropdown-item:hover {
-  color: $primary !important; 
+  opacity: 0.7;
 }
 
 .details-col1 {
